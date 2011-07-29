@@ -1,6 +1,5 @@
 ;; Directories
-(setq home-dir "~/dotfiles/"
-      emacs-dir (concat home-dir ".emacs.d/")
+(setq emacs-dir "~/.emacs.d/"
       temp-dir (concat emacs-dir "temp/")
       module-dir (concat emacs-dir "modules/")
       package-dir (concat emacs-dir "packages/")
