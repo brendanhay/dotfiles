@@ -1,0 +1,16 @@
+# Change control sequence
+escape ^Zz
+
+# xterm
+termcapinfo xterm|xterms|xs|rxvt ti@:te@
+
+# Tab bar
+caption always '%{= dg} %H %{G} %=%?%{d}%-w%?%{r}(%{d}%n %t%? {%u} %?%{r})%{d}%?%+w%?%=%{G} %{B}%M %d %c:%s'
+
+# Don't display the copyright page
+startup_message off
+ 
+# Default screens
+screen -t emacs 2 emacs
+screen -t ruby 3 irb
+screen -t bash 1

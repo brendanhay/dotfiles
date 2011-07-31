@@ -1,6 +1,6 @@
 (progn
   ;; Working dir
-  (setq default-directory home-dir)
+  (setq default-directory "~/")
 
   ;; Soft tabs (spaces)
   (setq-default indent-tabs-mode nil)
