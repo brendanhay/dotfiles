@@ -1,4 +1,7 @@
 (progn
+  ;; GNU-screen
+  (global-unset-key (kbd "C-q"))
+
   ;; Movement
   (global-set-key (kbd "M-p") 'backward-sexp)
   (global-set-key (kbd "M-n") 'forward-sexp)
