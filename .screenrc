@@ -1,5 +1,5 @@
 # Change control sequence
-escape ^Zz
+escape ``
 
 # xterm
 termcapinfo xterm|xterms|xs|rxvt ti@:te@
