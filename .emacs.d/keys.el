@@ -41,22 +41,23 @@
 
 (progn
   ;; Movement
-  (global-set-key (kbd "M-p") 'backward-sexp)
-  (global-set-key (kbd "M-n") 'forward-sexp)
   (global-set-key (kbd "S-C-p") 'backward-paragraph)
   (global-set-key (kbd "S-C-n") 'forward-paragraph)
+  (global-set-key (kbd "M-[ A") 'backward-paragraph)
+  (global-set-key (kbd "M-[ B") 'forward-paragraph)
+  (global-set-key (kbd "ESC <down>") 'end-of-buffer) 
+  (global-set-key (kbd "ESC <up>") 'beginning-of-buffer)
   
   ;; Terminal movement
-  (global-set-key (kbd "M-[ 5 c") 'forward-word)
-  (global-set-key (kbd "M-[ 5 d") 'backward-word)
+  (global-set-key (kbd "M-[ C") 'forward-word)
+  (global-set-key (kbd "M-[ D") 'backward-word)
 
   ;; Comments
   (global-set-key (kbd "C-\\") 'uncomment-region) 
   (global-set-key (kbd "C-]") 'comment-region)
 
   ;; Completion
-  (global-set-key (kbd "C-<return>") 'hippie-expand)
-  
+  (global-set-key (kbd "M-/") 'hippie-expand)
 
   ;; Use regex searches
   (global-set-key (kbd "C-s") 'isearch-forward-regexp)
@@ -67,14 +68,14 @@
   
   ;; File finding
   (global-set-key (kbd "C-x f") 'ido-find-file) 
-  (global-set-key (kbd "C-'") 'rinari-rgrep)
+  (global-set-key (kbd "M-'") 'rinari-rgrep)
   (global-set-key (kbd "C-x p") 'find-file-in-project)
 
   ;; Tags
-  (global-set-key (kbd "C-;") 'my-ido-find-tag)
+  (global-set-key (kbd "M-;") 'my-ido-find-tag)
 
   ;; Buffers
-  (global-set-key (kbd "C-<tab>") 'ido-switch-buffer)
+  (global-set-key (kbd "C-x b") 'ido-switch-buffer)
   (global-set-key (kbd "C-c r") 'revert-buffer)
 
   ;; Terminal Buffers
@@ -90,11 +91,10 @@
   (global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
   ;; Bookmarks
-  (global-set-key (kbd "C-,") 'bookmark-jump)
-  (global-set-key (kbd "C-.") 'bookmark-set)
+  (global-set-key (kbd "M-,") 'bookmark-jump)
+  (global-set-key (kbd "M-.") 'bookmark-set)
 
   ;; Help should search more than just commands
   (global-set-key (kbd "C-h a") 'apropos))
 
 (provide 'bindings)
-
