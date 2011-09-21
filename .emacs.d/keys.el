@@ -71,8 +71,8 @@
   (global-set-key (kbd "C-c r") 'revert-buffer)
 
   ;; Terminal Buffers
-  (global-set-key (kbd "C-x M-[ 5 c") 'next-buffer)
-  (global-set-key (kbd "C-x M-[ 5 d") 'previous-buffer)
+  (global-set-key (kbd "C-x M-[ C") 'next-buffer)
+  (global-set-key (kbd "C-x M-[ D") 'previous-buffer)
 
   ;; Windows
   (windmove-default-keybindings) ;; Shift+direction

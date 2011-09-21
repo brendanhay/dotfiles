@@ -12,6 +12,8 @@
  ;; If there is more than one, they won't work right.
  )
 
+(set-face-attribute 'linum nil :background "#353535" :foreground "#555")
+
 (load-theme 'zenburn)
 
 (progn
