@@ -2,7 +2,8 @@
  '(custom-safe-themes (quote ("fa4a96fbf85d8ab62b906268f5ad3e37938c2810" "9cdf9fb94f560902b567b73f65c2ed4e5cfbaafe" default))))
 
 (custom-set-faces
- '(vertical-border ((nil (:foreground "grey20")))))
+ '(vertical-border ((nil (:foreground "#3f3f3f"))))
+ '(linum ((nil :background "#333" :foreground "#404040"))))
 
 (load-theme 'zenburn)
 
@@ -49,7 +50,6 @@
   (line-number-mode t)
   (global-linum-mode 1)
   (setq linum-format "%4d ")
-  (set-face-attribute 'linum nil :background "#353535" :foreground "#555")
 
   ;; Winner mode
   (winner-mode -1)
