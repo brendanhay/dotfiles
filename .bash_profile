@@ -23,23 +23,12 @@ complete -W "$(cat /etc/hosts | awk '$1 != "#" {print $2}')" ssh
 # completion for rails
 source ~/.rails_bash
 
+# Bash completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
+
 # completion for rake
-#
-# some code from on Jonathan Palardy's http://technotales.wordpress.com/2009/09/18/rake-completion-cache/
-# and http://pastie.org/217324 found http://ragonrails.com/post/38905212/rake-bash-completion-ftw
-# 
-# For details and discussion
-# http://turadg.aleahmad.net/2011/02/bash-completion-for-rake-tasks/
-#
-# INSTALL
-#
-# Place in your bash completions.d and/or source in your .bash_profile
-# If on a Mac with Homebrew, try "brew install bash-completion"
-# 
-# USAGE
-#
-# Type 'rake' and hit tab twice to get completions.
-# To clear the cache, run rake_cache_clear() in your shell.
 function _rake_cache_path() {
   # If in a Rails app, put the cache in the cache dir
   # so version control ignores it
@@ -79,11 +68,23 @@ function _rakecomplete() {
 
 complete -o default -o nospace -F _rakecomplete rake
 
-# Rebuild
-alias lsrebuild="/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user"
-alias ctags='/usr/local/bin/ctags'
+# Make sure homebrew paths are prepended
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
+# Emacs
+alias emacsclient='/Applications/Aquamacs.app/Contents/MacOS/bin/emacsclient --no-wait'
+alias e='emacsclient'
 export EDITOR='emacs'
+
+# Rails
+alias be='bundle exec'
+alias bec='bundle exec cucumber'
+alias bes='bundle exec rspec'
+alias ber='bundle exec rake'
+
+# Rebuild
+alias lsrebuild='/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user'
+alias xctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 
 # Git alias'
 alias ga='git add'
@@ -100,3 +101,9 @@ alias gco='git checkout'
 alias gpu='git pull'
 alias gpuo='git pull origin'
 alias gcl='git clone'
+
+# Compiling
+export ARCHFLAGS="-arch x86_64"
+
+# Shortcuts
+alias ll='ls -la'
