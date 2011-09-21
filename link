@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+for path in ~/dotfiles/.[^.]*
+do
+  file=$(basename $path)
+  case "$file" in
+    .git* ) continue;;
+  esac
+  target=~/dotfiles/$file
+  echo "Linking $file -> $target"
+  ln -sf $target ~/$file
+done
