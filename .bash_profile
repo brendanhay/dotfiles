@@ -14,9 +14,6 @@ parse_svn_repository_root() {
     svn info 2>/dev/null | sed -ne 's#^Repository Root: ##p'
 }
 
-# show git or svn path in prompt
-export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(parse_git_branch)\$(parse_svn_branch) \[\033[00m\]$\[\033[00m\] "
-
 # completion for ssh
 complete -W "$(cat /etc/hosts | awk '$1 != "#" {print $2}')" ssh
 
@@ -107,4 +104,7 @@ export ARCHFLAGS="-arch x86_64"
 # Shortcuts
 alias ll='ls -la'
 
+# Exports
 export LS_COLORS='di=38;5;108:fi=00:*svn-commit.tmp=31:ln=38;5;116:ex=38;5;186'
+#export PROMPT_COMMAND="echo -ne \"\\033]0;\${USER}@${HOSTNAME}\\007\\033k\${PWD}\\033\\\\ \""
+export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(parse_git_branch)\$(parse_svn_branch) \[\033[00m\]$\[\033[00m\] "
