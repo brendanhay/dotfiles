@@ -72,8 +72,7 @@ complete -o default -o nospace -F _rakecomplete rake
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Emacs
-alias emacsclient='/Applications/Aquamacs.app/Contents/MacOS/bin/emacsclient --no-wait'
-alias e='emacsclient'
+alias e='emacs'
 export EDITOR='emacs'
 
 # Rails

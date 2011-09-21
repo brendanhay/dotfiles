@@ -11,6 +11,7 @@
 (setq package-user-dir package-dir)
 (when (load (expand-file-name (concat brendan-dir "package.el"))) (package-initialize))
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 
 (load (concat brendan-dir "keys.el"))
 (load (concat brendan-dir "settings.el"))
@@ -26,6 +27,5 @@
 (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
 
 ;; Rinari/Ruby
-;(require 'rinari)
 (setq rinari-tags-file-name "TAGS")
 (setq ruby-insert-encoding-magic-comment nil)

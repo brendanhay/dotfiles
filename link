@@ -6,7 +6,9 @@ do
   case "$file" in
     .git* ) continue;;
   esac
+
   target=~/dotfiles/$file
-  echo "Linking $file -> $target"
+  echo "[link] $file -> $target"
   ln -sf $target ~/$file
 done
+

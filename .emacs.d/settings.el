@@ -1,3 +1,19 @@
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("fa4a96fbf85d8ab62b906268f5ad3e37938c2810" "9cdf9fb94f560902b567b73f65c2ed4e5cfbaafe" default))))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(load-theme 'zenburn)
+
 (progn
   ;; Working dir
   (setq default-directory "~/")
@@ -7,6 +23,9 @@
 
   ;; Split windows
   (split-window-horizontally)
+
+  ;; No menu bar
+  (menu-bar-mode -1)
 
   ;; Default mode
   (setq default-major-mode 'text-mode)
@@ -44,7 +63,6 @@
 
   ;; Startup
   (setq inhibit-startup-message t)
-  (server-start)
 
   ;; Change auto-save directory
   (setq backup-directory-alist `((".*" . ,temp-dir)))
