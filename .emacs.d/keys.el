@@ -41,16 +41,8 @@
 
 (progn
   ;; Movement
-  (global-set-key (kbd "S-C-p") 'backward-paragraph)
-  (global-set-key (kbd "S-C-n") 'forward-paragraph)
-  (global-set-key (kbd "M-[ A") 'backward-paragraph)
-  (global-set-key (kbd "M-[ B") 'forward-paragraph)
-  (global-set-key (kbd "ESC <down>") 'end-of-buffer) 
-  (global-set-key (kbd "ESC <up>") 'beginning-of-buffer)
-  
-  ;; Terminal movement
-  (global-set-key (kbd "M-[ C") 'forward-word)
-  (global-set-key (kbd "M-[ D") 'backward-word)
+  (global-set-key (kbd "M-p") 'backward-paragraph)
+  (global-set-key (kbd "M-n") 'forward-paragraph)
 
   ;; Comments
   (global-set-key (kbd "C-\\") 'uncomment-region) 
