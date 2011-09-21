@@ -68,6 +68,11 @@ complete -o default -o nospace -F _rakecomplete rake
 # Make sure homebrew paths are prepended
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
+# Tmux
+alias t='tmux'
+alias ta='tmux at'
+alias tls='tmux ls'
+
 # Emacs
 alias e='emacsclient --no-wait'
 export EDITOR='emacs'
