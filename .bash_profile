@@ -72,7 +72,7 @@ complete -o default -o nospace -F _rakecomplete rake
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Emacs
-alias e='emacs'
+alias e='emacsclient --no-wait'
 export EDITOR='emacs'
 
 # Rails
@@ -106,3 +106,5 @@ export ARCHFLAGS="-arch x86_64"
 
 # Shortcuts
 alias ll='ls -la'
+
+export LS_COLORS='di=38;5;108:fi=00:*svn-commit.tmp=31:ln=38;5;116:ex=38;5;186'

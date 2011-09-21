@@ -12,8 +12,6 @@
  ;; If there is more than one, they won't work right.
  )
 
-(set-face-attribute 'linum nil :background "#353535" :foreground "#555")
-
 (load-theme 'zenburn)
 
 (progn
@@ -59,12 +57,14 @@
   (line-number-mode t)
   (global-linum-mode 1)
   (setq linum-format "%4d ")
+  (set-face-attribute 'linum nil :background "#353535" :foreground "#555")
 
   ;; Winner mode
   (winner-mode -1)
 
   ;; Startup
   (setq inhibit-startup-message t)
+  (server-start)
 
   ;; Change auto-save directory
   (setq backup-directory-alist `((".*" . ,temp-dir)))
