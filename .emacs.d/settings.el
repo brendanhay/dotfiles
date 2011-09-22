@@ -5,14 +5,18 @@
  '(linum ((nil :background "#333" :foreground "#404040")))
  '(vertical-border ((nil (:foreground "#3f3f3f")))))
 
-(load-theme 'zenburn)
-
 (progn
+  (load-theme 'zenburn)
+
   ;; Working dir
   (setq default-directory "~/")
 
   ;; Soft tabs (spaces)
   (setq-default indent-tabs-mode nil)
+
+  ;; Show whitespace
+  (require 'whitespace)
+  (setq-default show-trailing-whitespace t)
 
   ;; Split windows
   (split-window-horizontally)
