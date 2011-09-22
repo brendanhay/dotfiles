@@ -1,9 +1,9 @@
 (custom-set-variables
- '(custom-safe-themes (quote ("fa4a96fbf85d8ab62b906268f5ad3e37938c2810" "9cdf9fb94f560902b567b73f65c2ed4e5cfbaafe" default))))
+ '(custom-safe-themes (quote ("01d0ff95b0b897b55f577c241ecab86269870fce" "d2c13a983064a67ccd71fe363ea712b5374fa484" "fa4a96fbf85d8ab62b906268f5ad3e37938c2810" "9cdf9fb94f560902b567b73f65c2ed4e5cfbaafe" default))))
 
 (custom-set-faces
- '(vertical-border ((nil (:foreground "#3f3f3f"))))
- '(linum ((nil :background "#333" :foreground "#404040"))))
+ '(linum ((nil :background "#333" :foreground "#404040")))
+ '(vertical-border ((nil (:foreground "#3f3f3f")))))
 
 (load-theme 'zenburn)
 
