@@ -13,7 +13,10 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 
+;; Key bindings
 (load (concat brendan-dir "keys.el"))
+
+;; Custom settings
 (load (concat brendan-dir "settings.el"))
 
 ;; IDO
@@ -30,3 +33,5 @@
 (setq rinari-tags-file-name "TAGS")
 (setq ruby-insert-encoding-magic-comment nil)
 
+;; OSX copy/paste in terminal
+(load (concat brendan-dir "pbcopy.el"))
