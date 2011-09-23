@@ -1,2 +1,7 @@
-*
-!*.el
+auto-save-list
+eshell
+temp
+.\#
+\#
+~
+archives

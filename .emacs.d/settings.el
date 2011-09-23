@@ -11,6 +11,10 @@
   ;; Working dir
   (setq default-directory "~/")
 
+  ;; Backups
+  (setq backup-directory-alist `((".*" . ,temp-dir)))
+  (setq auto-save-file-name-transforms `((".*" ,temp-dir t)))
+
   ;; Soft tabs (spaces)
   (setq-default indent-tabs-mode nil)
 
