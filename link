@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 
-for path in ~/dotfiles/.[^.]*
+base=~/Dropbox/Code/dotfiles
+
+for path in $base/.[^.]*
 do
   file=$(basename $path)
   case "$file" in
     .git* ) continue;;
   esac
 
-  target=~/dotfiles/$file
-  echo "[link] $file -> $target"
+  target=$base/$file
+  echo "[link] $target -> $file"
   ln -sf $target ~/$file
 done
 
+source ~/.bashrc
