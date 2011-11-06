@@ -1,0 +1,70 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("rist"
+ (filename . "~/Code/sc/arms-worker/rist/")
+ (front-context-string . ".DS_Store\n  drwx")
+ (rear-context-string . "92  1 Nov 10:40 ")
+ (position . 273))
+("bindings.el"
+ (filename . "~/Dropbox/Code/dotfiles/.emacs.d/bindings.el")
+ (front-context-string . " a\") 'shell-comm")
+ (rear-context-string . "et-key (kbd \"C-S")
+ (position . 386))
+("proto"
+ (filename . "~/Code/sc/arms-worker/proto/")
+ (front-context-string . ".#.#annotate-typ")
+ (rear-context-string . "38 27 Oct 22:05 ")
+ (position . 214))
+("todo.org"
+ (filename . "~/Dropbox/Documents/org/todo.org")
+ (front-context-string . "* TODO Create a ")
+ (rear-context-string)
+ (position . 1))
+("org-capture-last-stored"
+ (filename . "~/Dropbox/Documents/org/todo.org")
+ (front-context-string . "* TODO Create a ")
+ (rear-context-string)
+ (position . 1))
+("keys.el"
+ (filename . "~/Dropbox/Code/dotfiles/.emacs.d/bindings.el")
+ (front-context-string . "(defun copy-from")
+ (rear-context-string)
+ (position . 1))
+("settings.el"
+ (filename . "~/Dropbox/Code/dotfiles/.emacs.d/settings.el")
+ (front-context-string . "\n;  (define-glob")
+ (rear-context-string . "i-rule-width 1)\n")
+ (position . 1045))
+(".emacs"
+ (filename . "~/Dropbox/Code/dotfiles/.emacs")
+ (front-context-string . "(defvar base-dir")
+ (rear-context-string)
+ (position . 1))
+("sc-controllers"
+ (filename . "~/Code/soundcloud/app/controllers/")
+ (front-context-string . "accounts_control")
+ (rear-context-string . "15 19 Sep 15:23 ")
+ (position . 274))
+("sc-models"
+ (filename . "~/Code/soundcloud/app/models/")
+ (front-context-string . "access_token.rb\n")
+ (rear-context-string . "81 19 Sep 15:23 ")
+ (position . 273))
+("sc"
+ (filename . "~/Code/soundcloud/")
+ (front-context-string . "c\n  drwxr-xr-x  ")
+ (rear-context-string . "19 Sep 15:23 spe")
+ (position . 1818))
+("sc-spec"
+ (filename . "~/Code/soundcloud/spec/")
+ (front-context-string . "blueprints\n  -rw")
+ (rear-context-string . "14 19 Sep 15:23 ")
+ (position . 262))
+("soundcloud"
+ (filename . "~/Code/soundcloud/")
+ (front-context-string . ".DS_Store\n  drwx")
+ (rear-context-string . "48  4 Oct 09:13 ")
+ (position . 255))
+)

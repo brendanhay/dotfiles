@@ -5,3 +5,5 @@ temp
 \#
 ~
 archives
+.DS_Store
+*.elc

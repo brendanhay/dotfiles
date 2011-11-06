@@ -1,92 +1,56 @@
-(defun my-ido-find-tag ()
-  (interactive)
-  (tags-completion-table)
-  (let (tag-names)
-    (mapc (lambda (x)
-            (unless (integerp x)
-              (push (prin1-to-string x t) tag-names)))
-          tags-completion-table)
-    (find-tag (ido-completing-read "Tag: " tag-names))))
+;; Movement
+(global-set-key (kbd "M-p") 'backward-paragraph)
+(global-set-key (kbd "M-n") 'forward-paragraph)
 
-(defun he-slime-symbol-beg ()
-  (let ((p (slime-symbol-start-pos))) p))
+;; Comments
+(global-set-key (kbd "C-\\") 'uncomment-region)
+(global-set-key (kbd "C-]") 'comment-region)
 
-(defun try-expand-slime-symbol (old)
-  (unless  old
-    (he-init-string (he-slime-symbol-beg) (point))
-    (setq he-expand-list (sort
-                          (car (slime-simple-completions
-                                (buffer-substring-no-properties (slime-symbol-start-pos) (slime-symbol-end-pos))))
-                          'string-lessp)))
-  (while (and he-expand-list
-              (he-string-member (car he-expand-list) he-tried-table))
-    (setq he-expand-list (cdr he-expand-list)))
-  (if (null he-expand-list)
-      (progn
-        (when old (he-reset-string))
-        ())
-    (he-substitute-string (car he-expand-list))
-    (setq he-expand-list (cdr he-expand-list))
-    t))
+;; Completion
+(global-set-key (kbd "M-/") 'hippie-expand)
 
-(make-hippie-expand-function
-'(try-expand-slime-symbol
-  try-expand-dabbrev-visible
-  try-expand-dabbrev-from-kill
-  try-expand-dabbrev-all-buffers
-  try-complete-file-name-partially
-  try-complete-file-name))
+;; Use regex searches
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
 
-(setq enable-recursive-minibuffers t)
+;; Replace
+(global-set-key (kbd "C-x r") 'replace-regexp)
 
-(progn
-  ;; Movement
-  (global-set-key (kbd "M-p") 'backward-paragraph)
-  (global-set-key (kbd "M-n") 'forward-paragraph)
+;; File finding
+(global-set-key (kbd "C-x f") 'ido-find-file)
+(global-set-key (kbd "M-'") 'rinari-rgrep)
+(global-set-key (kbd "M-;") 'find-file-in-project)
 
-  ;; Comments
-  (global-set-key (kbd "C-\\") 'uncomment-region) 
-  (global-set-key (kbd "C-]") 'comment-region)
+;; Tags
+(global-set-key (kbd "M-l") 'my-ido-find-tag)
 
-  ;; Completion
-  (global-set-key (kbd "M-/") 'hippie-expand)
+;; Buffers
+(global-set-key (kbd "C-M-_") 'ido-switch-buffer) ; My terminal sends C-<tab> as hexcode 0x9f
+(global-set-key (kbd "C-c r") 'revert-buffer)
+(global-set-key (kbd "C-<delete>") 'my-kill-buffer)
 
-  ;; Use regex searches
-  (global-set-key (kbd "C-s") 'isearch-forward-regexp)
-  (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+;; Terminal Buffers
+(global-set-key (kbd "C-x n") 'next-buffer)
+(global-set-key (kbd "C-x p") 'previous-buffer)
 
-  ;; Replace
-  (global-set-key (kbd "C-/") 'replace-string) 
-  
-  ;; File finding
-  (global-set-key (kbd "C-x f") 'ido-find-file) 
-  (global-set-key (kbd "M-'") 'rinari-rgrep)
-  (global-set-key (kbd "C-x p") 'find-file-in-project)
+;; Windows
+(windmove-default-keybindings) ;; Shift+direction
+(global-set-key (kbd "C-o") 'other-window)
+(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<down>") 'shrink-window)
+(global-set-key (kbd "S-C-<up>") 'enlarge-window)
 
-  ;; Tags
-  (global-set-key (kbd "M-;") 'my-ido-find-tag)
+;; Bookmarks
+(global-set-key (kbd "M-,") 'bookmark-jump)
+(global-set-key (kbd "M-.") 'bookmark-set)
 
-  ;; Buffers
-  (global-set-key (kbd "C-x b") 'ido-switch-buffer)
-  (global-set-key (kbd "C-c r") 'revert-buffer)
+;; Symbols
+(global-set-key (kbd "M-]") 'highlight-symbol-next)
+(global-set-key (kbd "M-[") 'highlight-symbol-prev)
 
-  ;; Terminal Buffers
-  (global-set-key (kbd "C-x M-[ C") 'next-buffer)
-  (global-set-key (kbd "C-x M-[ D") 'previous-buffer)
+;; Help should search more than just commands
+(global-set-key (kbd "C-h a") 'apropos)
 
-  ;; Windows
-  (windmove-default-keybindings) ;; Shift+direction
-  (global-set-key (kbd "C-o") 'other-window)
-  (global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
-  (global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
-  (global-set-key (kbd "S-C-<down>") 'shrink-window)
-  (global-set-key (kbd "S-C-<up>") 'enlarge-window)
-
-  ;; Bookmarks
-  (global-set-key (kbd "M-,") 'bookmark-jump)
-  (global-set-key (kbd "M-.") 'bookmark-set)
-
-  ;; Help should search more than just commands
-  (global-set-key (kbd "C-h a") 'apropos))
-
-(provide 'bindings)
+;; Org-capture
+(global-set-key (kbd "C-c c") 'org-capture)

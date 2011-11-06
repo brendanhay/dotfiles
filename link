@@ -10,7 +10,7 @@ do
   esac
 
   echo "[link] $file -> ~/$file"
-  ln -sf $base/$file ~/$file
+  ln -nsf $base/$file ~/$file
 done
 
 source ~/.bashrc

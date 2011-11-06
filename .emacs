@@ -1,37 +1,52 @@
 (defvar base-dir "~/")
-(defvar app-dir (concat base-dir "app/"))
-(defvar lang-dir (concat base-dir "lang/"))
-(defvar tool-dir (concat base-dir "tool/"))
-(defvar brendan-dir (concat base-dir ".emacs.d/"))
-(defvar package-dir (concat brendan-dir "packages/"))
-(defvar config-dir (concat brendan-dir "config/"))
-(defvar temp-dir (concat brendan-dir "temp/"))
+(defvar emacs-dir (concat base-dir ".emacs.d/"))
+(defvar package-dir (concat emacs-dir "packages/"))
+(defvar temp-dir (concat emacs-dir "temp/"))
 
 ;; Packages
 (setq package-user-dir package-dir)
-(when (load (expand-file-name (concat brendan-dir "package.el"))) (package-initialize))
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives '("tromey" . "http://tromey.com/elpa/"))
 
-;; Key bindings
-(load (concat brendan-dir "keys.el"))
+(when (load (expand-file-name (concat emacs-dir "package.el")))
+  (package-initialize))
 
-;; Custom settings
-(load (concat brendan-dir "settings.el"))
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 
-;; IDO
-(require 'ido)
-(ido-mode t)
-(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+(load (concat emacs-dir "functions.el"))
+(load (concat emacs-dir "keys.el"))
+(load (concat emacs-dir "settings.el"))
+;(load (concat emacs-dir "bindings.el"))
 
-(defun ido-disable-line-trucation () 
-  (set (make-local-variable 'truncate-lines) nil))
+;; (global-set-key (kbd "C-l") 'event-apply-hyper-modifier)
+;;(define-key key-translation-map (kbd "C-") 'event-apply-super-modifier)
 
-(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
+(defvar erlang-dir "/usr/local/Cellar/erlang/R14B03/")
 
-;; Rinari/Ruby
-(setq rinari-tags-file-name "TAGS")
-(setq ruby-insert-encoding-magic-comment nil)
+(setq erlang-root-dir erlang-dir)
+(setq exec-path (cons erlang-dir exec-path))
+
+(setq load-path (cons (concat emacs-dir "erlang") load-path))
+
+(require 'erlang-start)
+(require 'erlang-flymake)
 
 ;; OSX copy/paste in terminal
-(load (concat brendan-dir "pbcopy.el"))
+(load (concat emacs-dir "pbcopy.el"))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("9cdf9fb94f560902b567b73f65c2ed4e5cfbaafe" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(flymake-errline ((t (:background "#332323"))))
+ '(flymake-warnline ((t (:background "#5f5f5f"))))
+ '(linum ((nil :background "#333" :foreground "#404040")))
+ '(vertical-border ((nil (:foreground "#3f3f3f"))))
+ '(whitespace-line ((t (:background "black" :foreground "violet"))))
+ '(whitespace-tab ((t (:background "black" :foreground "violet"))))
+ '(whitespace-trailing ((t (:background "black" :foreground "violet" :weight bold)))))

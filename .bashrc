@@ -18,6 +18,9 @@ _parse_git_branch() {
 # Prompt
 export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(_parse_git_branch)\$(_parse_svn_branch) \[\033[00m\]$\[\033[00m\] "
 
+# CD Path
+export CDPATH=$HOME/Code:$HOME/Library/Application:$CDPATH
+
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
@@ -45,16 +48,18 @@ _complete_hosts() {
   return 0
 }
 
-complete -F _complete_hosts ssh
-
+# ls
+alias ls='ls -G'
+alias l='ls -lha'
 
 # Tmux
 alias t='tmux'
-alias ta='tmux at'
+alias ta='tmux attach -t'
 alias tls='tmux ls'
 
 # Emacs
-alias e='emacsclient --no-wait'
+alias e='emacs -nw'
+alias ec='emacsclient --no-wait'
 export EDITOR='emacs'
 
 # Rails
@@ -79,20 +84,13 @@ alias gpu='git pull'
 alias gpuo='git pull origin'
 alias gcl='git clone'
 
+# SoundCloud
+alias scr='ber soundcloud:development:restart'
+alias sck='ber soundcloud:development:killall'
+
 # Tags
 alias xctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 
-# ls
-alias l='ls -lha'
-
 # OSX specifics
-
-# Compiling
 export ARCHFLAGS="-arch x86_64"
-
-# Prepend homebrew
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-
-# Rebuild
-alias lsrebuild='/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/Support/lsregister -kill -r -domain local -domain system -domain user'
-

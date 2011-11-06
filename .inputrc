@@ -1,0 +1,27 @@
+# set bind-tty-special-chars off
+
+# Keys
+"\C-x\C-r": re-read-init-file
+
+#"\C-j": backward-char
+#"\C-l": forward-char
+#"\C-i": previous-history
+#"\C-k": next-history
+#"\ej": beginning-of-line
+#"\el": end-of-line
+#"\C-u": backward-word
+#"\C-o": forward-word
+#"\e;": reverse-search-history
+
+#"\ed": kill-line
+#"\ew": backward-kill-word
+#"\ee": clear-screen
+#"\er": kill-word
+#"\es": backward-delete-char
+#"\ef": delete-char
+#"\ez": undo
+#"\ex": kill-region
+#"\ec": copy-region-as-kill
+#"\ev": yank
+
+
