@@ -1,7 +1,22 @@
-(load-theme 'zenburn)
+;; Packages
+(setq package-user-dir (concat package-dir "remote/"))
+
+(when (load (expand-file-name (concat package-dir "local/package.el")))
+  (package-initialize))
+
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+;; Make local packages known
+(add-to-list 'load-path (concat package-dir "local"))
+
+;; Load local initializers
+(mapcar
+ (lambda (file) (load (concat init-dir file)))
+ (directory-files init-dir nil ".el$"))
 
 ;; Initial directory
-(setq default-directory base-dir)
+(setq default-directory "~/")
 
 ;; Backups
 (setq backup-directory-alist `((".*" . ,temp-dir)))
@@ -16,14 +31,12 @@
 (setq fci-always-use-textual-rule t)
 (setq fci-rule-width 10)
 
-(define-globalized-minor-mode global-fci-mode
-  fci-mode (lambda ()
-             (setq fill-column 80)
-             (fci-mode 1)))
+(define-globalized-minor-mode global-fci-mode fci-mode
+  (lambda () (setq fill-column 80) (fci-mode 1)))
 
 (global-fci-mode 1)
 
-;; Soft tabs (spaces)
+;; Soft tabs
 (setq-default indent-tabs-mode nil)
 
 ;; Show whitespace
@@ -70,63 +83,37 @@
 (setq linum-format "%4d ")
 
 ;; Winner mode
-(winner-mode -1)
+(winner-mode 1)
 
 ;; Startup
 (setq inhibit-startup-message t)
-(server-start)
 
 ;; Change auto-save directory
 (setq backup-directory-alist `((".*" . ,temp-dir)))
 (setq auto-save-file-name-transforms `((".*" ,temp-dir t)))
 
-;; Org-mode
-(setq org-default-notes-file "~/Dropbox/Documents/org/refile.org")
-
-;; Capture templates for: TODO tasks, Notes, appointments, phone calls, and org-protocol
-(setq org-capture-templates
-      (quote (("t" "todo" entry (file "~/Dropbox/Documents/org/todo.org")
-               "* TODO %^{Description} %^g\n%?  Added: %U")
-
-              ("n" "note" entry (file "~/Dropbox/Documents/org/notes.org")
-               "* %? :NOTE:\n%U\n%a\n  %i" :clock-in t :clock-resume t)
-              ("s" "study" entry (file "~/Dropbox/Documents/org/study.org")
-               "* %? :STUDY:\n%U\n%a\n  %i" :clock-in t :clock-resume t)
-              ("f" "follow-up" entry (file "~/Dropbox/Documents/org/followup.org")
-               "* FOLLOWUP %? :FOLLOWUP:\n%U" :clock-in t :clock-resume t))))
-
-;; Various face adjustments
-(custom-set-faces
- '(linum ((nil :background "#333" :foreground "#404040")))
- '(flymake-warnline ((t (:background "#5f5f5f"))))
- '(flymake-errline ((t (:background "#332323"))))
- '(vertical-border ((nil (:foreground "#3f3f3f"))))
- '(whitespace-line ((t (:background "black" :foreground "violet"))))
- '(whitespace-tab ((t (:background "black" :foreground "violet"))))
- '(whitespace-trailing ((t (:background "black" :foreground "violet" :weight bold)))))
-
-(font-lock-add-keywords 'erlang-mode
-                        '(("^\\(-\\<spec .+\\)$" 1 '(:foreground "#777" :background "#3a3a3a") prepend)))
-
 ;; Add xxx/todo highlighting to specific major modes
-(mapcar (lambda (mode)
-          (font-lock-add-keywords mode
-                                  '(("\\<\\(XXX\\):" 1 font-lock-warning-face prepend)
-                                    ("\\<\\(TODO\\):" 1 '(:foreground "#f0dfaf" :background "#506070") prepend))))
-        '(text-mode lisp-mode emacs-lisp-mode erlang-mode ruby-mode))
+(mapcar
+ (lambda (mode)
+   (font-lock-add-keywords mode
+                           '(("\\<\\(XXX\\):" 1 font-lock-warning-face prepend)
+                             ("\\<\\(TODO\\):" 1 '(:foreground "#f0dfaf" :background "#506070") prepend))))
+ '(text-mode lisp-mode emacs-lisp-mode erlang-mode ruby-mode))
 
+;; Hippie
 (make-hippie-expand-function
  '(try-expand-dabbrev-visible
+   try-expand-dabbrev
    try-expand-dabbrev-from-kill
-   try-expand-dabbrev-all-buffers
-   try-complete-file-name-partially
-   try-complete-file-name))
+   try-expand-dabbrev-all-buffers))
 
+;; Minibuffers
 (setq enable-recursive-minibuffers t)
 
 ;; IDO
 (require 'ido)
 (ido-mode t)
+
 (setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 
 (defun ido-disable-line-trucation ()
@@ -134,6 +121,17 @@
 
 (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
 
-;; Rinari/Ruby
-(setq rinari-tags-file-name "TAGS")
-(setq ruby-insert-encoding-magic-comment nil)
+;; Command statistics
+(require 'command-frequency)
+(command-frequency-mode 1)
+(command-frequency-autosave-mode 1)
+
+;; Start up ze server
+(server-start)
+
+;; Set themes dir
+(add-to-list 'custom-theme-load-path theme-dir)
+
+;; Theme!
+(load-theme 'zenburn)
+

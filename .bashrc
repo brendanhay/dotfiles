@@ -58,9 +58,8 @@ alias ta='tmux attach -t'
 alias tls='tmux ls'
 
 # Emacs
-alias e='emacs -nw'
-alias ec='emacsclient --no-wait'
 export EDITOR='emacs'
+alias e='emacsclient -t --no-wait'
 
 # Rails
 alias be='bundle exec'

@@ -3,16 +3,14 @@
 If narrow-to-region is in effect, then copy that region only."
   (interactive)
   (kill-new (buffer-string))
-  (message "Buffer content copied copy-region-as-kill")
-  )
+  (message "Buffer content copied copy-region-as-kill"))
 
 (defun cut-all ()
   "Cut the whole buffer content into the kill-ring.
 If narrow-to-region is in effect, then cut that region only."
   (interactive)
   (kill-region (point-min) (point-max))
-  (message "Buffer content cut")
-  )
+  (message "Buffer content cut"))
 
 (defadvice kill-ring-save (before slick-copy activate compile)
   "When called interactively with no active region, copy the current line."
@@ -21,7 +19,7 @@ If narrow-to-region is in effect, then cut that region only."
        (list (region-beginning) (region-end))
      (progn
        (message "Current line is copied.")
-       (list (line-beginning-position) (line-beginning-position 2)) ) ) ))
+       (list (line-beginning-position) (line-beginning-position 2))))))
 
 (defadvice kill-region (before slick-copy activate compile)
   "When called interactively with no active region, cut the current line."
@@ -29,27 +27,24 @@ If narrow-to-region is in effect, then cut that region only."
    (if mark-active
        (list (region-beginning) (region-end))
      (progn
-       (list (line-beginning-position) (line-beginning-position 2)) ) ) ))
+       (list (line-beginning-position) (line-beginning-position 2))))))
 
 (defun select-text-in-quote ()
   "Select text between the nearest left and right delimiters.
 Delimiters are paired characters:
  () [] {} «» ‹› “” 〖〗 【】 「」 『』 （） 〈〉 《》 〔〕 ⦗⦘ 〘〙
-
 For practical purposes, it also includes double straight quote
 \", but not curly single quote matching pairs ‘’, because that is
 often used as apostrophy. It also consider both left and right
 angle brackets <> as either beginning or ending pair, so that it
 is easy to get content inside html tags."
- (interactive)
- (let (b1 b2)
-   (skip-chars-backward "^<>([{“「『‹«（〈《〔【〖⦗〘\"")
-   (setq b1 (point))
-   (skip-chars-forward "^<>)]}”」』›»）〉》〕】〗⦘〙\"")
-   (setq b2 (point))
-   (set-mark b1)
-   )
- )
+  (interactive)
+  (let (b1 b2)
+    (skip-chars-backward "^<>([{“「『‹«（〈《〔【〖⦗〘\"")
+    (setq b1 (point))
+    (skip-chars-forward "^<>)]}”」』›»）〉》〕】〗⦘〙\"")
+    (setq b2 (point))
+    (set-mark b1)))
 
 ;; by Nikolaj Schumacher, 2008-10-20. Released under GPL.
 (defun semnav-up (arg)
@@ -91,56 +86,47 @@ If there's no text, delete the previous line ending."
   (interactive)
   (if (looking-back "\n")
       (delete-char -1)
-    (kill-line 0)
-    )
-  )
+    (kill-line 0)))
 
 (defun move-cursor-next-pane ()
   "Move cursor to the next pane."
   (interactive)
-  (other-window 1)
-  )
+  (other-window 1))
 
 (defun move-cursor-previous-pane ()
   "Move cursor to the previous pane."
   (interactive)
-  (other-window -1)
-  )
+  (other-window -1))
 
 (defun toggle-letter-case ()
   "Toggle the letter case of current word or text selection.
 Toggles from 3 cases: UPPER CASE, lower case, Title Case,
 in that cyclic order."
-(interactive)
-(let (pos1 pos2 (deactivate-mark nil) (case-fold-search nil))
-  (if (and transient-mark-mode mark-active)
-      (setq pos1 (region-beginning)
-            pos2 (region-end))
-    (setq pos1 (car (bounds-of-thing-at-point 'word))
-          pos2 (cdr (bounds-of-thing-at-point 'word))))
+  (interactive)
+  (let (pos1 pos2 (deactivate-mark nil) (case-fold-search nil))
+    (if (and transient-mark-mode mark-active)
+        (setq pos1 (region-beginning)
+              pos2 (region-end))
+      (setq pos1 (car (bounds-of-thing-at-point 'word))
+            pos2 (cdr (bounds-of-thing-at-point 'word))))
 
-  (when (not (eq last-command this-command))
-    (save-excursion
-      (goto-char pos1)
-      (cond
-       ((looking-at "[[:lower:]][[:lower:]]") (put this-command 'state "all lower"))
-       ((looking-at "[[:upper:]][[:upper:]]") (put this-command 'state "all caps") )
-       ((looking-at "[[:upper:]][[:lower:]]") (put this-command 'state "init caps") )
-       (t (put this-command 'state "all lower") )
-       )
-      )
-    )
+    (when (not (eq last-command this-command))
+      (save-excursion
+        (goto-char pos1)
+        (cond
+         ((looking-at "[[:lower:]][[:lower:]]") (put this-command 'state "all lower"))
+         ((looking-at "[[:upper:]][[:upper:]]") (put this-command 'state "all caps") )
+         ((looking-at "[[:upper:]][[:lower:]]") (put this-command 'state "init caps") )
+         (t (put this-command 'state "all lower") )
+         )))
 
-  (cond
-   ((string= "all lower" (get this-command 'state))
-    (upcase-initials-region pos1 pos2) (put this-command 'state "init caps"))
-   ((string= "init caps" (get this-command 'state))
-    (upcase-region pos1 pos2) (put this-command 'state "all caps"))
-   ((string= "all caps" (get this-command 'state))
-    (downcase-region pos1 pos2) (put this-command 'state "all lower"))
-   )
-)
-)
+    (cond
+     ((string= "all lower" (get this-command 'state))
+      (upcase-initials-region pos1 pos2) (put this-command 'state "init caps"))
+     ((string= "init caps" (get this-command 'state))
+      (upcase-region pos1 pos2) (put this-command 'state "all caps"))
+     ((string= "all caps" (get this-command 'state))
+      (downcase-region pos1 pos2) (put this-command 'state "all lower")))))
 
 (defun next-user-buffer ()
   "Switch to the next user buffer.
@@ -149,7 +135,7 @@ User buffers are those whose name does not start with *."
   (next-buffer)
   (let ((i 0))
     (while (and (string-match "^*" (buffer-name)) (< i 50))
-      (setq i (1+ i)) (next-buffer) )))
+      (setq i (1+ i)) (next-buffer))))
 
 (defun previous-user-buffer ()
   "Switch to the previous user buffer.
@@ -158,4 +144,4 @@ User buffers are those whose name does not start with *."
   (previous-buffer)
   (let ((i 0))
     (while (and (string-match "^*" (buffer-name)) (< i 50))
-      (setq i (1+ i)) (previous-buffer) )))
+      (setq i (1+ i)) (previous-buffer))))

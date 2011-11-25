@@ -2,7 +2,17 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("rist"
+(("erlang"
+ (filename . "/usr/local/Cellar/erlang/R14B03/lib/erlang/lib/")
+ (front-context-string)
+ (rear-context-string . ":02 xmerl-1.2.9\n")
+ (position . 4105))
+("lib"
+ (filename . "/usr/local/Cellar/erlang/R14B03/lib/erlang/lib/")
+ (front-context-string . "appmon-2.1.13\n  ")
+ (rear-context-string . "70 19 Aug 18:02 ")
+ (position . 265))
+("rist"
  (filename . "~/Code/sc/arms-worker/rist/")
  (front-context-string . ".DS_Store\n  drwx")
  (rear-context-string . "92  1 Nov 10:40 ")
@@ -34,9 +44,9 @@
  (position . 1))
 ("settings.el"
  (filename . "~/Dropbox/Code/dotfiles/.emacs.d/settings.el")
- (front-context-string . "\n;  (define-glob")
- (rear-context-string . "i-rule-width 1)\n")
- (position . 1045))
+ (front-context-string . "\n;; Hippie\n(make")
+ (rear-context-string . "ode ruby-mode))\n")
+ (position . 3441))
 (".emacs"
  (filename . "~/Dropbox/Code/dotfiles/.emacs")
  (front-context-string . "(defvar base-dir")
