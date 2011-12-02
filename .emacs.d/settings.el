@@ -135,3 +135,18 @@
 ;; Theme!
 (load-theme 'zenburn)
 
+;; Enable skeleton-pair insert globally
+(setq skeleton-pair t)
+
+;; Don't apply skeleton-pair from the front of a word
+(setq skeleton-pair-on-word nil)
+
+(global-set-key (kbd "(")  'skeleton-pair-insert-maybe)
+(global-set-key (kbd "[")  'skeleton-pair-insert-maybe)
+(global-set-key (kbd "{")  'skeleton-pair-insert-maybe)
+(global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
+(global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
+
+
+
+

@@ -6,7 +6,7 @@ for path in .[^.]*
 do
   file=$(basename $path)
   case "$file" in
-    .git* ) continue;;
+    .git ) continue;;
   esac
 
   echo "[link] $file -> ~/$file"

@@ -26,10 +26,10 @@
 (global-set-key (kbd "C-x p") 'previous-buffer)
 
 ;; Windows
-(global-set-key (kbd "<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "<down>") 'shrink-window)
-(global-set-key (kbd "<up>") 'enlarge-window)
+(global-set-key (kbd "<right>") 'shrink-window-horizontally)
+(global-set-key (kbd "<left>") 'enlarge-window-horizontally)
+(global-set-key (kbd "<up>") 'shrink-window)
+(global-set-key (kbd "<down>") 'enlarge-window)
 
 ;; Bookmarks
 (global-set-key (kbd "M-,") 'bookmark-jump)

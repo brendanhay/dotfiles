@@ -48,6 +48,9 @@ _complete_hosts() {
   return 0
 }
 
+# Git Completion
+. .git_completion
+
 # ls
 alias ls='ls -G'
 alias l='ls -lha'

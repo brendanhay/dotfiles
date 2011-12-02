@@ -1,3 +1,9 @@
+yl-go-to-char
+backward-to-char
+
+zap-to-char
+zap-backward-to-char
+
 (defvar ergo-minor-mode-map (make-sparse-keymap)
   "ergo-minor-mode keymap.")
 
