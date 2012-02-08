@@ -63,7 +63,9 @@
 ;; Kill selected region, or line if no active region
 (define-key custom-keys-mode-map (kbd "C-k") 'kill-region)
 
-
+;; pbcopy/pbpaste
+(define-key custom-keys-mode-map (kbd "C-x C-y") 'pbpaste)
+(define-key custom-keys-mode-map (kbd "C-x M-w") 'pbcopy)
 
 (defun my-minibuffer-setup-hook ()
   (custom-keys-mode 0))

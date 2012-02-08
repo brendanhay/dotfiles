@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("functions"
+(("tmux"
+ (filename . "~/.tmux.conf")
+ (front-context-string . "# Unbind default")
+ (rear-context-string)
+ (position . 1))
+("functions"
  (filename . "~/Dropbox/Code/dotfiles/.emacs.d/functions.el")
  (front-context-string . "(defadvice kill-")
  (rear-context-string)
