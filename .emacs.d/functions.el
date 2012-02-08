@@ -115,14 +115,12 @@
            (add-to-list 'buffer-mode-matches buf))))
    buffer-mode-matches))
 
-(defun occur-multi-in-current-mode ()
-  "Starts multi-occur for the current search term on all buffers with the first matching buffer's major mode."
+(defun multi-occur-in-this-mode ()
+  "Show all lines matching REGEXP in buffers with this major mode."
   (interactive)
   (multi-occur
-   (get-buffers-matching-mode
-    (with-current-buffer (car (nth 2 occur-revert-arguments))
-      major-mode))
-   (car occur-revert-arguments)))
+   (get-buffers-matching-mode major-mode)
+   (car (occur-read-primary-args))))
 
 (defun pbpaste ()
   "Paste data from pasteboard."

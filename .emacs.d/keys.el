@@ -46,7 +46,7 @@
 (define-key custom-keys-mode-map (kbd "C-c C-j") 'clojure-jack-in)
 
 ;; Occur
-(define-key custom-keys-mode-map (kbd "M-s o") 'occur-multi-in-current-mode)
+(define-key custom-keys-mode-map (kbd "M-s o") 'multi-occur-in-this-mode)
 
 ;; Align
 (define-key custom-keys-mode-map (kbd "C-c a") 'align-regexp)
