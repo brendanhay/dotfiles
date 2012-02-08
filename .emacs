@@ -1,6 +1,6 @@
 (defvar emacs-dir   "~/.emacs.d/")
 (defvar package-dir (concat emacs-dir "pkg/"))
-(defvar temp-dir    (concat emacs-dir "tmp/"))
+(defvar temp-dir    "~/tmp/")
 (defvar init-dir    (concat emacs-dir "init/"))
 (defvar theme-dir   (concat emacs-dir "theme/"))
 

@@ -2,51 +2,61 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("erlang"
+(("functions"
+ (filename . "~/Dropbox/Code/dotfiles/.emacs.d/functions.el")
+ (front-context-string . "(defadvice kill-")
+ (rear-context-string)
+ (position . 1))
+("arms_worker"
+ (filename . "~/Code/sc/arms_worker/")
+ (front-context-string . "drwxr-xr-x  16 b")
+ (rear-context-string . " Jan 11:45 ..\n  ")
+ (position . 210))
+("soundcloud"
+ (filename . "~/Code/sc/soundcloud/")
+ (front-context-string . ".DS_Store\n  drwx")
+ (rear-context-string . "48  4 Oct 09:13 ")
+ (position . 260))
+("api"
+ (filename . "~/Code/clojure/wundertell/")
+ (front-context-string . ".git\n  -rw-r--r-")
+ (rear-context-string . "42 24 Jan 21:45 ")
+ (position . 1))
+("ui"
+ (filename . "~/Code/clojure/wundertell/ui/")
+ (front-context-string . ".git\n  -rw-r--r-")
+ (rear-context-string . "42 24 Jan 21:45 ")
+ (position . 1))
+("erlang"
  (filename . "/usr/local/Cellar/erlang/R14B03/lib/erlang/lib/")
  (front-context-string)
  (rear-context-string . ":02 xmerl-1.2.9\n")
- (position . 4105))
-("lib"
- (filename . "/usr/local/Cellar/erlang/R14B03/lib/erlang/lib/")
- (front-context-string . "appmon-2.1.13\n  ")
- (rear-context-string . "70 19 Aug 18:02 ")
- (position . 265))
+ (position . 1))
 ("rist"
- (filename . "~/Code/sc/arms-worker/rist/")
+ (filename . "~/Code/sc/arms_worker/")
  (front-context-string . ".DS_Store\n  drwx")
  (rear-context-string . "92  1 Nov 10:40 ")
- (position . 273))
-("bindings.el"
+ (position . 1))
+("bindings"
  (filename . "~/Dropbox/Code/dotfiles/.emacs.d/bindings.el")
  (front-context-string . " a\") 'shell-comm")
  (rear-context-string . "et-key (kbd \"C-S")
- (position . 386))
-("proto"
- (filename . "~/Code/sc/arms-worker/proto/")
- (front-context-string . ".#.#annotate-typ")
- (rear-context-string . "38 27 Oct 22:05 ")
- (position . 214))
-("todo.org"
+ (position . 1))
+("todo"
  (filename . "~/Dropbox/Documents/org/todo.org")
  (front-context-string . "* TODO Create a ")
  (rear-context-string)
  (position . 1))
-("org-capture-last-stored"
- (filename . "~/Dropbox/Documents/org/todo.org")
- (front-context-string . "* TODO Create a ")
+("keys"
+ (filename . "~/Dropbox/Code/dotfiles/.emacs.d/keys.el")
+ (front-context-string . ";; my minor mode")
  (rear-context-string)
  (position . 1))
-("keys.el"
- (filename . "~/Dropbox/Code/dotfiles/.emacs.d/bindings.el")
- (front-context-string . "(defun copy-from")
- (rear-context-string)
- (position . 1))
-("settings.el"
+("settings"
  (filename . "~/Dropbox/Code/dotfiles/.emacs.d/settings.el")
  (front-context-string . "\n;; Hippie\n(make")
  (rear-context-string . "ode ruby-mode))\n")
- (position . 3441))
+ (position . 1))
 (".emacs"
  (filename . "~/Dropbox/Code/dotfiles/.emacs")
  (front-context-string . "(defvar base-dir")
@@ -56,25 +66,15 @@
  (filename . "~/Code/soundcloud/app/controllers/")
  (front-context-string . "accounts_control")
  (rear-context-string . "15 19 Sep 15:23 ")
- (position . 274))
+ (position . 1))
 ("sc-models"
  (filename . "~/Code/soundcloud/app/models/")
  (front-context-string . "access_token.rb\n")
  (rear-context-string . "81 19 Sep 15:23 ")
- (position . 273))
+ (position . 1))
 ("sc"
- (filename . "~/Code/soundcloud/")
+ (filename . "~/Code/sc")
  (front-context-string . "c\n  drwxr-xr-x  ")
  (rear-context-string . "19 Sep 15:23 spe")
- (position . 1818))
-("sc-spec"
- (filename . "~/Code/soundcloud/spec/")
- (front-context-string . "blueprints\n  -rw")
- (rear-context-string . "14 19 Sep 15:23 ")
- (position . 262))
-("soundcloud"
- (filename . "~/Code/soundcloud/")
- (front-context-string . ".DS_Store\n  drwx")
- (rear-context-string . "48  4 Oct 09:13 ")
- (position . 255))
+ (position . 1))
 )

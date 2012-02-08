@@ -121,11 +121,6 @@
 
 (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
 
-;; Command statistics
-(require 'command-frequency)
-(command-frequency-mode 1)
-(command-frequency-autosave-mode 1)
-
 ;; Start up ze server
 (server-start)
 
@@ -141,12 +136,31 @@
 ;; Don't apply skeleton-pair from the front of a word
 (setq skeleton-pair-on-word nil)
 
+(global-set-key (kbd "<")  'skeleton-pair-insert-maybe)
 (global-set-key (kbd "(")  'skeleton-pair-insert-maybe)
 (global-set-key (kbd "[")  'skeleton-pair-insert-maybe)
 (global-set-key (kbd "{")  'skeleton-pair-insert-maybe)
 (global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
 
+;; Distel for Erlang
+(add-to-list 'load-path (concat package-dir "local/distel/elisp"))
 
+(require 'distel)
+(distel-setup)
+(add-hook 'erlang-mode-hook
+          (lambda ()
+            (setq inferior-erlang-machine-options '("-sname" "emacs"))))
 
+;; Auto Save
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+;; Yaml
+(require 'yaml-mode)
+
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 

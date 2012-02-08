@@ -1,39 +1,74 @@
-;; Movement
-(global-set-key (kbd "M-p") 'backward-paragraph)
-(global-set-key (kbd "M-n") 'forward-paragraph)
+;; my minor mode for really global keybindings
+(defvar custom-keys-mode-map (make-keymap))
 
-;; Comments
-(global-set-key (kbd "C-\\") 'uncomment-region)
-(global-set-key (kbd "C-]") 'comment-region)
+(define-minor-mode custom-keys-mode
+  "My minor mode for global keybindings."
+  nil
+  :lighter nil
+  :global t
+  :keymap 'custom-keys-mode-map)
+
+;; Movement
+(define-key custom-keys-mode-map (kbd "M-p") 'backward-paragraph)
+(define-key custom-keys-mode-map (kbd "M-n") 'forward-paragraph)
 
 ;; Completion
-(global-set-key (kbd "M-/") 'hippie-expand)
+(define-key custom-keys-mode-map (kbd "M-/") 'my-ido-hippie-expand)
 
 ;; Replace
-(global-set-key (kbd "C-x r") 'replace-string)
+(define-key custom-keys-mode-map (kbd "C-x r") 'replace-string)
 
-;; Tags
-(global-set-key (kbd "M-l") 'my-ido-find-tag)
+;; Find
+(define-key custom-keys-mode-map (kbd "C-c f") 'find-file-in-project)
+(define-key custom-keys-mode-map (kbd "C-c r") 'rinari-rgrep)
+(define-key custom-keys-mode-map (kbd "C-c t") 'my-ido-find-tag)
 
 ;; Buffers
-
-(global-set-key (kbd "C-c r") 'revert-buffer)
-(global-set-key (kbd "C-<delete>") 'my-kill-buffer)
-
-;; Terminal Buffers
-(global-set-key (kbd "C-x b") 'ido-switch-buffer)
-(global-set-key (kbd "C-x n") 'next-buffer)
-(global-set-key (kbd "C-x p") 'previous-buffer)
+(define-key custom-keys-mode-map (kbd "C-c b") 'revert-buffer)
+(define-key custom-keys-mode-map (kbd "C-x b") 'ido-switch-buffer)
+(define-key custom-keys-mode-map (kbd "C-x n") 'next-user-buffer)
+(define-key custom-keys-mode-map (kbd "C-x p") 'previous-user-buffer)
 
 ;; Windows
-(global-set-key (kbd "<right>") 'shrink-window-horizontally)
-(global-set-key (kbd "<left>") 'enlarge-window-horizontally)
-(global-set-key (kbd "<up>") 'shrink-window)
-(global-set-key (kbd "<down>") 'enlarge-window)
+(define-key custom-keys-mode-map (kbd "<right>") 'shrink-window-horizontally)
+(define-key custom-keys-mode-map (kbd "<left>") 'enlarge-window-horizontally)
+(define-key custom-keys-mode-map (kbd "<up>") 'shrink-window)
+(define-key custom-keys-mode-map (kbd "<down>") 'enlarge-window)
 
 ;; Bookmarks
-(global-set-key (kbd "M-,") 'bookmark-jump)
-(global-set-key (kbd "M-.") 'bookmark-set)
+(define-key custom-keys-mode-map (kbd "M-,") 'bookmark-jump)
+(define-key custom-keys-mode-map (kbd "M-.") 'bookmark-set)
 
 ;; Org-capture
-(global-set-key (kbd "C-c c") 'org-capture)
+(define-key custom-keys-mode-map (kbd "C-c c") 'org-capture)
+
+;; Slime / Clojure
+(define-key custom-keys-mode-map (kbd "C-c C-j") 'clojure-jack-in)
+
+;; Occur
+(define-key custom-keys-mode-map (kbd "M-s o") 'occur-multi-in-current-mode)
+
+;; Align
+(define-key custom-keys-mode-map (kbd "C-c a") 'align-regexp)
+
+;; Extend Selection
+(define-key custom-keys-mode-map (kbd "C-c s") 'extend-selection)
+
+;; Remove suspend frame
+(global-unset-key (kbd "C-z"))
+
+;; Zap back to char
+(define-key custom-keys-mode-map (kbd "C-z") 'zap-back-to-char)
+
+;; Kill selected region, or line if no active region
+(define-key custom-keys-mode-map (kbd "C-k") 'kill-region)
+
+
+
+(defun my-minibuffer-setup-hook ()
+  (custom-keys-mode 0))
+
+(add-hook 'slime-repl-mode-hook
+          (lambda () (custom-keys-mode t)))
+
+(custom-keys-mode t)

@@ -6,7 +6,7 @@
 ;;          Lennart Staflin <lenst@lysator.liu.se>
 ;;          Phil Hagelberg <technomancy@gmail.com>
 ;; URL: http://github.com/technomancy/clojure-mode
-;; Version: 1.11.1
+;; Version: 1.11.5
 ;; Keywords: languages, lisp
 
 ;; This file is not part of GNU Emacs.
@@ -147,7 +147,7 @@ numbers count from the end:
 
 (defun clojure-mode-version ()
   "Currently package.el doesn't support prerelease version numbers."
-  "1.10.0")
+  "1.11.5")
 
 ;;;###autoload
 (defun clojure-mode ()
@@ -182,6 +182,8 @@ if that value is non-nil."
          'clojure-forward-sexp))
   (set (make-local-variable 'lisp-doc-string-elt-property)
        'clojure-doc-string-elt)
+  (set (make-local-variable 'inferior-lisp-program) "lein repl")
+  (set (make-local-variable 'parse-sexp-ignore-comments) t)
 
   (clojure-mode-font-lock-setup)
 
@@ -849,8 +851,32 @@ use (put-clojure-indent 'some-symbol 'defun)."
 
 (defvar clojure-project-root-file "project.clj")
 
-;; Pipe to sh to work around mackosecks GUI Emacs $PATH issues.
-(defvar clojure-swank-command "echo \"lein jack-in %s\" | sh")
+;; Pipe to $SHELL to work around mackosecks GUI Emacs $PATH issues.
+(defcustom clojure-swank-command 
+  (if (or (locate-file "lein" exec-path) (locate-file "lein.bat" exec-path))
+      "lein jack-in %s"
+    "echo \"lein jack-in %s\" | $SHELL -l")
+  "The command used to start swank via clojure-jack-in."
+  :type 'string
+  :group 'clojure-mode)
+
+(defun clojure-jack-in-sentinel (process event)
+  (let ((debug-on-error t))
+    (error "Could not start swank server: %s"
+           (with-current-buffer (process-buffer process)
+             (buffer-substring (point-min) (point-max))))))
+
+(defun clojure-eval-bootstrap-region (process)
+  "Eval only the elisp in between the markers."
+  (with-current-buffer (process-buffer process)
+    (save-excursion
+      (goto-char 0)
+      (search-forward ";;; Bootstrapping bundled version of SLIME")
+      (let ((begin (point)))
+        (when (not (search-forward ";;; Done bootstrapping." nil t))
+          ;; fall back to possibly-ambiguous string if above isn't found
+          (search-forward "(run-hooks 'slime-load-hook)"))
+        (eval-region begin (point))))))
 
 ;;;###autoload
 (defun clojure-jack-in ()
@@ -864,23 +890,18 @@ use (put-clojure-indent 'some-symbol 'defun)."
       (kill-buffer "*swank*"))
     (let* ((swank-cmd (format clojure-swank-command port))
            (proc (start-process-shell-command "swank" "*swank*" swank-cmd)))
+      (set-process-sentinel (get-buffer-process "*swank*")
+                            'clojure-jack-in-sentinel)
       (set-process-filter (get-buffer-process "*swank*")
                           (lambda (process output)
-                            (with-current-buffer "*swank*"
+                            (with-current-buffer (process-buffer process)
                               (insert output))
                             (when (string-match "proceed to jack in" output)
-                              (with-current-buffer "*swank*"
-                                (kill-region (save-excursion
-                                               (goto-char (point-max))
-                                               (search-backward "slime-load-hook")
-                                               (forward-line)
-                                               (point))
-                                             (point-max)))
-                              (eval-buffer "*swank*")
+                              (clojure-eval-bootstrap-region process)
                               (slime-connect "localhost" port)
                               (with-current-buffer (slime-output-buffer t)
-                                (delete-region (point-min) (point-max))
                                 (setq default-directory dir))
+                              (set-process-sentinel process nil)
                               (set-process-filter process nil))))))
   (message "Starting swank server..."))
 

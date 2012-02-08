@@ -40,8 +40,7 @@
 ;; `load-path' and (optionally) byte-compile it.  To automatically
 ;; handle files ending in '.yml', add something like:
 ;;
-;;    (require 'yaml-mode)
-;;    (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+
 ;;
 ;; to your .emacs file.
 ;;
@@ -408,3 +407,5 @@ margin."
 (provide 'yaml-mode)
 
 ;;; yaml-mode.el ends here
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))

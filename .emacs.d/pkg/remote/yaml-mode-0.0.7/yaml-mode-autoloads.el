@@ -16,3 +16,4 @@
 ;; coding: utf-8
 ;; End:
 ;;; yaml-mode-autoloads.el ends here
+

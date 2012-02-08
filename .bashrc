@@ -18,9 +18,6 @@ _parse_git_branch() {
 # Prompt
 export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(_parse_git_branch)\$(_parse_svn_branch) \[\033[00m\]$\[\033[00m\] "
 
-# CD Path
-export CDPATH=$HOME/Code:$HOME/Library/Application:$CDPATH
-
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
@@ -49,7 +46,7 @@ _complete_hosts() {
 }
 
 # Git Completion
-. .git_completion
+. ~/.git_completion
 
 # ls
 alias ls='ls -G'
@@ -75,6 +72,7 @@ alias ga='git add'
 alias gp='git push'
 alias gpo='git push origin'
 alias gl='git log'
+alias gl='git log --pretty=format:"%H %ad %s <%an>" --date=short'
 alias gs='git status'
 alias gd='git diff'
 alias gdc='git diff --cached'
@@ -96,3 +94,6 @@ alias xctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 # OSX specifics
 export ARCHFLAGS="-arch x86_64"
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
+# CD Path
+export CDPATH=$HOME:$HOME/Library/Application:$CDPATH
