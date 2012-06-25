@@ -78,8 +78,8 @@
 (cua-mode 0)
 
 ;; Line numbers
-(line-number-mode t)
-(global-linum-mode 1)
+(line-number-mode -1)
+(global-linum-mode -1)
 (setq linum-format "%4d ")
 
 ;; Winner mode
@@ -92,14 +92,6 @@
 (setq backup-directory-alist `((".*" . ,temp-dir)))
 (setq auto-save-file-name-transforms `((".*" ,temp-dir t)))
 
-;; Add xxx/todo highlighting to specific major modes
-(mapcar
- (lambda (mode)
-   (font-lock-add-keywords mode
-                           '(("\\<\\(XXX\\):" 1 font-lock-warning-face prepend)
-                             ("\\<\\(TODO\\):" 1 '(:foreground "#f0dfaf" :background "#506070") prepend))))
- '(text-mode lisp-mode emacs-lisp-mode erlang-mode ruby-mode))
-
 ;; Hippie
 (make-hippie-expand-function
  '(try-expand-dabbrev-visible
@@ -108,20 +100,54 @@
    try-expand-dabbrev-all-buffers))
 
 ;; Minibuffers
-(setq enable-recursive-minibuffers t)
+(setq enable-recursive-minibuffers t
+      max-mini-window-height .3   ;;  max 2 lines
+      resize-mini-windows t)
+
+(icomplete-mode t)                ;; completion in minibuffer
+
+(setq complete-prospects-height 1 ;; don't spam my minibuffer
+      icomplete-compute-delay 0)  ;; don't wait
 
 ;; IDO
 (require 'ido)
-(ido-mode t)
 
-(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+(ido-mode 'both) ;; for buffers and files
 
+(setq
+  ido-save-directory-list-file "~/ido.last"
+  ido-ignore-buffers ;; ignore these guys
+  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
+     "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+  ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~/Code")
+  ido-case-fold t                     ; be case-insensitive
+  ido-enable-last-directory-history t ; remember last used dirs
+  ido-max-work-directory-list 30      ; should be enough
+  ido-max-work-file-list 50           ; remember many
+  ido-use-filename-at-point nil       ; don't use filename at point (annoying)
+  ido-use-url-at-point nil            ; don't use url at point (annoying)
+  ido-enable-flex-matching nil        ; don't try to be too smart
+  ido-max-prospects 10                ; don't spam my minibuffer
+  ido-confirm-unique-completion t     ; wait for RET, even with unique completion
+  ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+
+;; when using ido, the confirmation is rather annoying...
+(setq confirm-nonexistent-file-or-buffer nil)
+
+;; increase minibuffer size when ido completion is active
+(add-hook 'ido-minibuffer-setup-hook
+  (function
+    (lambda ()
+      (make-local-variable 'resize-minibuffer-window-max-height)
+      (setq resize-minibuffer-window-max-height 1))))
+
+;; don't truncate minibuffer lines
 (defun ido-disable-line-trucation ()
   (set (make-local-variable 'truncate-lines) nil))
-
 (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
 
 ;; Start up ze server
+(server-force-delete)
 (server-start)
 
 ;; Set themes dir
@@ -148,9 +174,27 @@
 
 (require 'distel)
 (distel-setup)
+
+; define where put beam files
+(setq erlang-compile-outdir "../ebin")
+
 (add-hook 'erlang-mode-hook
           (lambda ()
             (setq inferior-erlang-machine-options '("-sname" "emacs"))))
+
+(setq auto-mode-alist
+  (append auto-mode-alist
+    '(("\\.rel$" . erlang-mode)
+      ("\\.app$" . erlang-mode)
+      ("\\.appSrc$" . erlang-mode)
+      ("\\.app.src$" . erlang-mode)
+      ("rebar.config" . erlang-mode)
+      ("sys.config" . erlang-mode)
+      ("app.config" . erlang-mode)
+      ("Emakefile" . erlang-mode)
+      ("\\.hrl$" . erlang-mode)
+      ("\\.erl$" . erlang-mode)
+      ("\\.yrl$" . erlang-mode))))
 
 ;; Auto Save
 (setq backup-directory-alist
@@ -164,3 +208,47 @@
 
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
+;; Highline
+(highline-mode 1)
+
+(set-face-background 'highline-face "#40404")
+
+;; Workgroups
+(winner-mode nil)
+
+(require 'workgroups)
+(workgroups-mode 1)
+(setq wg-prefix-key (kbd "C-c w"))
+
+;; Modeline!
+
+;; use setq-default to set it for /all/ modes
+(setq-default mode-line-format
+  (list
+    ;; the buffer name; the file name as a tool tip
+    '(:eval (propertize " %b" 'face 'zenburn-title
+        'help-echo (buffer-file-name)))
+
+    ;; the current major mode for the buffer.
+    '(:eval (propertize " %m" 'face 'zenburn-lowlight-1
+              'help-echo buffer-file-coding-system))
+
+    ;; line and column
+    (propertize " %02l" 'face 'zenburn-lowlight-1)
+    ","
+    (propertize "%c" 'face 'zenburn-lowlight-1)
+
+    ;; was this buffer modified since the last save?
+    '(:eval (when (buffer-modified-p)
+              (concat " " (propertize "Modified"
+                                      'face 'zenburn-red-2
+                                      'help-echo "Buffer has been modified"))))
+
+    ;; is this buffer read-only?
+    '(:eval (when buffer-read-only
+              (concat " " (propertize "ReadOnly"
+                                      'face 'zenburn-blue
+                                      'help-echo "Buffer is read-only"))))
+
+    ;; minor-mode-alist  ;; list of minor modes
+    ))

@@ -7,3 +7,6 @@ temp
 archives
 .DS_Store
 *.elc
+bookmarks
+.emacs.d
+.irssi

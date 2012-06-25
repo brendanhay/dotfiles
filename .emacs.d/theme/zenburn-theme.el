@@ -23,7 +23,7 @@
 
 (let ( (zenburn-fg		"#dcdccc")
        (zenburn-bg-1		"#2b2b2b")
-       (zenburn-bg		"#3f3f3f")
+       (zenburn-bg		"#3a3a3a")
        (zenburn-bg+1		"#4f4f4f")
        (zenburn-bg+2		"#5f5f5f")
        (zenburn-red+1		"#dca3a3")
@@ -58,7 +58,7 @@
     'zenburn 
     
     ;; setup for inheritance
-    `(zenburn-background ((t (:background ,zenburn-bg))))
+    `(zenburn-background ((t (:background ,zenburn-bg-1))))
     `(zenburn-background-1 ((t (:background ,zenburn-bg+1))))
     `(zenburn-background-2 ((t (:background ,zenburn-bg+2))))
     `(zenburn-primary-1 ((t (:foreground ,zenburn-yellow-1 :weight bold))))
@@ -254,8 +254,8 @@
     
     ;; font-locking
     '(font-lock-builtin-face ((t (:inherit 'zenburn-blue))))
-    `(font-lock-comment-face ((t (:foreground ,zenburn-green :slant italic))))
-    `(font-lock-comment-delimiter-face ((t (:foreground ,zenburn-green))))
+    `(font-lock-comment-face ((t (:foreground ,zenburn-green+1 :slant italic))))
+    `(font-lock-comment-delimiter-face ((t (:foreground ,zenburn-green-1))))
     '(font-lock-constant-face ((t (:inherit 'zenburn-primary-4))))
     '(font-lock-doc-face ((t (:inherit 'zenburn-green+1))))
     `(font-lock-doc-string-face ((t (:foreground ,zenburn-blue+1))))

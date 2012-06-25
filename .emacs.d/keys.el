@@ -9,8 +9,16 @@
   :keymap 'custom-keys-mode-map)
 
 ;; Movement
-(define-key custom-keys-mode-map (kbd "M-p") 'backward-paragraph)
-(define-key custom-keys-mode-map (kbd "M-n") 'forward-paragraph)
+(global-set-key (kbd "M-p") 'backward-paragraph)
+(global-set-key (kbd "M-n") 'forward-paragraph)
+
+;; Slime Movement overrides
+(add-hook 'slime-mode-hook
+          (defun slime-sanitize-bindings ()
+              (cond ((boundp 'slime-mode-map)
+                     (define-key slime-mode-map (kbd "M-p") 'backward-paragraph)
+                     (define-key slime-mode-map (kbd "M-n") 'forward-paragraph)
+                     (message "slime keybinding on C-c x has been sanitized")))))
 
 ;; Completion
 (define-key custom-keys-mode-map (kbd "M-/") 'my-ido-hippie-expand)
@@ -36,8 +44,8 @@
 (define-key custom-keys-mode-map (kbd "<down>") 'enlarge-window)
 
 ;; Bookmarks
-(define-key custom-keys-mode-map (kbd "M-,") 'bookmark-jump)
-(define-key custom-keys-mode-map (kbd "M-.") 'bookmark-set)
+(define-key custom-keys-mode-map (kbd "C-c ,") 'bookmark-jump)
+(define-key custom-keys-mode-map (kbd "C-c .") 'bookmark-set)
 
 ;; Org-capture
 (define-key custom-keys-mode-map (kbd "C-c c") 'org-capture)
@@ -46,7 +54,7 @@
 (define-key custom-keys-mode-map (kbd "C-c C-j") 'clojure-jack-in)
 
 ;; Occur
-(define-key custom-keys-mode-map (kbd "M-s o") 'multi-occur-in-this-mode)
+(define-key custom-keys-mode-map (kbd "C-c o") 'multi-occur-in-this-mode)
 
 ;; Align
 (define-key custom-keys-mode-map (kbd "C-c a") 'align-regexp)
@@ -74,3 +82,4 @@
           (lambda () (custom-keys-mode t)))
 
 (custom-keys-mode t)
+

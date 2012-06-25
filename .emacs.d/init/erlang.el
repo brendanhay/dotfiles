@@ -1,5 +1,5 @@
 ;; Erlang
-(defvar erlang-dir "/usr/local/Cellar/erlang/R14B03/")
+(defvar erlang-dir "/usr/local/Cellar/erlang/R15B/")
 
 (setq erlang-root-dir erlang-dir)
 (setq exec-path (cons erlang-dir exec-path))
@@ -8,8 +8,8 @@
 (add-to-list 'load-path (concat package-dir "local/erlang"))
 
 (require 'erlang-start)
-(require 'erlang-flymake)
+;(require 'erlang-flymake)
 
 ;; Make those dirty -spec declarations less visible
 (font-lock-add-keywords 'erlang-mode
-                        '(("^\\(\\-spec .+\\)$" 1 '(:foreground "#777" :background "#3a3a3a") prepend)))
+                        '(("-spec\\(.+$\\)" 1 'zenburn-lowlight-2 prepend)))

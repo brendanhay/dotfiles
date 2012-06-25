@@ -12,11 +12,12 @@ _parse_svn_branch() {
 }
 
 _parse_git_branch() {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(git:\1)/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
 
 # Prompt
 export PS1="\[\033[00m\]\u@\h\[\033[01;34m\] \w \[\033[31m\]\$(_parse_git_branch)\$(_parse_svn_branch) \[\033[00m\]$\[\033[00m\] "
+export PS1="\[\033[ G\]$PS1"
 
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
@@ -93,7 +94,15 @@ alias xctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 
 # OSX specifics
 export ARCHFLAGS="-arch x86_64"
-export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+export PATH="$HOME/Library/Haskell/bin:$PATH"
 
 # CD Path
 export CDPATH=$HOME:$HOME/Library/Application:$CDPATH
+
+# Bash History
+export HISTFILESIZE=5000
+export HISTSIZE=5000
+export HISTCONTROL=ignoredups:erasedups
+
+shopt -s histappend

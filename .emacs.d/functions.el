@@ -136,5 +136,11 @@
   (print (mark))
   (when mark-active
     (shell-command-on-region
-     (point) (mark) "pbcopy")
-    (kill-buffer "*Shell Command Output*")))
+     (point) (mark) "pbcopy")))
+;;    (kill-buffer "*Shell Command Output*")))
+
+(defun what-face (pos)
+  (interactive "d")
+  (let ((face (or (get-char-property (point) 'read-face-name)
+                  (get-char-property (point) 'face))))
+    (if face (message "Face: %s" face) (message "No face at %d" pos))))
