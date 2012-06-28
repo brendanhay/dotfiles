@@ -106,3 +106,6 @@ export HISTSIZE=5000
 export HISTCONTROL=ignoredups:erasedups
 
 shopt -s histappend
+
+# OSX Mouse Accel
+~/killmouseaccell mouse
