@@ -142,13 +142,9 @@
       (setq resize-minibuffer-window-max-height 1))))
 
 ;; don't truncate minibuffer lines
-(defun ido-disable-line-trucation ()
-  (set (make-local-variable 'truncate-lines) nil))
-(add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
-
-;; Start up ze server
-(server-force-delete)
-(server-start)
+(add-hook 'ido-minibuffer-setup-hook
+          (lambda ()
+            (set (make-local-variable 'truncate-lines) nil)))
 
 ;; Set themes dir
 (add-to-list 'custom-theme-load-path theme-dir)
@@ -216,10 +212,6 @@
 ;; Workgroups
 (winner-mode nil)
 
-(require 'workgroups)
-(workgroups-mode 1)
-(setq wg-prefix-key (kbd "C-c w"))
-
 ;; Modeline!
 
 ;; use setq-default to set it for /all/ modes
@@ -252,3 +244,10 @@
 
     ;; minor-mode-alist  ;; list of minor modes
     ))
+
+;; Follow symlinks into version controlled directories/files
+(setq vc-follow-symlinks t)
+
+;; Start up sie server
+(server-force-delete)
+(server-start)
