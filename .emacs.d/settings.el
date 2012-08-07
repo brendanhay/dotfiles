@@ -165,6 +165,12 @@
 (global-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
 (global-set-key (kbd "\'") 'skeleton-pair-insert-maybe)
 
+;; Haskell
+
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+(remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(remove-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
 ;; Distel for Erlang
 (add-to-list 'load-path (concat package-dir "local/distel/elisp"))
 
@@ -251,3 +257,4 @@
 ;; Start up sie server
 (server-force-delete)
 (server-start)
+
