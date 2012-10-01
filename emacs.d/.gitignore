@@ -1,0 +1,7 @@
+tmp
+auto-save-list
+bookmarks
+*.elc
+.#*
+~.*
+.DS_Store
