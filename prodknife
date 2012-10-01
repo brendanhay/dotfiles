@@ -1,2 +1,0 @@
-#!/bin/bash
-knife $@ -c $HOME/.chef/knife-production.rb

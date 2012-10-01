@@ -1,9 +1,0 @@
-[user]
-	name = brendanhay
-	email = brendan.g.hay@gmail.com
-[color]
-	ui = true
-[push]
-	default = current
-[github]
-	user = brendanhay
