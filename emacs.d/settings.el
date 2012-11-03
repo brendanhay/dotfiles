@@ -32,9 +32,18 @@
 (setq fci-rule-width 10)
 
 (define-globalized-minor-mode global-fci-mode fci-mode
-  (lambda () (setq fill-column 80) (fci-mode 1)))
+  (lambda () (setq fill-column 76) (fci-mode 1)))
 
 (global-fci-mode 1)
+
+;; Markdown
+(setq markdown-command-needs-filename 1)
+
+(setq auto-mode-alist
+  (append auto-mode-alist
+    '(("\\.md$" . markdown-mode)
+      ("\\.markdown$" . markdown-mode)
+      ("\\.mdown$" . markdown-mode))))
 
 ;; Soft tabs
 (setq-default indent-tabs-mode nil)
@@ -53,7 +62,8 @@
 
 ;; Default mode
 (setq default-major-mode 'text-mode)
-(remove-hook 'text-mode-hook 'turn-on-auto-fill)
+; (remove-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'markdown-mode-hook 'turn-on-auto-fill)
 
 ;; Keyboard
 (set-keyboard-coding-system nil)
@@ -68,8 +78,8 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Bookmarks
-(setq bookmark-save-flag 1)
-(setq bookmark-default-file (concat emacs-dir "bookmarks"))
+(setq bookmark-save-flag 1
+      bookmark-default-file (concat emacs-dir "bookmarks"))
 
 ;; Line wrap
 (set-default 'truncate-lines t)
@@ -78,9 +88,9 @@
 (cua-mode 0)
 
 ;; Line numbers
-(line-number-mode -1)
-(global-linum-mode -1)
-(setq linum-format "%4d ")
+(setq line-number-mode nil
+      global-linum-mode nil
+      linum-format "%4d ")
 
 ;; Winner mode
 (winner-mode 1)
@@ -89,47 +99,49 @@
 (setq inhibit-startup-message t)
 
 ;; Change auto-save directory
-(setq backup-directory-alist `((".*" . ,temp-dir)))
-(setq auto-save-file-name-transforms `((".*" ,temp-dir t)))
+(setq backup-directory-alist `((".*" . ,temp-dir))
+      auto-save-file-name-transforms `((".*" ,temp-dir t)))
 
 ;; Hippie
-(make-hippie-expand-function
- '(try-expand-dabbrev-visible
-   try-expand-dabbrev
-   try-expand-dabbrev-from-kill
-   try-expand-dabbrev-all-buffers))
+(setq hippie-expand-verbose nil
+      hippie-expand-dabbrev-as-symbol t
+      hippie-expand-try-functions-list
+      (quote
+       (try-expand-dabbrev-visible
+        try-expand-dabbrev-from-kill
+        try-expand-dabbrev-all-buffers
+        try-complete-file-name-partially
+        try-complete-file-name)))
 
 ;; Minibuffers
-(setq enable-recursive-minibuffers t
+(setq enable-recursive-minibuffers nil
       max-mini-window-height .3   ;;  max 2 lines
-      resize-mini-windows t)
+      resize-mini-windows -1)
 
-(icomplete-mode t)                ;; completion in minibuffer
+(icomplete-mode 1)                ;; completion in minibuffer
 
 (setq complete-prospects-height 1 ;; don't spam my minibuffer
       icomplete-compute-delay 0)  ;; don't wait
 
-;; IDO
+;; ;; IDO
 (require 'ido)
 
 (ido-mode 'both) ;; for buffers and files
 
-(setq
-  ido-save-directory-list-file "~/ido.last"
-  ido-ignore-buffers ;; ignore these guys
-  '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
-     "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
-  ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~/Code")
-  ido-case-fold t                     ; be case-insensitive
-  ido-enable-last-directory-history t ; remember last used dirs
-  ido-max-work-directory-list 30      ; should be enough
-  ido-max-work-file-list 50           ; remember many
-  ido-use-filename-at-point nil       ; don't use filename at point (annoying)
-  ido-use-url-at-point nil            ; don't use url at point (annoying)
-  ido-enable-flex-matching nil        ; don't try to be too smart
-  ido-max-prospects 10                ; don't spam my minibuffer
-  ido-confirm-unique-completion t     ; wait for RET, even with unique completion
-  ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+(setq ido-save-directory-list-file "~/ido.last"
+      ido-ignore-buffers '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
+                           "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+      ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~/Code")
+      ido-case-fold t                     ; be case-insensitive
+      ido-enable-last-directory-history t ; remember last used dirs
+      ido-max-work-directory-list 15      ; should be enough
+      ido-max-work-file-list 25           ; remember many
+      ido-use-filename-at-point nil       ; don't use filename at point (annoying)
+      ido-use-url-at-point nil            ; don't use url at point (annoying)
+      ido-enable-flex-matching nil        ; don't try to be too smart
+      ido-max-prospects 10                ; don't spam my minibuffer
+      ido-confirm-unique-completion t     ; wait for RET, even with unique completion
+      ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 
 ;; when using ido, the confirmation is rather annoying...
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -171,7 +183,7 @@
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
-;; Distel for Erlang
+;; Erlang
 (add-to-list 'load-path (concat package-dir "local/distel/elisp"))
 
 (require 'distel)
@@ -186,17 +198,17 @@
 
 (setq auto-mode-alist
   (append auto-mode-alist
-    '(("\\.rel$" . erlang-mode)
-      ("\\.app$" . erlang-mode)
-      ("\\.appSrc$" . erlang-mode)
-      ("\\.app.src$" . erlang-mode)
+    '(("\\.rel$"      . erlang-mode)
+      ("\\.app$"      . erlang-mode)
+      ("\\.appSrc$"   . erlang-mode)
+      ("\\.app.src$"  . erlang-mode)
       ("rebar.config" . erlang-mode)
-      ("sys.config" . erlang-mode)
-      ("app.config" . erlang-mode)
-      ("Emakefile" . erlang-mode)
-      ("\\.hrl$" . erlang-mode)
-      ("\\.erl$" . erlang-mode)
-      ("\\.yrl$" . erlang-mode))))
+      ("sys.config"   . erlang-mode)
+      ("app.config"   . erlang-mode)
+      ("Emakefile"    . erlang-mode)
+      ("\\.hrl$"      . erlang-mode)
+      ("\\.erl$"      . erlang-mode)
+      ("\\.yrl$"      . erlang-mode))))
 
 ;; Auto Save
 (setq backup-directory-alist
@@ -258,3 +270,9 @@
 (server-force-delete)
 (server-start)
 
+;; Ruby
+(setq auto-mode-alist
+  (append auto-mode-alist
+    '(("Rakefile$" . ruby-mode)
+      ("Gemfile\\." . ruby-mode)
+      ("Gemfile$" . ruby-mode))))
