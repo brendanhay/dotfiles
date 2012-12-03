@@ -60,6 +60,7 @@
 ;; No menu bar
 (menu-bar-mode -1)
 
+
 ;; Default mode
 (setq default-major-mode 'text-mode)
 ; (remove-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -67,9 +68,6 @@
 
 ;; Keyboard
 (set-keyboard-coding-system nil)
-
-;; Highlight parens
-(show-paren-mode t)
 
 ;; Kill startup message
 (setq inhibit-startup-message t)
@@ -222,17 +220,18 @@
 
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 
-;; Highline
-(highline-mode 1)
+;; Highlight parens
+(show-paren-mode -1)
+;; ;; show-paren-match-face and show-paren-mismatch-face
 
-(set-face-background 'highline-face "#40404")
+;; Highline
+(highline-mode -1)
+;; (set-face-background 'highline-face "#444")
 
 ;; Workgroups
-(winner-mode nil)
+(winner-mode -1)
 
 ;; Modeline!
-
-;; use setq-default to set it for /all/ modes
 (setq-default mode-line-format
   (list
     ;; the buffer name; the file name as a tool tip
@@ -276,3 +275,14 @@
     '(("Rakefile$" . ruby-mode)
       ("Gemfile\\." . ruby-mode)
       ("Gemfile$" . ruby-mode))))
+
+
+;; Auto Save
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
+
+;; TAGS
+(setq tags-revert-without-query 1)
