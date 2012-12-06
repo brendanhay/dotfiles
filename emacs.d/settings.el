@@ -60,7 +60,6 @@
 ;; No menu bar
 (menu-bar-mode -1)
 
-
 ;; Default mode
 (setq default-major-mode 'text-mode)
 ; (remove-hook 'text-mode-hook 'turn-on-auto-fill)
@@ -86,12 +85,17 @@
 (cua-mode 0)
 
 ;; Line numbers
-(setq line-number-mode nil
-      global-linum-mode nil
-      linum-format "%4d ")
+(setq line-number-mode -1
+      global-linum-mode -1
+      linum-format "%d ")
 
-;; Winner mode
+
+;; Winner/Windmove mode
 (winner-mode 1)
+
+(setq windmove-wrap-around t)
+
+(require 'switch-window)
 
 ;; Startup
 (setq inhibit-startup-message t)
@@ -228,9 +232,6 @@
 (highline-mode -1)
 ;; (set-face-background 'highline-face "#444")
 
-;; Workgroups
-(winner-mode -1)
-
 ;; Modeline!
 (setq-default mode-line-format
   (list
@@ -275,7 +276,6 @@
     '(("Rakefile$" . ruby-mode)
       ("Gemfile\\." . ruby-mode)
       ("Gemfile$" . ruby-mode))))
-
 
 ;; Auto Save
 (setq backup-directory-alist

@@ -21,7 +21,7 @@
                      (message "slime keybinding on C-c x has been sanitized")))))
 
 ;; Completion
-(define-key custom-keys-mode-map (kbd "M-/") 'my-ido-hippie-expand)
+; (define-key custom-keys-mode-map (kbd "M-/") 'my-ido-hippie-expand)
 
 ;; Replace
 (define-key custom-keys-mode-map (kbd "C-x r") 'replace-string)
@@ -38,20 +38,21 @@
 (define-key custom-keys-mode-map (kbd "C-x p") 'previous-user-buffer)
 
 ;; Windows
-(define-key custom-keys-mode-map (kbd "<right>") 'shrink-window-horizontally)
-(define-key custom-keys-mode-map (kbd "<left>") 'enlarge-window-horizontally)
-(define-key custom-keys-mode-map (kbd "<up>") 'shrink-window)
-(define-key custom-keys-mode-map (kbd "<down>") 'enlarge-window)
+; (global-unset-key (kbd "C-x o"))
+
+(define-key custom-keys-mode-map (kbd "M-h") 'windmove-left)
+(define-key custom-keys-mode-map (kbd "M-l") 'windmove-right)
+(define-key custom-keys-mode-map (kbd "M-k") 'windmove-up)
+(define-key custom-keys-mode-map (kbd "M-j") 'windmove-down)
+
+(define-key custom-keys-mode-map (kbd "M-H") 'shrink-window-horizontally)
+(define-key custom-keys-mode-map (kbd "M-L") 'enlarge-window-horizontally)
+(define-key custom-keys-mode-map (kbd "M-K") 'shrink-window)
+(define-key custom-keys-mode-map (kbd "M-J") 'enlarge-window)
 
 ;; Bookmarks
 (define-key custom-keys-mode-map (kbd "C-c ,") 'bookmark-jump)
 (define-key custom-keys-mode-map (kbd "C-c .") 'bookmark-set)
-
-;; Org-capture
-(define-key custom-keys-mode-map (kbd "C-c c") 'org-capture)
-
-;; Slime / Clojure
-(define-key custom-keys-mode-map (kbd "C-c C-j") 'clojure-jack-in)
 
 ;; Occur
 (define-key custom-keys-mode-map (kbd "C-c o") 'multi-occur-in-this-mode)
