@@ -21,6 +21,8 @@
                      (message "slime keybinding on C-c x has been sanitized")))))
 
 ;; Completion
+; Commented since the custom dabbrev function list seems to perform
+; better without the minibuffer expansion shenannigans
 ; (define-key custom-keys-mode-map (kbd "M-/") 'my-ido-hippie-expand)
 
 ;; Replace
@@ -38,7 +40,10 @@
 (define-key custom-keys-mode-map (kbd "C-x p") 'previous-user-buffer)
 
 ;; Windows
-; (global-unset-key (kbd "C-x o"))
+(global-unset-key (kbd "C-x o"))
+(global-unset-key (kbd "M-o"))
+
+(define-key custom-keys-mode-map (kbd "M-o") 'switch-window)
 
 (define-key custom-keys-mode-map (kbd "M-h") 'windmove-left)
 (define-key custom-keys-mode-map (kbd "M-l") 'windmove-right)
