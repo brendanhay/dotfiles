@@ -10,7 +10,7 @@ export GIT_EDITOR="emacs"
 export GEM_EDITOR="emacs"
 
 # IRC
-export IRC_CLIENT="irssi"
+export IRC_CLIENT="weechat-curses"
 
 #
 # Mail
@@ -19,7 +19,11 @@ export IRC_CLIENT="irssi"
 # Don't check mail when opening terminal.
 unset MAILCHECK
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+#
+# RBEnv
+#
+
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 #
 # SSH
@@ -27,7 +31,7 @@ unset MAILCHECK
 
 export CVS_RSH="ssh"
 
-if [ "x`ps ax |grep [s]sh-agent`" == "x" ];
+if [ "x`ps ax | grep [s]sh-agent`" == "x" ];
 then
     ssh-agent && ssh-add ~/.ssh/id_rsa;
 fi
@@ -42,8 +46,9 @@ export LANGUAGE="en_US"
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Fixing gcc in lion
-export CC=/usr/bin/gcc
+#export CC=`which cc`
+# Due to gem build issues
+# export CC=/usr/bin/gcc
 
 export ARCHFLAGS="-arch x86_64"
 
@@ -57,7 +62,7 @@ export PLATFORM="$MACHINE-$OS-$OSVERSION"
 # Path
 #
 
-export PATH=/usr/local/bin:/usr/local/sbin:~/.bin:~/.rvm/bin:/usr/local/share/python:~/Library/Haskell/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/.bin:/usr/local/share/python:~/Library/Haskell/bin:$PATH
 
 # Add OSX applications to cd path
 export CDPATH=$HOME/Library/Application:$CDPATH
@@ -80,14 +85,11 @@ alias edit="$EDITOR"
 # Emacs
 alias e="emacsclient -t --no-wait"
 
-# ls
-alias ls='ls -G'
-alias l='ls -lha'
-alias lo='ls -l | sed -e 's/--x/1/g' -e 's/-w-/2/g' -e 's/-wx/3/g' -e 's/r--/4/g' -e 's/r-x/5/g' -e 's/rw-/6/g' -e 's/rwx/7/g' -e 's/---/0/g''  # convert permissions to octal
-alias recent='ls -lAt | head'
-alias old='ls -lAt | tail'
-
 # Tmux
+function sssh () {
+    ssh -t "$1" 'tmux attach || tmux new'
+}
+
 alias t='tmux'
 alias ta='tmux attach -t'
 alias tls='tmux ls'
@@ -98,28 +100,53 @@ alias xctags='/usr/local/Cellar/ctags/5.8/bin/ctags'
 # Reload Library
 alias reload='source ~/.bash_profile && echo "bash_profile reloaded"'
 
+# Grep
+alias al="alias | grep"                 # Find an alias
+alias com='grep -e "^$" -e"^ *      #"' # Commented lines
+alias uncom='grep -v -e "^$" -e"^ * #"' # Uncommented lines
+alias tm='ps -ef | grep'                # Find a process
+
+# Most frequently used commands
+alias freq='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
+
 # Directory
+function mcd() {
+    mkdir -p "$1" && cd "$1";
+}
+
 alias md='mkdir -p'
-alias mkdir='mkdir -p'
 alias rd=rmdir
 alias rmd='rm -Rf'
 alias d='dirs -v'
 
+# ls
+alias l='ls -Glha'
+alias ls='ls -G'
+alias l.='ls -Gd .*'          # List hidden files
+alias lf='ls -Gl | grep ^d'   # Only list directories
+alias lsf='ls -Gal | grep ^d' # Only list directories, including hidden ones
+
+# Tree
+if [ ! -x "$(which tree)" ]
+then
+  alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+else
+  alias tree="tree -CAFa -I 'CVS|*.*.package|.svn|.git' --dirsfirst"
+fi
+
 # Navigation
 alias ..='cd ..'
-alias ...='cd ../..'
-alias u='cd ..'
-alias uu='cd ../..'
-alias uuu='cd ../../..'
-alias uuuu='cd ../../../..'
-alias -- -="cd -"       # Go back
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+alias ......='cd ../../../../../'
 
 # Linux Specific
 if [ $(uname) = "Linux" ]
 then
   alias ls="ls --color=always"
 
-  #pbcopy and pbpaste aliases for GNU/Linux
+  # pbcopy and pbpaste aliases for GNU/Linux
   alias pbcopy='xclip -selection clipboard'
   alias pbpaste='xclip -selection clipboard -o'
 fi
@@ -134,20 +161,12 @@ alias h='history'
 alias page="$PAGER"
 alias irc="$IRC_CLIENT"
 
-# Tree
-if [ ! -x "$(which tree)" ]
-then
-  alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-else
-  alias tree="tree -CAFa -I 'CVS|*.*.package|.svn|.git' --dirsfirst"
-fi
-
 # Git
 alias ga='git add'
 alias gp='git push'
 alias gpo='git push origin'
 alias gl='git log'
-alias gl='git log --pretty=format:"%H %ad %s <%an>" --date=short'
+alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 alias gs='git status'
 alias gd='git diff'
 alias gdc='git diff --cached'
@@ -155,8 +174,8 @@ alias gc='git commit -m'
 alias gca='git commit -am'
 alias gb='git branch'
 alias gco='git checkout'
-alias gpu='git pull'
-alias gpuo='git pull origin'
+alias gpu='git pull --rebase'
+alias gpuo='git pull origin --rebase'
 alias gcl='git clone'
 
 # Bundler Commands

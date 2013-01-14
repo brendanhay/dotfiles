@@ -89,13 +89,13 @@
       global-linum-mode -1
       linum-format "%d ")
 
-
 ;; Winner/Windmove mode
 (winner-mode 1)
-
 (setq windmove-wrap-around t)
 
+;; Switch Window
 (require 'switch-window)
+(setq switch-window-timeout 2)
 
 ;; Startup
 (setq inhibit-startup-message t)
@@ -266,16 +266,27 @@
 ;; Follow symlinks into version controlled directories/files
 (setq vc-follow-symlinks t)
 
-;; Start up sie server
+;; Start up Sie server
 (server-force-delete)
 (server-start)
+
+;; Puppet
+(setq auto-mode-alist
+  (append auto-mode-alist
+    '((".pp$" . puppet-mode))))
 
 ;; Ruby
 (setq auto-mode-alist
   (append auto-mode-alist
     '(("Rakefile$" . ruby-mode)
+      ("Capfile$" . ruby-mode)
       ("Gemfile\\." . ruby-mode)
-      ("Gemfile$" . ruby-mode))))
+      ("Gemfile$" . ruby-mode)
+      ("Cheffile\\." . ruby-mode)
+      ("Cheffile$" . ruby-mode)
+      ("Thorfile$" . ruby-mode)
+      (".gemspec$" . ruby-mode)
+      (".erb$" . ruby-mode))))
 
 ;; Auto Save
 (setq backup-directory-alist
