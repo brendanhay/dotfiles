@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+find ${1-.} -regex ".*\.hs" -exec fast-tags {} \;

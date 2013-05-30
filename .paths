@@ -1,0 +1,26 @@
+PATH=~/projects/dotfiles/bin:$PATH
+
+# Haskell
+PATH=~/.cabal/bin:$PATH
+
+# ZeroMQ
+MANPATH=/opt/zeromq3-x/share/man:$MANPATH
+LD_LIBRARY_PATH=/opt/zeromq3-1/lib:/opt/zeromq2-1/lib:$LD_LIBRARY_PATH
+
+# Go
+export GOROOT=/opt/go
+export GOPATH=~/go
+PATH=$GOROOT/bin:$GOPATH/bin:$PATH
+
+# Java
+PATH=/opt/maven/bin:$PATH
+
+# Android
+export ANDROID_HOME=/opt/android
+export ANDROID_NDK_HOME=/opt/android-ndk/current
+PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$ANDROID_NDK_HOME
+
+# Common exports
+PATH=~/bin:$PATH
+export PATH MANPATH LD_LIBRARY_PATH
+

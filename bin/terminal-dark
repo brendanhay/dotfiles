@@ -1,0 +1,32 @@
+#!/bin/sh
+
+exec urxvt \
+++scrollBar \
+++scrollTtyOutput \
+--scrollTtyKeypress \
+--scrollWithBuffer \
+--saveLines 16000 \
+--font xft:Monospace-14,7x14 \
+--letterSpace 0 \
+--foreground \#dddddd \
+--background \#161616 \
+--cursorColor \#ffffff \
+--cursorBlink \
+--loginShell \
+--color0  rgba:0000/0000/0000/FFFF \
+--color1  rgba:FFFF/5270/5270/FFFF \
+--color2  rgba:6F68/C837/6F68/FFFF \
+--color3  rgba:AAAA/5555/0000/FFFF \
+--color4  rgba:67A5/67A5/B684/FFFF \
+--color5  rgba:C111/5097/C111/FFFF \
+--color6  rgba:4349/B053/B053/FFFF \
+--color7  rgba:AAAA/AAAA/AAAA/FFFF \
+--color8  rgba:5555/5555/5555/FFFF \
+--color9  rgba:FFFF/81A6/81A6/FFFF \
+--color10 rgba:5555/FFFF/5555/FFFF \
+--color11 rgba:FFFF/FFFF/5555/FFFF \
+--color12 rgba:7979/9898/FFFF/FFFF \
+--color13 rgba:ECEC/6D6D/FFFF/FFFF \
+--color14 rgba:5454/FFFF/FFFF/FFFF \
+--color15 rgba:FFFF/FFFF/FFFF/FFFF \
+"$@"

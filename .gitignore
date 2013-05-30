@@ -1,0 +1,39 @@
+# Emacs/Vim
+*/auto-save-list
+*/bookmarks
+*/eshell
+.DS_Store
+.emacs.d
+\#
+.\#
+*.elc
+~
+*~
+.*.sw[a-z]
+*/#*#
+#*#
+
+
+# Haskell
+.cabal
+cabal-dev
+dist
+*.o
+*.hi
+*.chi
+*.chs.h
+*.org
+*.prof*
+*.aux*
+*.ps*
+*.hp*
+
+# Archives
+*.tar
+*.gz
+*.tmp
+elpa
+
+# Tags
+TAGS
+tags

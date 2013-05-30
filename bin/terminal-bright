@@ -1,0 +1,16 @@
+#!/bin/sh
+
+exec urxvt \
+++scrollBar \
+++scrollTtyOutput \
+--scrollTtyKeypress \
+--scrollWithBuffer \
+--saveLines 16000 \
+--font xft:Monospace-12,7x14 \
+--letterSpace 0 \
+--foreground \#000000 \
+--background \#faf9f8 \
+--cursorColor red \
+--loginShell \
+--cursorBlink \
+"$@"

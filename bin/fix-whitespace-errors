@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [ -z "$1" ]; then
+        echo "Missing input file."
+        exit 1
+fi
+
+sed -e 's/[ \t]\+$//' -e 's/^M$//' -i "$1"
+sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' -i "$1"

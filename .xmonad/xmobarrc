@@ -1,0 +1,17 @@
+Config { font = "xft:Monospace-11"
+       , bgColor = "#111111"
+       , fgColor = "#666666"
+       , position = Static { xpos = 0 , ypos = 0, width = 2878, height = 40 }
+       , lowerOnStart = True
+       , commands = [ Run Weather "EDDT" ["-t","<tempC>°C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
+                    , Run Network "wlp4s0" ["-L","0","-H","32","--normal","green","--high","red"] 10
+                    , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Date "%H:%M:%S [%a, %Y-%m-%d]" "date" 10
+                    , Run Battery ["-t", "Batt: <left>% [<timeleft>]"] 600
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "}{ %cpu% | %memory% | %wlp4s0% | %battery% | %EDDT% | <fc=#e6bb74>%date%</fc>"
+       }
+
