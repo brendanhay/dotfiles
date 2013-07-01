@@ -184,3 +184,5 @@ alias be='bundle exec'
 alias bec='bundle exec cucumber'
 alias bes='bundle exec rspec'
 alias ber='bundle exec rake'
+
+export PATH=~/.cabal/bin:$PATH

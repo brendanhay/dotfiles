@@ -1,8 +1,7 @@
-;; my minor mode for really global keybindings
 (defvar custom-keys-mode-map (make-keymap))
 
 (define-minor-mode custom-keys-mode
-  "My minor mode for global keybindings."
+  "Minor mode for global keybindings."
   nil
   :lighter nil
   :global t
@@ -12,26 +11,14 @@
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
 
-;; Slime Movement overrides
-(add-hook 'slime-mode-hook
-          (defun slime-sanitize-bindings ()
-              (cond ((boundp 'slime-mode-map)
-                     (define-key slime-mode-map (kbd "M-p") 'backward-paragraph)
-                     (define-key slime-mode-map (kbd "M-n") 'forward-paragraph)
-                     (message "slime keybinding on C-c x has been sanitized")))))
-
-;; Completion
-; Commented since the custom dabbrev function list seems to perform
-; better without the minibuffer expansion shenannigans
-; (define-key custom-keys-mode-map (kbd "M-/") 'my-ido-hippie-expand)
-
 ;; Replace
 (define-key custom-keys-mode-map (kbd "C-x r") 'replace-string)
+(define-key custom-keys-mode-map (kbd "C-x R") 'replace-regexp)
 
 ;; Find
-(define-key custom-keys-mode-map (kbd "C-c f") 'find-file-in-project)
-(define-key custom-keys-mode-map (kbd "C-c r") 'rinari-rgrep)
-(define-key custom-keys-mode-map (kbd "C-c t") 'my-ido-find-tag)
+(define-key custom-keys-mode-map (kbd "C-x f") 'find-file-in-project)
+(define-key custom-keys-mode-map (kbd "C-x F") 'ack-and-a-half-find-file)
+(define-key custom-keys-mode-map (kbd "C-c r") 'ack-and-a-half)
 
 ;; Buffers
 (define-key custom-keys-mode-map (kbd "C-c b") 'revert-buffer)
@@ -42,8 +29,6 @@
 ;; Windows
 (global-unset-key (kbd "C-x o"))
 (global-unset-key (kbd "M-o"))
-
-(define-key custom-keys-mode-map (kbd "M-o") 'switch-window)
 
 (define-key custom-keys-mode-map (kbd "M-h") 'windmove-left)
 (define-key custom-keys-mode-map (kbd "M-l") 'windmove-right)
@@ -77,15 +62,13 @@
 ;; Kill selected region, or line if no active region
 (define-key custom-keys-mode-map (kbd "C-k") 'kill-region)
 
-;; pbcopy/pbpaste
-(define-key custom-keys-mode-map (kbd "C-x C-y") 'pbpaste)
-(define-key custom-keys-mode-map (kbd "C-x M-w") 'pbcopy)
+;; Toggle relative line numbers
+(define-key custom-keys-mode-map (kbd "C-c l") 'linum-relative-toggle)
 
-(defun my-minibuffer-setup-hook ()
-  (custom-keys-mode 0))
+;; Toggle vim emulation
+(define-key custom-keys-mode-map (kbd "C-c e") 'evil-mode)
 
-(add-hook 'slime-repl-mode-hook
-          (lambda () (custom-keys-mode t)))
+;; (defun custom-minibuffer-setup-hook ()
+;;   (custom-keys-mode 0))
 
 (custom-keys-mode t)
-
