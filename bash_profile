@@ -185,4 +185,12 @@ alias bec='bundle exec cucumber'
 alias bes='bundle exec rspec'
 alias ber='bundle exec rake'
 
+# Vagrant
+alias vup='time vagrant up'
+alias vpro='vagrant provision'
+alias vsus='vagrant suspend'
+alias vdes='vagrant destroy -f'
+alias vssh='vagrant ssh'
+
+# Haskell Binaries
 export PATH=~/.cabal/bin:$PATH

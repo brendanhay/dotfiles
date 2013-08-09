@@ -12,10 +12,16 @@
 
 (require 'haskell-align-imports)
 
+
+(define-key haskell-mode-map (kbd "C-c h")
+  (lambda ()
+    (interactive)
+    (haskell-sort-imports)
+    (haskell-align-imports)))
+
+
 ;; Haskell main editing mode key bindings.
 (defun haskell-hook ()
-  (define-key haskell-mode-map (kbd "C-c h") 'haskell-align-imports)
-
   (define-key haskell-mode-map (kbd "<return>") 'haskell-simple-indent-newline-same-col)
   (define-key haskell-mode-map (kbd "C-<return>") 'haskell-simple-indent-newline-indent)
 
@@ -82,6 +88,7 @@
       ("Gemfile$" . ruby-mode)
       ("Cheffile\\." . ruby-mode)
       ("Cheffile$" . ruby-mode)
+      ("Vagrantfile$" . ruby-mode)
       ("Thorfile$" . ruby-mode)
       (".gemspec$" . ruby-mode)
       (".erb$" . ruby-mode))))

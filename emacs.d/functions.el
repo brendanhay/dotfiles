@@ -108,7 +108,7 @@
 
 (defun get-buffers-matching-mode (mode)
   "Returns a list of buffers where their major-mode is equal to MODE"
-  (let ((buffer-mode-matches '()))
+  (let (buffer-mode-matches '())
    (dolist (buf (buffer-list))
      (with-current-buffer buf
        (if (eq mode major-mode)
@@ -125,22 +125,53 @@
 (defun pbpaste ()
   "Paste data from pasteboard."
   (interactive)
-  (shell-command-on-region
-   (point)
-   (if mark-active (mark) (point))
-   "pbpaste" nil t))
+  (let (pwd default-directory)
+    (setq default-directory "/tmp")
+    (shell-command-on-region
+     (point) (if mark-active (mark) (point)) "pbpaste" nil t)
+    (setq default-directory pwd)))
 
 (defun pbcopy ()
   "Copy region to pasteboard."
   (interactive)
   (print (mark))
   (when mark-active
-    (shell-command-on-region
-     (point) (mark) "pbcopy")))
-;;    (kill-buffer "*Shell Command Output*")))
+    (let (pwd default-directory)
+      (setq default-directory "/tmp")
+      (shell-command-on-region (point) (mark) "pbcopy")
+      (setq default-directory pwd))))
 
 (defun what-face (pos)
   (interactive "d")
   (let ((face (or (get-char-property (point) 'read-face-name)
                   (get-char-property (point) 'face))))
     (if face (message "Face: %s" face) (message "No face at %d" pos))))
+
+(defun downcase-first-char-of-string (str)
+  "Make first character of STR lower-case."
+  (interactive "s")
+  (concat (downcase (substring str 0 1)) (substring str 1)))
+
+(defun split-name (s)
+  (split-string
+   (let ((case-fold-search nil))
+     (downcase
+      (replace-regexp-in-string "\\([a-z]\\)\\([A-Z]\\)" "\\1 \\2" s)))
+   "[^A-Za-z0-9]+"))
+
+(defun camelcase  (s) (mapconcat 'capitalize (split-name s) ""))
+(defun underscore (s) (mapconcat 'downcase   (split-name s) "_"))
+
+(defun camelscore (s)
+  (cond ((string-match-p "_"  s) (camelcase s))
+        (t                       (underscore s))))
+
+(defun camelscore-word-at-point ()
+  (interactive)
+  (let* ((case-fold-search nil)
+         (beg (and (skip-chars-backward "[:alnum:]:_-") (point)))
+         (end (and (skip-chars-forward  "[:alnum:]:_-") (point)))
+         (txt (buffer-substring beg end))
+         (cml (camelscore txt))
+         (res (downcase-first-char-of-string cml)))
+    (if res (progn (delete-region beg end) (insert res)))))

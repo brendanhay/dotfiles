@@ -7,18 +7,33 @@
   :global t
   :keymap 'custom-keys-mode-map)
 
+;; Regex ISearch
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+
 ;; Movement
 (global-set-key (kbd "M-p") 'backward-paragraph)
 (global-set-key (kbd "M-n") 'forward-paragraph)
 
+;; Clipboard
+(global-set-key (kbd "C-c c") 'pbcopy)
+(global-set-key (kbd "C-c p") 'pbpaste)
+
+;; Camel Case
+(define-key custom-keys-mode-map (kbd "C-c w") 'camelscore-word-at-point)
+
+;; Indent/outdent blocks
+(define-key custom-keys-mode-map (kbd "C-c >") 'my-indent-region)
+(define-key custom-keys-mode-map (kbd "C-c <") 'my-unindent-region)
+
 ;; Replace
-(define-key custom-keys-mode-map (kbd "C-x r") 'replace-string)
-(define-key custom-keys-mode-map (kbd "C-x R") 'replace-regexp)
+(define-key custom-keys-mode-map (kbd "C-c r") 'replace-regexp)
+(define-key custom-keys-mode-map (kbd "C-c R") 'replace-string)
 
 ;; Find
-(define-key custom-keys-mode-map (kbd "C-x f") 'find-file-in-project)
-(define-key custom-keys-mode-map (kbd "C-x F") 'ack-and-a-half-find-file)
-(define-key custom-keys-mode-map (kbd "C-c r") 'ack-and-a-half)
+(define-key custom-keys-mode-map (kbd "C-c f") 'find-file-in-project)
+(define-key custom-keys-mode-map (kbd "C-c F") 'ack-and-a-half-find-file)
+(define-key custom-keys-mode-map (kbd "C-c C-f") 'ack-and-a-half)
 
 ;; Buffers
 (define-key custom-keys-mode-map (kbd "C-c b") 'revert-buffer)
@@ -67,8 +82,5 @@
 
 ;; Toggle vim emulation
 (define-key custom-keys-mode-map (kbd "C-c e") 'evil-mode)
-
-;; (defun custom-minibuffer-setup-hook ()
-;;   (custom-keys-mode 0))
 
 (custom-keys-mode t)

@@ -1,4 +1,10 @@
 ;;
+;; Kill whole line from any point
+;;
+
+(setq kill-whole-line t)
+
+;;
 ;; Whitespace
 ;;
 
@@ -11,6 +17,12 @@
 
 ;; Soft tabs
 (setq-default indent-tabs-mode nil)
+
+;;
+;; Treat Cased Parts of word as different
+;;
+
+(subword-mode 1)
 
 ;;
 ;; Window Movement
@@ -88,8 +100,7 @@
 
 (require 'uniquify)
 
-(setq uniquify-buffer-name-style 'forward)
-(setq uniquify-separator "/")
+(setq uniquify-buffer-name-style 'post-forward)
 (setq uniquify-after-kill-buffer-p t)
 (setq uniquify-ignore-buffers-re "^\\*")
 
