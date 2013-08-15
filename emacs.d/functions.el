@@ -175,3 +175,17 @@
          (cml (camelscore txt))
          (res (downcase-first-char-of-string cml)))
     (if res (progn (delete-region beg end) (insert res)))))
+
+(defun my-indent-region (n)
+  (interactive "p")
+  (if mark-active
+      (progn (indent-rigidly (min (mark) (point)) (max (mark) (point)) (* n 4))
+             (setq deactivate-mark nil))
+    (self-insert-command n)))
+
+(defun my-unindent-region (n)
+  (interactive "p")
+  (if mark-active
+      (progn (indent-rigidly (min (mark) (point)) (max (mark) (point)) (* n -4))
+             (setq deactivate-mark nil))
+    (self-insert-command n)))

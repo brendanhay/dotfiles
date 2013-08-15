@@ -12,13 +12,11 @@
 
 (require 'haskell-align-imports)
 
-
 (define-key haskell-mode-map (kbd "C-c h")
   (lambda ()
     (interactive)
     (haskell-sort-imports)
     (haskell-align-imports)))
-
 
 ;; Haskell main editing mode key bindings.
 (defun haskell-hook ()
@@ -68,13 +66,13 @@
 
 ;; Customization
 (custom-set-variables
- '(haskell-font-lock-symbols t)
+ '(haskell-font-lock-symbols nil)
  '(haskell-notify-p t)
  '(haskell-process-type 'cabal-dev)
  '(haskell-stylish-on-save t)
  '(haskell-tags-on-save t)
  '(haskell-indent-after-keywords (quote (("where" 2 0) ("of" 4) ("do" 4) ("in" 4 0) ("{" 2) "if" "then" "else" "let")))
- '(haskell-indent-thenelse 1))
+ '(haskell-indent-thenelse 4))
 
 ;;
 ;; Ruby

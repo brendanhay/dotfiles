@@ -135,7 +135,7 @@ else
 fi
 
 # Navigation
-alias ..='cd ..'
+alias ..='cd ../../'
 alias ...='cd ../../../'
 alias ....='cd ../../../../'
 alias .....='cd ../../../../'

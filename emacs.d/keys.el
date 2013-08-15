@@ -19,12 +19,9 @@
 (global-set-key (kbd "C-c c") 'pbcopy)
 (global-set-key (kbd "C-c p") 'pbpaste)
 
-;; Camel Case
-(define-key custom-keys-mode-map (kbd "C-c w") 'camelscore-word-at-point)
-
 ;; Indent/outdent blocks
-(define-key custom-keys-mode-map (kbd "C-c >") 'my-indent-region)
-(define-key custom-keys-mode-map (kbd "C-c <") 'my-unindent-region)
+(define-key custom-keys-mode-map (kbd "M-.") 'my-indent-region)
+(define-key custom-keys-mode-map (kbd "M-,") 'my-unindent-region)
 
 ;; Replace
 (define-key custom-keys-mode-map (kbd "C-c r") 'replace-regexp)
@@ -67,6 +64,12 @@
 
 ;; Extend Selection
 (define-key custom-keys-mode-map (kbd "C-c s") 'extend-selection)
+
+;; Wrap Text
+(define-key custom-keys-mode-map (kbd "C-c w") 'fill-region)
+
+;; Camel Case
+(define-key custom-keys-mode-map (kbd "C-c y") 'camelscore-word-at-point)
 
 ;; Remove suspend frame
 (global-unset-key (kbd "C-z"))
