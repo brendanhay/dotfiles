@@ -5,6 +5,12 @@
 (setq kill-whole-line t)
 
 ;;
+;; Ack
+;;
+
+(defalias 'ack 'ack-and-a-half)
+
+;;
 ;; Whitespace
 ;;
 

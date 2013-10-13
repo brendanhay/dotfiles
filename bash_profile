@@ -65,7 +65,7 @@ export PLATFORM="$MACHINE-$OS-$OSVERSION"
 export PATH=/usr/local/bin:/usr/local/sbin:~/.bin:~/Library/Haskell/bin:$PATH
 
 # Add OSX applications to cd path
-export CDPATH=$HOME/Library/Application:$CDPATH
+export CDPATH=$CDPATH:$HOME/Library/Application:$HOME/Projects
 
 #
 # Bash
@@ -194,3 +194,5 @@ alias vssh='vagrant ssh'
 
 # Haskell Binaries
 export PATH=~/.cabal/bin:$PATH
+
+source ~/Projects/khan/share/completion.bash
