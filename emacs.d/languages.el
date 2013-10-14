@@ -123,3 +123,12 @@
     '(("\\.md$" . markdown-mode)
       ("\\.markdown$" . markdown-mode)
       ("\\.mdown$" . markdown-mode))))
+
+;;
+;; ED-E
+;;
+
+(setq auto-mode-alist
+  (append auto-mode-alist
+    '(("\\.ede$" . jinja2-mode))))
+
