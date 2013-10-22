@@ -62,6 +62,9 @@
 ;; Align
 (define-key custom-keys-mode-map (kbd "C-c a") 'align-regexp)
 
+;; Sort Lines
+(define-key custom-keys-mode-map (kbd "C-c l") 'sort-lines)
+
 ;; Extend Selection
 (define-key custom-keys-mode-map (kbd "C-c s") 'extend-selection)
 
@@ -79,9 +82,6 @@
 
 ;; Kill selected region, or line if no active region
 (define-key custom-keys-mode-map (kbd "C-k") 'kill-region)
-
-;; Toggle relative line numbers
-(define-key custom-keys-mode-map (kbd "C-c l") 'linum-relative-toggle)
 
 ;; Toggle vim emulation
 (define-key custom-keys-mode-map (kbd "C-c e") 'evil-mode)

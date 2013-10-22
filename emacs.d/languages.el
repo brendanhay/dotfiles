@@ -2,7 +2,6 @@
 ;; Haskell
 ;;
 
-
 (defvar haskell-mode-extra-keywords
   '(("\\<\\(FIXME\\):" 1 font-lock-warning-face prepend)
     ("^\\([a-zA-Z_]+[a-zA-Z0-9_]*\\) :" 1 font-lock-preprocessor-face prepend)))
@@ -12,7 +11,7 @@
 
 (require 'haskell-align-imports)
 
-(define-key haskell-mode-map (kbd "C-c h")
+(define-key haskell-mode-map (kbd "C-c j")
   (lambda ()
     (interactive)
     (haskell-sort-imports)
@@ -24,20 +23,17 @@
   (define-key haskell-mode-map (kbd "C-<return>") 'haskell-simple-indent-newline-indent)
 
   ;; Load the current file (and make a session if not already made).
-  (define-key haskell-mode-map [?\C-c ?\C-l] 'haskell-process-load-file)
+  (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
   (define-key haskell-mode-map [f5] 'haskell-process-load-file)
 
   ;; Switch to the REPL.
-  (define-key haskell-mode-map [?\C-c ?\C-z] 'haskell-interactive-switch)
+  (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
 
   ;; “Bring” the REPL, hiding all other windows apart from the source
   ;; and the REPL.
   (define-key haskell-mode-map (kbd "C-`") 'haskell-interactive-bring)
 
-  ;; Build the Cabal project.
   (define-key haskell-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
-  ;; Interactively choose the Cabal command to run.
-  (define-key haskell-mode-map (kbd "C-c c") 'haskell-process-cabal)
 
   ;; Get the type and info of the symbol at point, print it in the
   ;; message buffer.
@@ -58,8 +54,10 @@
   (define-key haskell-mode-map (kbd "C-c C-h") 'haskell-hayoo)
 
   ;; Jump to the definition of the current symbol.
-  (define-key haskell-mode-map (kbd "M-.") 'haskell-mode-tag-find))
+  (define-key haskell-mode-map (kbd "M-\"") 'haskell-process-generate-tags)
+  (define-key haskell-mode-map (kbd "M-'") 'haskell-mode-tag-find))
 
+(add-hook 'haskell-mode-hook 'haskell-hook)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (remove-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
@@ -68,7 +66,8 @@
 (custom-set-variables
  '(haskell-font-lock-symbols nil)
  '(haskell-notify-p t)
- '(haskell-process-type 'cabal-dev)
+ '(haskell-process-type 'cabal-repl)
+ '(haskell-process-log t)
  '(haskell-stylish-on-save t)
  '(haskell-tags-on-save t)
  '(haskell-indent-after-keywords (quote (("where" 2 0) ("of" 4) ("do" 4) ("in" 4 0) ("{" 2) "if" "then" "else" "let")))

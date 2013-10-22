@@ -37,13 +37,13 @@
 ;; Hippie
 (setq hippie-expand-verbose nil
       hippie-expand-dabbrev-as-symbol t
-      hippie-expand-try-functions-list
-      (quote
-       (try-expand-dabbrev-visible
-        try-expand-dabbrev-from-kill
-        try-expand-dabbrev-all-buffers
-        try-complete-file-name-partially
-        try-complete-file-name)))
+      hippie-expand-try-functions-list (quote
+                                        (my-ido-hippie-expand
+                                         try-expand-dabbrev-visible
+                                         try-expand-dabbrev-from-kill
+                                         try-expand-dabbrev-all-buffers
+                                         try-complete-file-name-partially
+                                         try-complete-file-name)))
 
 ;; Minibuffers
 (setq enable-recursive-minibuffers nil
@@ -94,6 +94,9 @@
           (lambda ()
             (set (make-local-variable 'truncate-lines) nil)))
 
+(add-hook 'minibuffer-setup-hook
+      (lambda () (setq truncate-lines nil)))
+
 ;;
 ;; Buffers
 ;;
@@ -129,13 +132,6 @@
 ;;
 
 (setq vc-follow-symlinks t)
-
-;;
-;; Server
-;;
-
-(server-force-delete)
-(server-start)
 
 ;;
 ;; Auto Save

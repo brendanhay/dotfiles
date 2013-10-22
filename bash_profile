@@ -62,7 +62,7 @@ export PLATFORM="$MACHINE-$OS-$OSVERSION"
 # Path
 #
 
-export PATH=/usr/local/bin:/usr/local/sbin:~/.bin:/usr/local/share/python:~/Library/Haskell/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:~/.bin:~/Library/Haskell/bin:$PATH
 
 # Add OSX applications to cd path
 export CDPATH=$HOME/Library/Application:$CDPATH
@@ -170,8 +170,8 @@ alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgree
 alias gs='git status'
 alias gd='git diff'
 alias gdc='git diff --cached'
-alias gc='git commit -m'
-alias gca='git commit -am'
+alias gc='git commit -ev'
+alias gca='git commit -aev'
 alias gb='git branch'
 alias gco='git checkout'
 alias gpu='git pull --rebase'
