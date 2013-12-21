@@ -196,3 +196,7 @@ alias vssh='vagrant ssh'
 export PATH=~/.cabal/bin:$PATH
 
 source ~/Projects/khan/share/completion.bash
+
+# EC2 Tools
+export JAVA_HOME="$(/usr/libexec/java_home)"
+export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.12.0/libexec"

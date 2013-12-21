@@ -89,3 +89,4 @@
 (add-hook 'window-configuration-change-hook
           (lambda ()
             (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 0 0)))
+(put 'set-goal-column 'disabled nil)
