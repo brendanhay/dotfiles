@@ -12,7 +12,7 @@
   resolve   = !git ls-files --unmerged | cut -c51- | sort -u | xargs git add
 [core]
   excludesfile = ~/.gitignore
-  editor       = subl -w
+  editor       = emacsclient
   autocrlf     = input
   whitespace   = space-before-tab, trailing-space
 [help]
@@ -47,7 +47,3 @@
   new  = green bold
 [difftool]
   prompt = false
-[difftool "Kaleidoscope"]
-  cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
-[diff]
-  tool = Kaleidoscope
