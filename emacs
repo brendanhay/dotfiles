@@ -40,8 +40,7 @@
  '(haskell-process-type (quote cabal-repl))
  '(haskell-stylish-on-save t)
  '(haskell-tags-on-save t)
- '(line-move-ignore-invisible nil)
- '(linum-format "%3d "))
+ '(line-move-ignore-invisible nil))
 
 ;; Theme
 (load-theme 'base16-monokai)
