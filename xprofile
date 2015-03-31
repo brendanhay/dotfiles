@@ -19,7 +19,7 @@ pa-applet &
 syndaemon -d -t -k -i 1
 
 # Keyboard
-xkbcomp -I$HOME/.xkb ~/.xkb/keymap/custom $DISPLAY &
+xkbcomp -I~/.xkb ~/.xkb/keymap/custom $DISPLAY &
 
 # DropBox
 dropbox &

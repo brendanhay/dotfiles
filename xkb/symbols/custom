@@ -1,0 +1,5 @@
+partial modifier_keys
+xkb_symbols "prtsc_super" {
+    replace key <PRSC> { [ Super_L ] };
+    modifier_map Mod4 { <PRSC> };
+};
