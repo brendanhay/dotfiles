@@ -1,9 +1,0 @@
---ignore-dir=vendor
---ignore-dir=log
---ignore-dir=tmp
---ignore-dir=doc
---ignore-dir=dist
---ignore-dir=cabal-dev
---ignore-dir=.cabal-sandbox
---ignore-dir=.git
---ignore-dir=resources
