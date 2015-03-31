@@ -142,7 +142,7 @@ assign [class="^Spotify$"] 5
 assign [class="^Steam$"] 6
 
 exec --no-startup-id i3-msg 'workspace 1; exec i3-sensible-terminal'
-exec --no-startup-id i3-msg 'workspace 2; exec emacs'
+exec emacs
 exec google-chrome-stable
 
 # Start i3bar to display a workspace bar (plus the system information i3status
