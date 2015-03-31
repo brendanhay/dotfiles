@@ -1,6 +1,9 @@
 # General Settings - started by i3-gnome
 # /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
 
+# Pathing for GUI programs
+export PATH=$HOME/bin:$HOME/.cabal/bin:/usr/local/bin:$PATH
+
 # Screensaver + Lock
 gnome-screensaver &
 xautolock -time 15 -locker "gnome-screensaver-command --lock" &
@@ -19,7 +22,7 @@ pa-applet &
 syndaemon -d -t -k -i 1
 
 # Keyboard
-xkbcomp -I~/.xkb ~/.xkb/keymap/custom $DISPLAY &
+xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/custom $DISPLAY &
 
 # DropBox
 dropbox &
