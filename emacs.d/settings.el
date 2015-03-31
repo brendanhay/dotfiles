@@ -1,19 +1,39 @@
-;;
-;; Kill whole line from any point
-;;
+;; Remove Visual Elements
+(menu-bar-mode -1)
 
+;; GUI Only
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+;; Default mode
+(setq default-major-mode 'text-mode)
+
+;; Keyboard
+(set-keyboard-coding-system nil)
+
+;; Kill startup message
+(setq inhibit-startup-message t)
+
+;; Replace Yes with Y (or N)
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Line wrap
+(set-default 'truncate-lines t)
+
+;; Cua
+(cua-mode 0)
+
+;; Startup
+(setq inhibit-startup-message t)
+
+;; Bookmarks
+(setq bookmark-save-flag 1
+      bookmark-default-file (concat emacs-dir "bookmarks"))
+
+;; Kill whole line from any point
 (setq kill-whole-line t)
 
-;;
-;; Ack
-;;
-
-(defalias 'ack 'ack-and-a-half)
-
-;;
 ;; Whitespace
-;;
-
 (require 'whitespace)
 
 (setq whitespace-line-column fill-column)
@@ -24,23 +44,13 @@
 ;; Soft tabs
 (setq-default indent-tabs-mode nil)
 
-;;
 ;; Treat Cased Parts of word as different
-;;
-
 (subword-mode 1)
 
-;;
 ;; Window Movement
-;;
-
 (setq windmove-wrap-around t)
 
-;;
 ;; Expansion
-;;
-
-;; Hippie
 (setq hippie-expand-verbose nil
       hippie-expand-dabbrev-as-symbol t
       hippie-expand-try-functions-list (quote
@@ -62,10 +72,7 @@
 (setq complete-prospects-height 1 ;; don't spam my minibuffer
       icomplete-compute-delay 0)  ;; don't wait
 
-;;
 ;; IDO
-;;
-
 (require 'ido)
 
 (ido-mode 'both) ;; for buffers and files
@@ -103,20 +110,14 @@
 (add-hook 'minibuffer-setup-hook
       (lambda () (setq truncate-lines nil)))
 
-;;
 ;; Buffers
-;;
-
 (require 'uniquify)
 
 (setq uniquify-buffer-name-style 'post-forward)
 (setq uniquify-after-kill-buffer-p t)
 (setq uniquify-ignore-buffers-re "^\\*")
 
-;;
 ;; Parens
-;;
-
 ;; Enable skeleton-pair insert globally
 (setq skeleton-pair t)
 
@@ -133,44 +134,22 @@
 ;; Highlight parens
 (show-paren-mode 1)
 
-;;
 ;; Symlinks
-;;
-
 (setq vc-follow-symlinks t)
 
-;;
 ;; Auto Save
-;;
-
 (setq backup-directory-alist         `((".*" . ,tmp-dir))
       auto-save-file-name-transforms `((".*" ,tmp-dir t)))
 
-;;
 ;; TAGS
-;;
-
 (setq tags-revert-without-query 1)
 
-;;
 ;; Line Numbers
-;;
-
 (setq linum-format "%4d ")
 (global-linum-mode 1)
 
-;(require 'linum-relative)
-
-;;
 ;; Columns
-;;
-
 (setq column-number-mode 1)
-
-;;
-;; Mode Hook
-;;
-
 
 ;; Fill columns
 (require 'fill-column-indicator)
@@ -183,3 +162,13 @@
     (fci-mode 1)))
 
 (global-fci-mode 1)
+
+;; Window margins
+(add-hook 'window-configuration-change-hook
+          (lambda ()
+            (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 0 0)))
+
+;; Server
+(load "server")
+
+(unless (server-running-p) (server-start))
