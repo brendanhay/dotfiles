@@ -1,0 +1,25 @@
+# General Settings - started by i3-gnome
+# /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
+
+# Screensaver + Lock
+gnome-screensaver &
+xautolock -time 15 -locker "gnome-screensaver-command --lock" &
+
+# Backlight
+xset dpms 0 900 3600 &
+xset s off &
+
+# NetworkManager - started by i3-gnome
+# nm-applet &
+
+# PulseAudio
+pa-applet &
+
+# Disable Trackpad when Typing
+syndaemon -d -t -k -i 1
+
+# Keyboard
+xkbcomp -I$HOME/.xkb ~/.xkb/keymap/custom $DISPLAY &
+
+# DropBox
+dropbox &

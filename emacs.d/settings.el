@@ -153,17 +153,10 @@
 (setq tags-revert-without-query 1)
 
 ;;
-;; Undo
-;;
-
-(global-undo-tree-mode 1)
-
-;;
 ;; Line Numbers
 ;;
 
-(setq linum-format "%3d ")
-
+(setq linum-format "%4d ")
 (global-linum-mode 1)
 
 ;(require 'linum-relative)
@@ -182,11 +175,10 @@
 ;; Fill columns
 (require 'fill-column-indicator)
 
-(setq fci-rule-color "#1e1e1e")
+(setq fci-rule-color "#1f1f1f")
 
 (define-globalized-minor-mode global-fci-mode fci-mode
   (lambda ()
-    (rainbow-mode 1)
     (setq fill-column 79)
     (fci-mode 1)))
 

@@ -16,8 +16,8 @@
 (global-set-key (kbd "M-n") 'forward-paragraph)
 
 ;; Clipboard
-(global-set-key (kbd "C-c c") 'pbcopy)
-(global-set-key (kbd "C-c p") 'pbpaste)
+;; (global-set-key (kbd "C-c c") 'pbcopy)
+;; (global-set-key (kbd "C-c p") 'pbpaste)
 
 ;; Indent/outdent blocks
 (define-key custom-keys-mode-map (kbd "M-.") 'my-indent-region)

@@ -11,16 +11,16 @@
 
 (require 'haskell-align-imports)
 
-(define-key haskell-mode-map (kbd "C-c j")
-  (lambda ()
-    (interactive)
-    (haskell-sort-imports)
-    (haskell-align-imports)))
+;; (define-key haskell-mode-map (kbd "C-c j")
+;;   (lambda ()
+;;     (interactive)
+;;     (haskell-sort-imports)
+;;     (haskell-align-imports)))
 
 ;; Haskell main editing mode key bindings.
 (defun haskell-hook ()
-  (define-key haskell-mode-map (kbd "<return>") 'haskell-simple-indent-newline-same-col)
-  (define-key haskell-mode-map (kbd "C-<return>") 'haskell-simple-indent-newline-indent)
+;;  (define-key haskell-mode-map (kbd "<return>") 'haskell-simple-indent-newline-same-col)
+;;  (define-key haskell-mode-map (kbd "C-<return>") 'haskell-simple-indent-newline-indent)
 
   ;; Load the current file (and make a session if not already made).
   (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
