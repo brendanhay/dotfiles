@@ -28,13 +28,14 @@
 (define-key custom-keys-mode-map (kbd "C-c R") 'replace-string)
 
 ;; Find
-(define-key custom-keys-mode-map (kbd "C-c f") 'find-file-in-project)
-(define-key custom-keys-mode-map (kbd "C-c F") 'ack-and-a-half-find-file)
-(define-key custom-keys-mode-map (kbd "C-c C-f") 'ack-and-a-half)
+(define-key custom-keys-mode-map (kbd "C-x C-f") 'helm-projectile-safe-for)
+
+;; Grep
+(define-key custom-keys-mode-map (kbd "C-x C-g") 'helm-projectile-grep)
 
 ;; Buffers
 (define-key custom-keys-mode-map (kbd "C-c b") 'revert-buffer)
-(define-key custom-keys-mode-map (kbd "C-x b") 'ido-switch-buffer)
+(define-key custom-keys-mode-map (kbd "C-x C-b") 'helm-buffers-list)
 (define-key custom-keys-mode-map (kbd "C-x n") 'next-user-buffer)
 (define-key custom-keys-mode-map (kbd "C-x p") 'previous-user-buffer)
 
@@ -57,7 +58,7 @@
 (define-key custom-keys-mode-map (kbd "C-c .") 'bookmark-set)
 
 ;; Occur
-(define-key custom-keys-mode-map (kbd "C-c o") 'multi-occur-in-this-mode)
+(define-key custom-keys-mode-map (kbd "C-c o") 'helm-multi-occur)
 
 ;; Align
 (define-key custom-keys-mode-map (kbd "C-c a") 'align-regexp)
@@ -83,7 +84,12 @@
 ;; Kill selected region, or line if no active region
 (define-key custom-keys-mode-map (kbd "C-k") 'kill-region)
 
-;; Toggle vim emulation
-(define-key custom-keys-mode-map (kbd "C-c e") 'evil-mode)
+;; Skeleton insert pairs
+(define-key custom-keys-mode-map (kbd "<")  'skeleton-pair-insert-maybe)
+(define-key custom-keys-mode-map (kbd "(")  'skeleton-pair-insert-maybe)
+(define-key custom-keys-mode-map (kbd "[")  'skeleton-pair-insert-maybe)
+(define-key custom-keys-mode-map (kbd "{")  'skeleton-pair-insert-maybe)
+(define-key custom-keys-mode-map (kbd "\"") 'skeleton-pair-insert-maybe)
+(define-key custom-keys-mode-map (kbd "\'") 'skeleton-pair-insert-maybe)
 
 (custom-keys-mode t)

@@ -1,8 +1,8 @@
 [user]
-  name  = ${name}
-  email = ${email}
+  name  = Brendan Hay
+  email = brendan.g.hay@gmail.com
 [github]
-  user  = ${gh_username}
+  user  = brendanhay
 [alias]
   co        = checkout
   unstage   = reset HEAD
@@ -12,7 +12,7 @@
   resolve   = !git ls-files --unmerged | cut -c51- | sort -u | xargs git add
 [core]
   excludesfile = ~/.gitignore
-  editor       = emacsclient
+  editor       = emacs -nw
   autocrlf     = input
   whitespace   = space-before-tab, trailing-space
 [help]

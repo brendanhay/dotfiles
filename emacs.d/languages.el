@@ -19,8 +19,8 @@
 
 ;; Haskell main editing mode key bindings.
 (defun haskell-hook ()
-;;  (define-key haskell-mode-map (kbd "<return>") 'haskell-simple-indent-newline-same-col)
-;;  (define-key haskell-mode-map (kbd "C-<return>") 'haskell-simple-indent-newline-indent)
+  (define-key haskell-mode-map (kbd "<return>") 'haskell-simple-indent-newline-same-col)
+  (define-key haskell-mode-map (kbd "C-<return>") 'haskell-simple-indent-newline-indent)
 
   ;; Load the current file (and make a session if not already made).
   (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-file)
@@ -72,6 +72,14 @@
  '(haskell-tags-on-save t)
  '(haskell-indent-after-keywords (quote (("where" 2 0) ("of" 4) ("do" 4) ("in" 4 0) ("{" 2) "if" "then" "else" "let")))
  '(haskell-indent-thenelse 4))
+
+;;
+;; Lisp
+;;
+
+(setq auto-mode-alist
+  (append auto-mode-alist
+    '(("emacs$" . lisp-mode))))
 
 ;;
 ;; Ruby

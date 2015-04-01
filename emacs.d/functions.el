@@ -189,3 +189,10 @@
       (progn (indent-rigidly (min (mark) (point)) (max (mark) (point)) (* n -4))
              (setq deactivate-mark nil))
     (self-insert-command n)))
+
+(defun helm-projectile-safe-for ()
+  "Open using helm-projectile or revert to helm-find-files if no project is detected."
+  (interactive)
+  (if (projectile-project-p)
+      (helm-projectile)
+    (helm-for-files)))
