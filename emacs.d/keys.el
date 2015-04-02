@@ -28,7 +28,8 @@
 (define-key custom-keys-mode-map (kbd "C-c R") 'replace-string)
 
 ;; Find
-(define-key custom-keys-mode-map (kbd "C-x C-f") 'helm-projectile-safe-for)
+(define-key custom-keys-mode-map (kbd "C-x C-f") 'helm-find-files)
+(define-key custom-keys-mode-map (kbd "C-x f") 'helm-projectile-find-file-dwim)
 
 ;; Grep
 (define-key custom-keys-mode-map (kbd "C-x C-g") 'helm-projectile-grep)
