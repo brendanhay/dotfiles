@@ -47,13 +47,12 @@
 ;; Theme
 (when (display-graphic-p)
   (load-theme 'base16-monokai)
-  (set-background-color "#0d0d0d")
+  (set-background-color "#090909")
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(fringe ((t (:background "#0d0d0d"))))
    '(helm-candidate-number ((t (:foreground "LightSkyBlue2"))))
    '(helm-ff-directory ((t (:foreground "LightSkyBlue2" :weight bold))))
    '(helm-ff-dotted-directory ((t (:foreground "#ae81ff"))))
@@ -68,7 +67,8 @@
    '(helm-selection ((t (:background "#050505" :foreground "#f92672" :weight bold))))
    '(helm-source-header ((t (:foreground "yellow green" :weight bold :height 1.2 :family "Sans Serif"))))
    '(helm-visible-mark ((t (:foreground "dark slate gray"))))
+   '(fringe ((t (:background "#090909"))))
    '(linum ((t (:background "#050505" :foreground "grey20"))))
-   '(mode-line ((t (:background "grey30" :foreground "#f5f4f1"))))
-   '(mode-line-inactive ((t (:inherit mode-line :background "#050505" :foreground "grey80" :box (:line-width -1 :color "grey10") :weight light))))
+   '(mode-line ((t (:background "grey10" :foreground "#f5f4f1"))))
+   '(mode-line-inactive ((t (:inherit mode-line :background "grey5" :foreground "grey80" :box (:line-width -1 :color "grey30") :weight light))))
    '(vertical-border ((nil (:foreground "#050505"))))))
