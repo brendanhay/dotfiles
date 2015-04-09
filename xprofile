@@ -9,7 +9,7 @@ gnome-screensaver &
 xautolock -time 15 -locker "gnome-screensaver-command --lock" &
 
 # Backlight
-xset dpms 0 900 3600 &
+xset dpms 0 1000 3600 &
 xset s off &
 
 # NetworkManager - started by i3-gnome
@@ -26,3 +26,8 @@ xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/custom $DISPLAY &
 
 # DropBox
 dropbox &
+
+# Screen Resolutions
+xrandr -q Modeline "1280x720_60.00" 74.50 1280 1344 1472 1664  720 723 728 748 -hsync +vsync
+xrandr --newmode "1280x720_60.00" 74.50 1280 1344 1472 1664  720 723 728 748 -hsync +vsync
+xrandr --addmode eDP1 1280x720_60.00

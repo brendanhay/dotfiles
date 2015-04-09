@@ -31,14 +31,17 @@
 (define-key custom-keys-mode-map (kbd "C-x C-f") 'helm-find-files)
 (define-key custom-keys-mode-map (kbd "C-x f") 'helm-projectile-find-file-dwim)
 
-;; Grep
-(define-key custom-keys-mode-map (kbd "C-x C-g") 'helm-projectile-grep)
-
 ;; Buffers
+(global-unset-key (kbd "C-x b"))
+
 (define-key custom-keys-mode-map (kbd "C-c b") 'revert-buffer)
 (define-key custom-keys-mode-map (kbd "C-x C-b") 'helm-buffers-list)
+(define-key custom-keys-mode-map (kbd "C-x b") 'helm-projectile-switch-to-buffer)
 (define-key custom-keys-mode-map (kbd "C-x n") 'next-user-buffer)
 (define-key custom-keys-mode-map (kbd "C-x p") 'previous-user-buffer)
+
+;; Grep
+(define-key custom-keys-mode-map (kbd "C-x C-g") 'helm-projectile-grep)
 
 ;; Windows
 (global-unset-key (kbd "C-x o"))

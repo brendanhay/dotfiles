@@ -11,12 +11,6 @@
 
 (require 'haskell-align-imports)
 
-;; (define-key haskell-mode-map (kbd "C-c j")
-;;   (lambda ()
-;;     (interactive)
-;;     (haskell-sort-imports)
-;;     (haskell-align-imports)))
-
 ;; Haskell main editing mode key bindings.
 (defun haskell-hook ()
   (define-key haskell-mode-map (kbd "<return>") 'haskell-simple-indent-newline-same-col)
@@ -58,20 +52,11 @@
   (define-key haskell-mode-map (kbd "M-'") 'haskell-mode-tag-find))
 
 (add-hook 'haskell-mode-hook 'haskell-hook)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-(remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(remove-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
-;; Customization
-(custom-set-variables
- '(haskell-font-lock-symbols nil)
- '(haskell-notify-p t)
- '(haskell-process-type 'cabal-repl)
- '(haskell-process-log t)
- '(haskell-stylish-on-save t)
- '(haskell-tags-on-save t)
- '(haskell-indent-after-keywords (quote (("where" 2 0) ("of" 4) ("do" 4) ("in" 4 0) ("{" 2) "if" "then" "else" "let")))
- '(haskell-indent-thenelse 4))
+;; (add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(remove-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;; (remove-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;;
 ;; Lisp
