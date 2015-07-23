@@ -1,8 +1,14 @@
-# General Settings - started by i3-gnome
+# General Settings - started by gdm
 # /usr/lib/gnome-settings-daemon/gnome-settings-daemon &
+
+# Keyring
+gnome-keyring-daemon &
 
 # Pathing for GUI programs
 export PATH=$HOME/bin:$HOME/.cabal/bin:/usr/local/bin:$PATH
+
+# Left Mouse Buttons
+xmodmap -e "pointer = 3 2 1" &
 
 # Screensaver + Lock
 gnome-screensaver &
@@ -12,22 +18,16 @@ xautolock -time 15 -locker "gnome-screensaver-command --lock" &
 xset dpms 0 1000 3600 &
 xset s off &
 
-# NetworkManager - started by i3-gnome
-# nm-applet &
+# NetworkManager
+nm-applet &
 
 # PulseAudio
 pa-applet &
 
-# Disable Trackpad when Typing
-syndaemon -d -t -k -i 1
-
 # Keyboard
 xkbcomp -I$HOME/.xkb $HOME/.xkb/keymap/custom $DISPLAY &
 
-# DropBox
-dropbox &
-
 # Screen Resolutions
-xrandr -q Modeline "1280x720_60.00" 74.50 1280 1344 1472 1664  720 723 728 748 -hsync +vsync
-xrandr --newmode "1280x720_60.00" 74.50 1280 1344 1472 1664  720 723 728 748 -hsync +vsync
-xrandr --addmode eDP1 1280x720_60.00
+xrandr -q Modeline "1280x720_60.00" 74.50 1280 1344 1472 1664 720 723 728 748 -hsync +vsync &
+xrandr --newmode "1280x720_60.00" 74.50 1280 1344 1472 1664  720 723 728 748 -hsync +vsync &
+xrandr --addmode eDP1 1280x720_60.00 &

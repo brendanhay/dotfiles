@@ -12,7 +12,7 @@
   resolve   = !git ls-files --unmerged | cut -c51- | sort -u | xargs git add
 [core]
   excludesfile = ~/.gitignore
-  editor       = emacs -nw
+  editor       = emacs -nw --quick
   autocrlf     = input
   whitespace   = space-before-tab, trailing-space
 [help]

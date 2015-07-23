@@ -40,8 +40,11 @@
 (define-key custom-keys-mode-map (kbd "C-x n") 'next-user-buffer)
 (define-key custom-keys-mode-map (kbd "C-x p") 'previous-user-buffer)
 
+(define-key custom-keys-mode-map (kbd "M-]") 'find-tag-other-window)
+
+
 ;; Grep
-(define-key custom-keys-mode-map (kbd "C-x C-g") 'helm-projectile-grep)
+(define-key custom-keys-mode-map (kbd "C-x g") 'helm-projectile-grep)
 
 ;; Windows
 (global-unset-key (kbd "C-x o"))

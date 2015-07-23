@@ -157,10 +157,9 @@
           (lambda ()
             (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 0 0)))
 
-;; Server
-(load "server")
-
-(unless (server-running-p) (server-start))
+;; ;; Server
+;; (load "server")
+;; (unless (server-running-p) (server-start))
 
 ;; Helm
 (require 'helm)
@@ -336,11 +335,6 @@
           (lambda ()
             (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 0 0)))
 
-;; Server
-(load "server")
-
-(unless (server-running-p) (server-start))
-
 ;; Helm
 (require 'helm)
 (require 'helm-config)
@@ -355,6 +349,15 @@
 
 ;; Projectile
 (projectile-global-mode)
+
+;; Grep
+(setq grep-find-ignored-directories
+      (append grep-find-ignored-directories
+              '("backup" "tmp" ".cabal-sandbox" "dist")))
+
+(setq grep-find-ignored-files
+      (append grep-find-ignored-files
+              '("*.dyn*")))
 
 ;; Line Numbers
 (setq linum-format "%4d ")

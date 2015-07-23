@@ -40,8 +40,8 @@
   (define-key haskell-mode-map (kbd "SPC") 'haskell-mode-contextual-space)
 
   ;; Jump to the imports. Keep tapping to jump between import
-  ;; groups. C-u f8 to jump back again.
-  (define-key haskell-mode-map [f8] 'haskell-navigate-imports)
+  ;; groups. C-u <key> to jump back again.
+  (define-key haskell-mode-map (kbd "C-c i") 'haskell-navigate-imports)
 
   ;; Searches
   (define-key haskell-mode-map (kbd "C-c h") 'haskell-hoogle)
