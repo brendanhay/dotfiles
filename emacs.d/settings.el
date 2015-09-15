@@ -157,9 +157,9 @@
           (lambda ()
             (set-window-margins (car (get-buffer-window-list (current-buffer) nil t)) 0 0)))
 
-;; ;; Server
-;; (load "server")
-;; (unless (server-running-p) (server-start))
+;; Server
+(load "server")
+(unless (server-running-p) (server-start))
 
 ;; Helm
 (require 'helm)

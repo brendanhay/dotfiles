@@ -26,6 +26,7 @@
  '(custom-safe-themes
    (quote
     ("0240d45644b370b0518e8407f5990a243c769fb0150a7e74297e6f7052a04a72" default)))
+ '(font-use-system-font t)
  '(grep-command "grep -I")
  '(haskell-indent-after-keywords
    (quote
@@ -96,32 +97,5 @@
  '(mode-line ((t (:background "Grey10" :foreground "#f5f4f1" :box (:line-width -1 :color "Grey20")))))
  '(mode-line-inactive ((t (:background "#050505" :foreground "Grey45" :weight light))))
  '(vertical-border ((nil (:foreground "#050505")))))
+
 (put 'downcase-region 'disabled nil)
-
-
-(defun mo–toggle–identifier–naming–style ()
-  "Toggles the symbol at point between C-style naming,
-e.g. `hello_world_string', and camel case,
-e.g. `HelloWorldString'."
-  (interactive)
-  (let* ((symbol–pos (bounds–of–thing–at–point 'symbol))
-         case–fold–search symbol–at–point cstyle regexp func)
-    (unless symbol–pos
-      (error "No symbol at point"))
-    (save–excursion
-      (narrow–to–region (car symbol–pos) (cdr symbol–pos))
-      (setq cstyle (string–match–p "_" (buffer–string))
-            regexp (if cstyle "\\(?:\\_<\\|_\\)\\(\\w\\)" "\\([A-Z]\\)")
-            func (if cstyle
-                     'capitalize
-                   (lambda (s)
-                     (concat (if (= (match–beginning 1)
-                                    (car symbol–pos))
-                                 ""
-                               "-")
-                             (downcase s)))))
-      (goto–char (point–min))
-      (while (re–search–forward regexp nil t)
-        (replace–match (funcall func (match–string 1))
-                       t nil))
-      (widen))))
