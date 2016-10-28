@@ -5,7 +5,7 @@
 ;; Packages
 (require 'package)
 
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -25,7 +25,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("0240d45644b370b0518e8407f5990a243c769fb0150a7e74297e6f7052a04a72" default)))
+    ("c968804189e0fc963c641f5c9ad64bca431d41af2fb7e1d01a2a6666376f819c" "3fd0fda6c3842e59f3a307d01f105cce74e1981c6670bb17588557b4cebfe1a7" "03e3e79fb2b344e41a7df897818b7969ca51a15a67dc0c30ebbdeb9ea2cd4492" "0240d45644b370b0518e8407f5990a243c769fb0150a7e74297e6f7052a04a72" default)))
  '(font-use-system-font t)
  '(grep-command "grep -I")
  '(haskell-indent-after-keywords
@@ -37,17 +37,29 @@
      ("{" 2)
      "if" "then" "else" "let")))
  '(haskell-indent-thenelse 4)
+ '(haskell-indentation-ifte-offset 4)
  '(haskell-notify-p t)
  '(haskell-process-log t)
- '(haskell-process-type (quote cabal-repl))
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote stack-ghci))
  '(haskell-stylish-on-save t)
- '(haskell-tags-on-save t)
+ '(haskell-tags-on-save nil)
  '(line-move-ignore-invisible nil)
+ '(package-selected-packages
+   (quote
+    (yaml-mode workgroups2 tuareg string-inflection sml-mode scss-mode sass-mode rustfmt python-mode pos-tip markdown-toc markdown-preview-mode markdown-mode+ jinja2-mode jekyll-modes idris-mode hyde helm-projectile helm-flycheck haskell-mode go-mode gh-md flycheck-color-mode-line fill-column-indicator dockerfile-mode clang-format cargo button-lock auctex)))
+ '(purescript-indent-spaces 4)
+ '(purescript-indentation-ifte-offset 4)
+ '(purescript-indentation-layout-offset 4)
+ '(purescript-indentation-left-offset 4)
+ '(purescript-indentation-where-pre-offset 2)
+ '(purescript-mode-hook (quote (haskell-indentation-mode)))
+ '(sgml-basic-offset 2)
  '(tags-case-fold-search nil))
 
 ;; Theme
 (when (display-graphic-p)
-  (load-theme 'base16-monokai-dark)
+  (load-theme 'base16-monokai)
   (set-background-color "#090909")
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
@@ -73,6 +85,7 @@
    '(mode-line ((t (:background "Grey10" :foreground "#f5f4f1" :box (:line-width -1 :color "Grey20")))))
    '(mode-line-inactive ((t (:background "#050505" :foreground "Grey45" :weight light))))
    '(vertical-border ((nil (:foreground "#050505"))))))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -99,3 +112,4 @@
  '(vertical-border ((nil (:foreground "#050505")))))
 
 (put 'downcase-region 'disabled nil)
+

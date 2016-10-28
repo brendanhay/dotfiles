@@ -196,3 +196,9 @@
   (if (projectile-project-p)
       (helm-projectile)
     (helm-for-files)))
+
+(defun unfill-paragraph ()
+  "Replace line endings into single spaces on the current paragraph."
+  (interactive)
+  (let ((fill-column 90002000))
+    (fill-paragraph nil)))
