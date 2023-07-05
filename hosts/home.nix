@@ -1,42 +1,102 @@
-{ config, lib, ... }:
-
-with builtins;
-with lib;
-let blocklist = fetchurl https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts;
+{
+  config,
+  pkgs,
+  lib,
+  system,
+  inputs,
+  my,
+  ...
+}: let
+  blocklist = builtins.fetchurl https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts;
 in {
-  networking.extraHosts = ''
-    192.168.1.1   router.home
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    ../modules
+  ];
 
-    # Hosts
-    ${optionalString (config.time.timeZone == "Europe/Copenhagen") ''
-        192.168.1.28  ao.home
-        192.168.1.20  murasaki.home
-        192.168.1.19  shiro.home
-      ''}
-    ${optionalString (config.time.timeZone == "America/Toronto") ''
-        192.168.1.2   ao.home
-        192.168.1.3   kiiro.home
-        192.168.1.10  kuro.home
-        192.168.1.11  shiro.home
-        192.168.1.12  midori.home
-      ''}
+  system.stateVersion = lib.mkDefault "23.11";
 
-    # Block garbage
-    ${optionalString config.services.xserver.enable (readFile blocklist)}
-  '';
+  #  home-manager = {
+  #    useGlobalPkgs = true;
+  #    useUserPackages = true;
+  #    extraSpecialArgs = { inherit system inputs; };
+  #  };
 
-  ## Location config -- since Toronto is my 127.0.0.1
-  time.timeZone = mkDefault "America/Toronto";
-  i18n.defaultLocale = mkDefault "en_US.UTF-8";
-  # For redshift, mainly
-  location = (if config.time.timeZone == "America/Toronto" then {
-    latitude = 43.70011;
-    longitude = -79.4163;
-  } else if config.time.timeZone == "Europe/Copenhagen" then {
-    latitude = 55.88;
-    longitude = 12.5;
-  } else {});
+  environment = {
+    variables = {
+      NIXPKGS_ALLOW_UNFREE = "1";
+      DOTFILES = config.dotfiles.dir;
+      DOTFILES_BIN = config.dotfiles.binDir;
+    };
 
-  # So the vaultwarden CLI knows where to find my server.
-  modules.shell.vaultwarden.config.server = "vault.lissner.net";
+    systemPackages = with pkgs; [
+      busybox
+      curl
+      git
+      gnumake
+      ripgrep
+      wget
+      unzip
+    ];
+  };
+
+  nix = {
+    package = pkgs.nixFlakes;
+
+    settings = {
+      experimental-features = ["nix-command" "flakes"];
+      substituters = ["https://nix-community.cachix.org"];
+      trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
+      trusted-users = ["root" "@wheel"];
+      allowed-users = ["root" "@wheel"];
+      auto-optimise-store = true;
+      warn-dirty = false;
+      log-lines = 25;
+      connect-timeout = 5;
+    };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 21d";
+    };
+
+    # Make the nixpkgs flake input be used for various nix commands
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
+
+    registry.nixpkgs = {
+      flake = inputs.nixpkgs;
+      from = {
+        id = "nixpkgs";
+        type = "indirect";
+      };
+    };
+  };
+
+  i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
+
+  time.timeZone = lib.mkDefault "Auckland/Pacific";
+
+  location =
+    if config.time.timeZone == "Auckland/Pacific"
+    then {
+      latitude = 36.85;
+      longitude = -174.76;
+    }
+    else {};
+
+  networking = {
+    wireless.enable = false;
+
+    networkmanager = {
+      enable = true;
+      ethernet.macAddress = "random";
+      wifi.macAddress = "random";
+    };
+
+    extraHosts = ''
+      # Block garbage
+      ${lib.optionalString config.services.xserver.enable (builtins.readFile blocklist)}
+    '';
+  };
 }

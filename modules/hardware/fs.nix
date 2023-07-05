@@ -1,14 +1,26 @@
-{ config, options, lib, pkgs, ... }:
-
-with lib;
-with lib.my;
-let cfg = config.modules.hardware.fs;
+{
+  config,
+  options,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.modules.hardware.fs;
 in {
   options.modules.hardware.fs = {
-    enable = mkBoolOpt false;
-    zfs.enable = mkBoolOpt false;
-    ssd.enable = mkBoolOpt false;
-    # TODO automount.enable = mkBoolOpt false;
+    enable = mkOption {
+      type = bool;
+      default = false;
+    };
+    zfs.enable = mkOption {
+      type = bool;
+      default = false;
+    };
+    ssd.enable = mkOption {
+      type = bool;
+      default = false;
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
@@ -18,9 +30,9 @@ in {
       # Support for more filesystems, mostly to support external drives
       environment.systemPackages = with pkgs; [
         sshfs
-        exfat     # Windows drives
-        ntfs3g    # Windows drives
-        hfsprogs  # MacOS drives
+        exfat # Windows drives
+        ntfs3g # Windows drives
+        hfsprogs # MacOS drives
       ];
     }
 
@@ -30,9 +42,20 @@ in {
 
     (mkIf cfg.zfs.enable (mkMerge [
       {
-        boot.loader.grub.copyKernels = true;
-        boot.supportedFilesystems = [ "zfs" ];
-        boot.zfs.devNodes = "/dev/disk/by-partuuid";
+        boot = {
+          loader.grub = {
+            copyKernels = true;
+            zfsSupport = true;
+          };
+
+          supportedFilesystems = ["zfs"];
+
+          zfs = {
+            devNodes = "/dev/disk/by-id";
+            forceImportRoot = false;
+          };
+        };
+
         services.zfs.autoScrub.enable = true;
       }
 
