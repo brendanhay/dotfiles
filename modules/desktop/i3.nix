@@ -2,19 +2,15 @@
 
 with lib;
 with lib.my;
-let cfg = config.modules.desktop.bspwm;
+let cfg = config.modules.desktop.i3;
     configDir = config.dotfiles.configDir;
 in {
-  options.modules.desktop.bspwm = {
+  options.modules.desktop.i3 = {
     enable = mkBoolOpt false;
   };
 
   config = mkIf cfg.enable {
-    modules.theme.onReload.bspwm = ''
-      ${pkgs.bspwm}/bin/bspc wm -r
-      source $XDG_CONFIG_HOME/bspwm/bspwmrc
-    '';
-
+    environment.pathsToLink = [ "/libexec" ];
     environment.systemPackages = with pkgs; [
       lightdm
       dunst
@@ -23,6 +19,10 @@ in {
         pulseSupport = true;
         nlSupport = true;
       })
+
+      xss-lock
+      nm-applet
+      pactl
     ];
 
     services = {
@@ -36,11 +36,11 @@ in {
       xserver = {
         enable = true;
         displayManager = {
-          defaultSession = "none+bspwm";
+          defaultSession = "none+i3";
           lightdm.enable = true;
           lightdm.greeters.mini.enable = true;
         };
-        windowManager.bspwm.enable = true;
+        windowManager.i3.enable = true;
       };
     };
 
@@ -49,15 +49,14 @@ in {
       description = "";
       wantedBy = [ "default.target" ];
       serviceConfig.Restart = "always";
-      serviceConfig.RestartSec = 2;
+      serviceConfig.RestartSec = 3;
       serviceConfig.ExecStart = "${pkgs.dunst}/bin/dunst";
     };
 
     # link recursively so other modules can link files in their folders
     home.configFile = {
-      "sxhkd".source = "${configDir}/sxhkd";
-      "bspwm" = {
-        source = "${configDir}/bspwm";
+      "i3" = {
+        source = "${configDir}/i3";
         recursive = true;
       };
     };

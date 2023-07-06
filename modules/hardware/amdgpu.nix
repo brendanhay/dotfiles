@@ -24,6 +24,11 @@ in {
 
     boot.initrd.kernelModules = ["amdgpu"];
 
-    services.xserver.videoDrivers = ["amdgpu"];
+    services.xserver = {
+      videoDrivers = ["amdgpu"];
+      deviceSection = ''
+        Option "TearFree" "true"
+      '';
+    };
   };
 }
