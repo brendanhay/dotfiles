@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ../configuration.nix
+    ../home.nix
     ./hardware-configuration.nix
   ];
 
@@ -21,15 +21,14 @@
       };
 
       browsers = {
-        default = "brave";
+        default = "firefox";
 
-        brave.enable = true;
+        brave.enable = false;
         firefox.enable = true;
-        qutebrowser.enable = true;
       };
 
       gaming = {
-        steam.enable = true;
+        steam.enable = false;
       };
 
       media = {
@@ -52,9 +51,9 @@
     };
 
     dev = {
-      node.enable = true;
-      rust.enable = true;
-      python.enable = true;
+      node.enable = false;
+      rust.enable = false;
+      python.enable = false;
     };
 
     editors = {
@@ -75,7 +74,7 @@
 
     services = {
       ssh.enable = true;
-      docker.enable = true;
+      docker.enable = false;
     };
 
     hardware = {

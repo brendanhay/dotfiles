@@ -59,7 +59,7 @@ in {
 
     modules.shell.zsh.rcFiles = [ "${configDir}/emacs/aliases.zsh" ];
 
-    fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
+    # XXX: fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
 
     system.userActivationScripts = mkIf cfg.doom.enable {
       installDoomEmacs = ''

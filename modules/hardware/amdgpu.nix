@@ -8,7 +8,7 @@
 with lib; let
   cfg = config.modules.hardware.amdgpu;
 in {
-  options.modules.hardware.amd = {
+  options.modules.hardware.amdgpu = {
     enable = mkOption {
       type = types.bool;
       default = false;

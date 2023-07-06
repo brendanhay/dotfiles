@@ -72,49 +72,52 @@ in {
   #    '';
   #  };
 
-  # Storage
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/nixos";
-      fsType = "ext4";
-      options = ["noatime"];
-    };
-    "/boot" = {
-      device = "/dev/disk/by-label/BOOT";
-      fsType = "vfat";
-    };
-    "/home" = {
-      device = "/dev/disk/by-label/home";
-      fsType = "ext4";
-      options = ["noatime"];
-    };
-    "/usr/drive" = {
-      device = "kiiro:/volume1/homes/hlissner/Drive";
-      fsType = "nfs";
-      options = [
-        "nofail"
-        "noauto"
-        "noatime"
-        "x-systemd.automount"
-        "x-systemd.idle-timeout=5min"
-        "nodev"
-        "nosuid"
-        "noexec"
-      ];
-    };
-    "/usr/store" = {
-      device = "/dev/disk/by-label/store";
-      fsType = "ext4";
-      options = [
-        "noauto"
-        "noatime"
-        "x-systemd.automount"
-        "x-systemd.idle-timeout=5min"
-        "nodev"
-        "nosuid"
-        "noexec"
-      ];
-    };
+  fileSystems."/" = {
+    device = "rpool/nixos/root";
+    fsType = "zfs";
+    options = ["noatime" "X-mount.mkdir"];
+    neededForBoot = true;
+  };
+
+  fileSystems."/boot" = {
+    device = "bpool/nixos/root";
+    fsType = "zfs";
+    options = ["noatime" "X-mount.mkdir"];
+    neededForBoot = true;
+  };
+
+  fileSystems."/home" = {
+    device = "rpool/nixos/home";
+    fsType = "zfs";
+    options = ["noatime" "X-mount.mkdir"];
+    neededForBoot = true;
+  };
+
+  fileSystems."/var/lib" = {
+    device = "rpool/nixos/var/lib";
+    fsType = "zfs";
+    options = ["noatime" "X-mount.mkdir"];
+    neededForBoot = true;
+  };
+
+  fileSystems."/var/log" = {
+    device = "rpool/nixos/var/log";
+    fsType = "zfs";
+    options = ["noatime" "X-mount.mkdir"];
+    neededForBoot = true;
+  };
+
+  fileSystems."/boot/efis/${efiPartition}" = {
+    device = "/dev/disk/by-id/${efiPartition}";
+    fsType = "vfat";
+    options = [
+      "x-systemd.idle-timeout=1min"
+      "x-systemd.automount"
+      "noauto"
+      "nofail"
+      "noatime"
+      "X-mount.mkdir"
+    ];
   };
 
   swapDevices = [];

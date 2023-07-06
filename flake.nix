@@ -13,16 +13,23 @@
   inputs = 
     {
       # Core dependencies.
-      nixpkgs.url = "nixpkgs/nixos-unstable";             # primary nixpkgs
+      nixpkgs.url = "nixpkgs/nixos-23.05";               # primary nixpkgs
       nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";  # for packages on the edge
-      home-manager.url = "github:rycee/home-manager/master";
+
+      home-manager.url = "github:nix-community/home-manager/release-23.05";
       home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
       agenix.url = "github:ryantm/agenix";
       agenix.inputs.nixpkgs.follows = "nixpkgs";
 
       # Extras
       emacs-overlay.url  = "github:nix-community/emacs-overlay";
       nixos-hardware.url = "github:nixos/nixos-hardware";
+
+      blocklist = {
+        url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
+        flake = false;	
+      };
     };
 
   outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
@@ -64,14 +71,6 @@
 
       devShell."${system}" =
         import ./shell.nix { inherit pkgs; };
-
-      templates = {
-        full = {
-          path = ./.;
-          description = "A grossly incandescent nixos config";
-        };
-      } // import ./templates;
-      defaultTemplate = self.templates.full;
 
       defaultApp."${system}" = {
         type = "app";

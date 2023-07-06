@@ -14,6 +14,7 @@ in {
       Zsh lines to be written to $XDG_CONFIG_HOME/zsh/extra.zshrc and sourced by
       $XDG_CONFIG_HOME/zsh/.zshrc
     '';
+
     envInit = mkOpt' lines "" ''
       Zsh lines to be written to $XDG_CONFIG_HOME/zsh/extra.zshenv and sourced
       by $XDG_CONFIG_HOME/zsh/.zshenv

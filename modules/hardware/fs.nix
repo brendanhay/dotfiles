@@ -8,7 +8,7 @@
 with lib; let
   cfg = config.modules.hardware.fs;
 in {
-  options.modules.hardware.fs = {
+  options.modules.hardware.fs = with types; {
     enable = mkOption {
       type = bool;
       default = false;

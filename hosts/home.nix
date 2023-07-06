@@ -4,17 +4,15 @@
   lib,
   system,
   inputs,
-  my,
   ...
-}: let
-  blocklist = builtins.fetchurl https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts;
-in {
+}: 
+
+{
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ../modules
   ];
 
-  system.stateVersion = lib.mkDefault "23.11";
+  system.stateVersion = lib.mkDefault "23.05";
 
   #  home-manager = {
   #    useGlobalPkgs = true;
@@ -96,7 +94,7 @@ in {
 
     extraHosts = ''
       # Block garbage
-      ${lib.optionalString config.services.xserver.enable (builtins.readFile blocklist)}
+      ${lib.optionalString config.services.xserver.enable (builtins.readFile inputs.blocklist)}
     '';
   };
 }
