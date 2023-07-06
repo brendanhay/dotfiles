@@ -1,15 +1,11 @@
-{
-  config,
-  pkgs,
-  lib,
-  inputs,
-  modulesPath,
-  ...
-}: let
+{ config, pkgs, lib, inputs, modulesPath, ... }:
+
+let
   diskName = "nvme-Samsung_SSD_970_EVO_Plus_2TB_S4J4NM0R712001B";
   efiPartition = "${diskName}-part2";
   efiRemovable = true;
-in {
+in
+{
   imports = [
     "${modulesPath}/installer/scan/not-detected.nix"
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-p14s-amd-gen2
@@ -17,13 +13,13 @@ in {
 
   boot = {
     initrd = {
-      availableKernelModules = ["ahci" "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "rtsx_pci_sdmmc"];
-      kernelModules = [];
+      availableKernelModules = [ "ahci" "nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" "rtsx_pci_sdmmc" ];
+      kernelModules = [ ];
     };
 
-    kernelModules = ["kvm-amd"];
-    kernelParams = ["amd_pstate=active" "systemd.gpt_auto=0" "mitigations=off"];
-    extraModulePackages = [];
+    kernelModules = [ "kvm-amd" ];
+    kernelParams = [ "amd_pstate=active" "systemd.gpt_auto=0" "mitigations=off" ];
+    extraModulePackages = [ ];
     extraModprobeConfig = "options kvm_amd nested=1";
 
     loader = {
@@ -36,7 +32,7 @@ in {
 
       grub = {
         enable = true;
-        devices = ["/dev/disk/by-id/${diskName}"];
+        devices = [ "/dev/disk/by-id/${diskName}" ];
         splashImage = null;
         copyKernels = true;
         efiInstallAsRemovable = true;
@@ -45,10 +41,7 @@ in {
     };
   };
 
-  hardware = {
-    cpu.amd.updateMicrocode = true;
-    enableRedistributableFirmware = true;
-  };
+  hardware.enableRedistributableFirmware = true;
 
   #  # Displays
   #  services.xserver = {
@@ -75,35 +68,35 @@ in {
   fileSystems."/" = {
     device = "rpool/nixos/root";
     fsType = "zfs";
-    options = ["noatime" "X-mount.mkdir"];
+    options = [ "noatime" "X-mount.mkdir" ];
     neededForBoot = true;
   };
 
   fileSystems."/boot" = {
     device = "bpool/nixos/root";
     fsType = "zfs";
-    options = ["noatime" "X-mount.mkdir"];
+    options = [ "noatime" "X-mount.mkdir" ];
     neededForBoot = true;
   };
 
   fileSystems."/home" = {
     device = "rpool/nixos/home";
     fsType = "zfs";
-    options = ["noatime" "X-mount.mkdir"];
+    options = [ "noatime" "X-mount.mkdir" ];
     neededForBoot = true;
   };
 
   fileSystems."/var/lib" = {
     device = "rpool/nixos/var/lib";
     fsType = "zfs";
-    options = ["noatime" "X-mount.mkdir"];
+    options = [ "noatime" "X-mount.mkdir" ];
     neededForBoot = true;
   };
 
   fileSystems."/var/log" = {
     device = "rpool/nixos/var/log";
     fsType = "zfs";
-    options = ["noatime" "X-mount.mkdir"];
+    options = [ "noatime" "X-mount.mkdir" ];
     neededForBoot = true;
   };
 
@@ -120,5 +113,5 @@ in {
     ];
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 }

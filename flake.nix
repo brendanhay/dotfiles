@@ -1,80 +1,65 @@
-# flake.nix --- the heart of my dotfiles
-#
-# Author:  Henrik Lissner <contact@henrik.io>
-# URL:     https://github.com/hlissner/dotfiles
-# License: MIT
-#
-# Welcome to ground zero. Where the whole flake gets set up and all its modules
-# are loaded.
-
 {
-  description = "A grossly incandescent nixos config.";
+  description = "brendanhay's dotfiles";
 
-  inputs = 
+  inputs =
     {
-      # Core dependencies.
-      nixpkgs.url = "nixpkgs/nixos-23.05";               # primary nixpkgs
-      nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";  # for packages on the edge
-
-      home-manager.url = "github:nix-community/home-manager/release-23.05";
-      home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-      agenix.url = "github:ryantm/agenix";
-      agenix.inputs.nixpkgs.follows = "nixpkgs";
-
-      # Extras
-      emacs-overlay.url  = "github:nix-community/emacs-overlay";
+      nixpkgs.url = "nixpkgs/nixos-23.05";
+      nixpkgs-unstable.url = "nixpkgs/nixpkgs-unstable";
+      nur.url = "github:nix-community/NUR";
       nixos-hardware.url = "github:nixos/nixos-hardware";
+      emacs-overlay.url = "github:nix-community/emacs-overlay";
 
-      blocklist = {
+      home-manager = {
+        url = "github:nix-community/home-manager/release-23.05";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      pre-commit-hooks = {
+        url = "github:cachix/pre-commit-hooks.nix";
+        inputs.nixpkgs-stable.follows = "nixpkgs";
+        inputs.nixpkgs.follows = "nixpkgs-unstable";
+      };
+
+      hosts-blocked = {
         url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
-        flake = false;	
+        flake = false;
       };
     };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, ... }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-unstable, pre-commit-hooks, ... }:
     let
-      inherit (lib.my) mapModules mapModulesRec mapHosts;
-
-      system = "x86_64-linux";
-
-      mkPkgs = pkgs: extraOverlays: import pkgs {
-        inherit system;
-        config.allowUnfree = true;  # forgive me Stallman senpai
-        overlays = extraOverlays ++ (lib.attrValues self.overlays);
+      linux-amd64 = "x86_64-linux";
+    in
+    {
+      nixosConfigurations = {
+        "exult" = nixpkgs.lib.nixosSystem {
+          system = linux-amd64;
+          specialArgs = { inherit inputs; };
+          modules = [ ./hosts/exult ];
+        };
       };
-      pkgs  = mkPkgs nixpkgs [ self.overlay ];
-      pkgs' = mkPkgs nixpkgs-unstable [];
 
-      lib = nixpkgs.lib.extend
-        (self: super: { my = import ./lib { inherit pkgs inputs; lib = self; }; });
-    in {
-      lib = lib.my;
-
-      overlay =
-        final: prev: {
-          unstable = pkgs';
-          my = self.packages."${system}";
+      devShell."${linux-amd64}" =
+        let
+          pkgs = nixpkgs.legacyPackages.${linux-amd64};
+        in
+        pkgs.mkShell {
+          name = "brendanhay-dotfiles";
+          nativeBuildInputs = with pkgs; [
+            nixpkgs-fmt
+          ];
+          shellHook = self.checks.${linux-amd64}.pre-commit-check.shellHook;
         };
 
-      overlays =
-        mapModules ./overlays import;
-
-      packages."${system}" =
-        mapModules ./packages (p: pkgs.callPackage p {});
-
-      nixosModules =
-        { dotfiles = import ./.; } // mapModulesRec ./modules import;
-
-      nixosConfigurations =
-        mapHosts ./hosts {};
-
-      devShell."${system}" =
-        import ./shell.nix { inherit pkgs; };
-
-      defaultApp."${system}" = {
-        type = "app";
-        program = ./bin/hey;
+      checks."${linux-amd64}" = {
+        pre-commit-check = pre-commit-hooks.lib.${linux-amd64}.run {
+          src = ./.;
+          hooks = {
+            shellcheck.enable = true;
+            shfmt.enable = true;
+            nixpkgs-fmt.enable = true;
+          };
+        };
       };
     };
 }
