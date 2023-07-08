@@ -33,6 +33,11 @@
         inputs.nixpkgs.follows = "nixpkgs-unstable";
       };
 
+      doomemacs = {
+        url = "github:doomemacs/doomemacs";
+        flake = false;
+      };
+
       hosts-blocked = {
         url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
         flake = false;

@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, lib, inputs, ... }:
 
 with lib;
 
@@ -13,19 +13,32 @@ in
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     nixpkgs.overlays = [ (import inputs.emacs-overlay) ];
 
-    services.emacs = {
-      enable = true;
-      defaultEditor = false;
-      client.enable = true;
+    modules.home-manager = {
+      programs.emacs.enable = true;
+
+      services.emacs = {
+        enable = true;
+        client.enable = true;
+      };
+
+      home.sessionPaths = [ "$XDG_CONFIG_HOME/doomemacs/bin" ];
     };
 
-    modules.home-manager.programs.emacs = {
-      enable = true;
-    };
+    system.userActivationScripts = {
+      installDoomEmacs = ''
+        if [ ! -d "$XDG_CONFIG_HOME/doomemacs" ]; then
+          echo "=============== $XDG_CONFIG_HOME/doomemacs doesn't exist =================="
+          ln -fs ${inputs.doomemacs} $XDG_CONFIG_HOME/doomemacs
+        fi
 
-    ./mime.nix
+        if [ ! -d "$HOME/.doom.d" ]; then
+          echo "=============== $HOME/.doom.d doesn't exist =================="
+          ln -fs ${../config/doom.d} $HOME/.doom.d
+        fi
+      '';
     };
-    }
+  };
+}
