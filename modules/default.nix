@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./emacs.nix
     ./firefox.nix
     ./fonts.nix
     ./sway.nix
