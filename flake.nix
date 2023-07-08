@@ -34,8 +34,8 @@
       nixosConfigurations = {
         "exult" = nixpkgs.lib.nixosSystem {
           system = linux-amd64;
-          specialArgs = { inherit inputs; };
           modules = [ ./hosts/exult ];
+          specialArgs = { inherit inputs; username = "bren"; };
         };
       };
 

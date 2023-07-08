@@ -1,28 +1,13 @@
-{ config, pkgs, lib, system, inputs, username, ... }:
+{ config, pkgs, lib, system, inputs, ... }:
+
+with lib;
 
 {
   imports = [
     ../modules
-    inputs.home-manager.nixosModules.home-manager
-    (lib.mkAliasOptionsModule [ "user" ] [ "home-manager" "users" username ])
   ];
 
-  system.stateVersion = lib.mkDefault "23.05";
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-  };
-
-  users.users.${username} = {
-    uid = 1000;
-    name = username;
-    home = "/home/${username}";
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-  };
-
-  user.stateVersion = config.system.stateVersion;
+  system.stateVersion = mkDefault "23.05";
 
   environment = {
     variables = {
@@ -75,7 +60,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  time.timeZone = "Pacific/Auckland";
+  time.timeZone = mkDefault "Pacific/Auckland";
 
   location =
     if config.time.timeZone == "Pacific/Auckland"
@@ -94,7 +79,7 @@
       wifi.macAddress = "random";
     };
 
-    # ${lib.optionalString config.services.xserver.enable (builtins.readFile inputs.blocklist)}
+    # ${optionalString config.services.xserver.enable (builtins.readFile inputs.blocklist)}
     # extraHosts = ''
     # Block garbage
     #'';

@@ -1,17 +1,19 @@
 { options, config, lib, ... }:
 
+with lib;
+
 let
   cfg = config.modules.hardware.amdgpu;
 in
 {
   options.modules.hardware.amdgpu = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
+    enable = mkOption {
+      type = types.bool;
       default = false;
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     hardware.opengl = {
       enable = true;
       driSupport = true;

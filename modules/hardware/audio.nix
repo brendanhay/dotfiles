@@ -1,17 +1,19 @@
-{ options, config, lib, pkgs, ... }:
+{ options, config, pkgs, lib, ... }:
+
+with lib;
 
 let
   cfg = config.modules.hardware.audio;
 in
 {
   options.modules.hardware.audio = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
+    enable = mkOption {
+      type = types.bool;
       default = false;
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
     services.pipewire = {
       enable = true;
       alsa.enable = true;
@@ -22,6 +24,6 @@ in
 
     security.rtkit.enable = true;
 
-    user.extraGroups = [ "audio" ];
+    modules.user.extraGroups = [ "audio" ];
   };
 }
