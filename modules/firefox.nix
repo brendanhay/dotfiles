@@ -19,9 +19,17 @@ in
       profiles.${config.modules.user.name} = {
         extensions = with inputs.nur.repos.rycee.firefox-addons; [
           bitwarden
-          ublock-origin
+          clearurls
+          libredirect
+          no-pdf-download
           privacy-badger
+          translate-web-pages
+          ublock-origin
         ];
+
+        settings = {
+          "gfx.webrender.all" = true;
+        };
       };
     };
   };
