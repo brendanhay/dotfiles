@@ -5,6 +5,7 @@
     ./emacs.nix
     ./firefox.nix
     ./fonts.nix
+    ./readline.nix
     ./sway.nix
     ./user.nix
     ./vim.nix
