@@ -3,6 +3,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./direnv.nix
     ./emacs.nix
     ./firefox.nix
     ./fonts.nix

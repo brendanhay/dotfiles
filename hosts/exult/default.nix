@@ -30,6 +30,7 @@
     };
 
     alacritty.enable = true;
+    direnv.enable = true;
     firefox.enable = true;
     fonts.enable = true;
     git.enable = true;

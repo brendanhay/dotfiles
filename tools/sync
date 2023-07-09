@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+~/.config/emacs/bin/doom sync &&
+	systemctl restart --user emacs

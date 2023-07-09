@@ -29,27 +29,46 @@ in
   };
 
   config = mkIf cfg.enable {
-    modules.home-manager.programs.git = {
-      enable = true;
-      userName = cfg.userName;
-      userEmail = cfg.userEmail;
-      ignores = cfg.ignores;
+    modules.home-manager = {
+      programs.git = {
+        enable = true;
+        userName = cfg.userName;
+        userEmail = cfg.userEmail;
+        ignores = cfg.ignores;
 
-      extraConfig = {
-        branch.autoSetupRebase = "always";
-        checkout.defaultRemote = "origin";
+        extraConfig = {
+          branch.autoSetupRebase = "always";
+          checkout.defaultRemote = "origin";
 
-        pull = {
-          rebase = true;
-          ff = "only";
-          default = "current";
+          pull = {
+            rebase = true;
+            ff = "only";
+            default = "current";
+          };
+
+          init.defaultBranch = "main";
+          submodule.recurse = "true";
+
+          url."ssh://git@".pushInsteadOf = "https://";
         };
+      };
 
-        init.defaultBranch = "main";
-        submodule.recurse = "true";
-
-        url."ssh://git@".pushInsteadOf = "https://";
+      home.shellAliases = {
+        "git" = "noglob git";
+        "ga" = "git add";
+        "gap" = "git add --patch";
+        "gc" = "git commit"
+          "gca" = "git commit --amend";
+        "gcm" = "git commit --message";
+        "gcf" = "git commit --fixup";
+        "gbl" = "git blame"
+          "gcl" = "git clone"
+        "gco" = "git checkout"
+        "gs" = "git status"
+        "gst" = "git stash"
+        "gr" = "git reset HEAD"
+        "gv" = "git rev-parse"
+        };
       };
     };
-  };
-}
+  }
