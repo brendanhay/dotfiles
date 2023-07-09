@@ -8,8 +8,8 @@ in
 {
   options.modules.alacritty = {
     enable = mkOption {
-      type = types.bool
-        default = false;
+      type = types.bool;
+      default = false;
     };
   };
 
