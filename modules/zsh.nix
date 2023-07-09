@@ -14,23 +14,19 @@ in
   };
 
   config = mkIf cfg.enable {
+    programs.zsh.enable = true;
+
     users.defaultUserShell = pkgs.zsh;
+
+    environment.pathsToLink = [ "/share/zsh" ];
 
     modules.home-manager = {
       programs.zsh = {
         enable = true;
         enableCompletion = true;
-        # Initialize completion manually, because enableGlobalCompInit 
-        # initializes it too soon - meaning later commands won't get 
-        # completion and running compinit multiple times is slow.
-        enableGlobalCompInit = false;
-        promptInit = "";
+        enableAutosuggestions = true;
+        enableVteIntegration = true;
       };
-
-      home.packages = with pkgs; [
-        zsh
-        nix-zsh-completions
-      ];
     };
 
     # env = {
