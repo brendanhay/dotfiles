@@ -17,7 +17,7 @@ in
     modules.home-manager.programs.firefox = {
       enable = true;
       profiles.${config.modules.user.name} = {
-        extensions = with inputs.nur.repos.rycee.firefox-addons; [
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
           bitwarden
           clearurls
           libredirect

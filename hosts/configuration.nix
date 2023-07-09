@@ -25,6 +25,10 @@ with lib;
     ];
   };
 
+  nixpkgs.overlays = [
+    inputs.nur.overlay
+  ];
+
   nix = {
     package = pkgs.nixFlakes;
 
@@ -58,9 +62,14 @@ with lib;
     };
   };
 
+  time.timeZone = mkDefault "Pacific/Auckland";
+
   i18n.defaultLocale = "en_US.UTF-8";
 
-  time.timeZone = mkDefault "Pacific/Auckland";
+  keyboard = {
+    layout = "us";
+    options = [ "caps:swapescape" ];
+  };
 
   location =
     if config.time.timeZone == "Pacific/Auckland"

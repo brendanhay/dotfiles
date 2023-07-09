@@ -1,8 +1,20 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+with lib;
+
+let
+  cfg = config.modules.fonts;
+in
 {
+  options.modules.fonts = {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+    };
+  };
+
   config = {
-    fonts = {
+    fonts = mkIf cfg.enable {
       fonts = with pkgs; [
         jetbrains-mono
         (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })

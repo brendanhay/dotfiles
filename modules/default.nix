@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./alacritty.nix
     ./emacs.nix
     ./firefox.nix
     ./fonts.nix

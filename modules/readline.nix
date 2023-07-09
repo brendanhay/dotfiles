@@ -17,7 +17,7 @@ in
     modules.home-manager.programs.readline = {
       enable = true;
       extraConfig = ''
-        	  set -o vi
+        set editing-mode vi
       '';
     };
   };

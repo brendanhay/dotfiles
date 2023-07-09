@@ -18,17 +18,17 @@ in
 
   config = mkIf cfg.enable {
     environment = {
-      systemPackages = with pkgs; [ unstable.neovim ];
+      systemPackages = with pkgs; [ neovim ];
       sessionVariables = env;
     };
 
     modules.home-manager = {
-      neovim = {
+      programs.neovim = {
         enable = true;
-        package = unstable.neovim;
+        #        package = unstable.neovim;
       };
 
-      home-manager.sessionVariables = env;
+      home.sessionVariables = env;
     };
   };
 }

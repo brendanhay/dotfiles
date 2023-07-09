@@ -20,11 +20,11 @@ in
 
     services.dbus.enable = true;
 
-    programs.donf.enable = true;
+    programs.dconf.enable = true;
 
-    # services.xserver.enable = true;
+    services.xserver.enable = true;
     # services.xserver.displayManager.sddm.enable = true;
-    # services.xserver.displayManager.sessionPackages = with pkgs; [ sway ];
+    services.xserver.displayManager.sessionPackages = with pkgs; [ sway ];
 
     xdg.portal = {
       enable = true;
@@ -32,35 +32,36 @@ in
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
 
-    #  programs.sway = {
-    #    enable = true;
-    #    wrapperFeatures.gtk = true; # so that gtk works properly
-    #    extraSessionCommands = ''
-    #      export SDL_VIDEODRIVER=wayland
-    #      export QT_QPA_PLATFORM=wayland
-    #      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-    #      export _JAVA_AWT_WM_NONREPARENTING=1
-    #      export MOZ_ENABLE_WAYLAND=1
-    #    '';
-    #  };
+    programs.sway = {
+      enable = true;
+      wrapperFeatures.gtk = true; # so that gtk works properly
+      extraSessionCommands = ''
+         export SDL_VIDEODRIVER=wayland
+         export QT_QPA_PLATFORM=wayland
+         export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+        export _JAVA_AWT_WM_NONREPARENTING=1
+         export MOZ_ENABLE_WAYLAND=1
+      '';
+    };
 
     modules.home-manager.wayland.windowManager.sway = {
       enable = true;
+      package = null;
       # package = null; # Use nixos/system sway.
       systemd.enable = true;
-      wrapperFeatures.gtk = true;
+      # wrapperFeatures.gtk = true;
 
-      extraSessionCommands = ''
-        export SDL_VIDEODRIVER=wayland
-        export QT_QPA_PLATFORM=wayland
-        export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export MOZ_ENABLE_WAYLAND=1
-      '';
+      # extraSessionCommands = ''
+      #  export SDL_VIDEODRIVER=wayland
+      #  export QT_QPA_PLATFORM=wayland
+      #  export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      #  export _JAVA_AWT_WM_NONREPARENTING=1
+      #  export MOZ_ENABLE_WAYLAND=1
+      # '';
 
       config = rec {
         modifier = "Mod4";
-        #        terminal = "xst";
+        terminal = "alacritty";
         focus.followMouse = true;
 
         window = {
