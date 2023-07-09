@@ -29,9 +29,11 @@
       vim.enable = true;
     };
 
+    alacritty.enable = true;
     firefox.enable = true;
     fonts.enable = true;
     git.enable = true;
     readline.enable = true;
+    sway.enable = true;
   };
 }

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 
 with lib;
 
@@ -14,6 +14,6 @@ in
   };
 
   config = {
-    home-manager.programs.alacritty.enable = true;
+    modules.home-manager.programs.alacritty.enable = true;
   };
 }

@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.modules.editors.emacs;
+  doomemacsDir = "${config.modules.home-manager.xdg.dataHome}/doomemacs";
 in
 {
   options.modules.editors.emacs = {
@@ -24,17 +25,18 @@ in
         client.enable = true;
       };
 
-      home.sessionPath = [ "$XDG_DATA_HOME/doomemacs/bin" ];
+      home.sessionPath = [ "\${doomemacsDir}/bin" ];
 
       home.file.".doom.d" = {
         source = ../config/doom.d;
         recursive = true;
       };
-
-      xdg.dataFile."doomemacs" = {
-        source = inputs.doomemacs;
-        recursive = true;
-      };
     };
+
+    system.userActivationScripts.installDoomEmacs = ''
+      if [ ! -d "${doomemacsDir}" ]; then
+         cp -R ${inputs.doomemacs} "${doomemacsDir}"
+      fi
+    '';
   };
 }

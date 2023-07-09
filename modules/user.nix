@@ -33,10 +33,17 @@ in
       useUserPackages = true;
     };
 
+    modules.home-manager.xdg.enable = true;
+
     modules.home-manager.home = {
       username = config.modules.user.name;
       homeDirectory = config.modules.user.home;
       stateVersion = config.system.stateVersion;
+
+      keyboard = {
+        layout = "us";
+        options = [ "caps:swapescape" ];
+      };
     };
   };
 }

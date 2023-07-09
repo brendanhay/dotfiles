@@ -66,11 +66,6 @@ with lib;
 
   i18n.defaultLocale = "en_US.UTF-8";
 
-  keyboard = {
-    layout = "us";
-    options = [ "caps:swapescape" ];
-  };
-
   location =
     if config.time.timeZone == "Pacific/Auckland"
     then {

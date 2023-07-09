@@ -22,9 +22,10 @@ in
 
     programs.dconf.enable = true;
 
-    services.xserver.enable = true;
-    # services.xserver.displayManager.sddm.enable = true;
-    services.xserver.displayManager.sessionPackages = with pkgs; [ sway ];
+    #services.xserver.enable = true;
+    #services.xserver.displayManager.lightdm.enable = true;
+    #services.xserver.displayManager.defaultSession = "sway";
+    #services.xserver.displayManager.sessionPackages = with pkgs; [ sway ];
 
     xdg.portal = {
       enable = true;
@@ -48,7 +49,7 @@ in
       enable = true;
       package = null;
       # package = null; # Use nixos/system sway.
-      systemd.enable = true;
+      # systemd.enable = true;
       # wrapperFeatures.gtk = true;
 
       # extraSessionCommands = ''

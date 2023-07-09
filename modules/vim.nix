@@ -26,6 +26,10 @@ in
       programs.neovim = {
         enable = true;
         #        package = unstable.neovim;
+        defaultEditor = true;
+        viAlias = true;
+        vimAlias = true;
+        vimdiffAlias = true;
       };
 
       home.sessionVariables = env;
