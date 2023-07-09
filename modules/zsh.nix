@@ -14,26 +14,53 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.zsh.enable = true;
-
     users.defaultUserShell = pkgs.zsh;
 
+    environment.shells = with pkgs; [ zsh ];
     environment.pathsToLink = [ "/share/zsh" ];
 
-    modules.home-manager = {
-      programs.zsh = {
-        enable = true;
-        enableCompletion = true;
-        enableAutosuggestions = true;
-        enableVteIntegration = true;
-      };
+    programs.zsh = {
+      enable = true;
+      enableCompletion = true;
+      enableBashCompletion = true;
+      enableGlobalCompInit = false;
+      promptInit = "";
+      #      shellInit = ''
+      #. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+      #      '';
     };
 
-    # env = {
-    # ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
-    # ZSH_CACHE = "$XDG_CACHE_HOME/zsh";
-    # ZGEN_DIR = "$XDG_DATA_HOME/zgenom";
-    # };
+    modules.home-manager = {
+      xdg.configFile."zsh" = {
+        source = "${../config}/zsh";
+        recursive = true;
+      };
+
+      home.sessionVariables = {
+        ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
+        ZSH_CACHE = "$XDG_CACHE_HOME/zsh";
+        ZGEN_DIR = "$XDG_DATA_HOME/zgenom";
+      };
+
+      programs.zsh = {
+        enable = true;
+        #        enableCompletion = true;
+        #        enableAutosuggestions = true;
+        #        enableVteIntegration = true;
+        completionInit = "";
+        dotDir = ".config/zsh";
+
+        initExtra = ''
+          	  _source "$ZDOTDIR/extra.zshrc"
+          	'';
+
+        envExtra = ''
+          	  _source "$ZDOTDIR/extra.zshenv"
+        '';
+
+        # source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
+      };
+    };
 
     #    home.configFile = {
     #      # Write it recursively so other modules can write files to it
@@ -58,10 +85,10 @@ in
     #        ${cfg.envInit}
     #      '';
     #    };
-    #
-    #    system.userActivationScripts.cleanupZgen = ''
-    #      rm -rf $ZSH_CACHE
-    #      rm -fv $ZGEN_DIR/init.zsh{,.zwc}
-    #    '';
+
+    system.userActivationScripts.cleanupZgen = ''
+      rm -rf $ZSH_CACHE
+      rm -fv $ZGEN_DIR/init.zsh{,.zwc}
+    '';
   };
 }

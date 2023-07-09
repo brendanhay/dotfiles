@@ -8,7 +8,8 @@
 
     modules.home-manager = {
       home.shellAliases = {
-        "reboot" = "systemd reboot";
+        "reboot" = "systemctl reboot";
+        "suspend" = "systemctl suspend";
       };
     };
   };

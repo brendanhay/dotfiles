@@ -40,6 +40,16 @@ in
       homeDirectory = config.modules.user.home;
       stateVersion = config.system.stateVersion;
 
+      sessionVariables = {
+        #	"XDG_CONFIG_HOME" = config.modules.home-manager.xdg.configHome;
+        #	"XDG_DATA_HOME" = config.modules.home-manager.xdg.dataHome;
+        #	"XDG_STATE_HOME" = config.modules.home-manager.xdg.stateHome;
+      };
+
+      sessionPath = [
+        "$HOME/.local/bin"
+      ];
+
       keyboard = {
         layout = "us";
         options = [ "caps:swapescape" ];
