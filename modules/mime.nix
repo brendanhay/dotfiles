@@ -31,6 +31,9 @@ in
   };
 
   config = {
+    # XXX: move somewhere sensible.
+    modules.home-manager.programs.feh.enable = true;
+
     modules.home-manager.xdg = {
       mime.enable = true;
       mimeApps = {

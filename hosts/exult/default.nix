@@ -33,6 +33,7 @@
     firefox.enable = true;
     fonts.enable = true;
     git.enable = true;
+    gtk.enable = true;
     readline.enable = true;
     sway.enable = true;
   };

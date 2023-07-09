@@ -1,10 +1,11 @@
-{ config, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 with lib;
 
 let
   cfg = config.modules.editors.emacs;
-  doomemacsDir = "${config.modules.home-manager.xdg.dataHome}/doomemacs";
+  emacsDir = "${config.modules.home-manager.xdg.configHome}/emacs";
+  emacsRepoUrl = "https://github.com/doomemacs/doomemacs";
 in
 {
   options.modules.editors.emacs = {
@@ -17,6 +18,8 @@ in
   config = mkIf cfg.enable {
     nixpkgs.overlays = [ (import inputs.emacs-overlay) ];
 
+    fonts.fonts = [ pkgs.emacs-all-the-icons-fonts ];
+
     modules.home-manager = {
       programs.emacs.enable = true;
 
@@ -25,18 +28,19 @@ in
         client.enable = true;
       };
 
-      home.sessionPath = [ "\${doomemacsDir}/bin" ];
+      home.sessionPath = [ "\${emacsDir}/bin" ];
 
-      home.file.".doom.d" = {
-        source = ../config/doom.d;
+      xdg.configFile."doom" = {
+        source = ../config/doom;
         recursive = true;
       };
     };
 
     system.userActivationScripts.installDoomEmacs = ''
-      if [ ! -d "${doomemacsDir}" ]; then
-         cp -R ${inputs.doomemacs} "${doomemacsDir}"
-      fi
+            if [ ! -d "${emacsDir}" ]; then
+               ${pkgs.git}/bin/git clone --depth=1 --single-branch ${emacsRepoUrl} ${emacsDir}
+      	 ${emacsDir}/bin/doom install --no-fonts
+            fi
     '';
   };
 }

@@ -7,6 +7,7 @@
     ./firefox.nix
     ./fonts.nix
     ./git.nix
+    ./gtk.nix
     ./mime.nix
     ./readline.nix
     ./sway.nix
