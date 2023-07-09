@@ -2,7 +2,7 @@
 
 {
   config = {
-    extraSystemdUnitPaths = [
+    boot.extraSystemdUnitPaths = [
       "${config.modules.user.home}/.local/share/systemd"
     ];
 

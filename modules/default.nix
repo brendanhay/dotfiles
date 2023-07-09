@@ -15,6 +15,7 @@
     ./sway.nix
     ./user.nix
     ./vim.nix
+    ./zsh.nix
 
     ./hardware/amdgpu.nix
     ./hardware/audio.nix
