@@ -11,6 +11,7 @@
     ./gtk.nix
     ./mime.nix
     ./readline.nix
+    ./systemd.nix
     ./sway.nix
     ./user.nix
     ./vim.nix

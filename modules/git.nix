@@ -57,18 +57,18 @@ in
         "git" = "noglob git";
         "ga" = "git add";
         "gap" = "git add --patch";
-        "gc" = "git commit"
-          "gca" = "git commit --amend";
+        "gc" = "git commit";
+        "gca" = "git commit --amend";
         "gcm" = "git commit --message";
         "gcf" = "git commit --fixup";
-        "gbl" = "git blame"
-          "gcl" = "git clone"
-        "gco" = "git checkout"
-        "gs" = "git status"
-        "gst" = "git stash"
-        "gr" = "git reset HEAD"
-        "gv" = "git rev-parse"
-        };
+        "gbl" = "git blame";
+        "gcl" = "git clone";
+        "gco" = "git checkout";
+        "gs" = "git status";
+        "gst" = "git stash";
+        "gr" = "git reset HEAD";
+        "gv" = "git rev-parse";
       };
     };
-  }
+  };
+}

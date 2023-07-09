@@ -13,8 +13,8 @@ in
     };
   };
 
-  config = mkif cfg.enable {
-    modules.home-manager.direnv = {
+  config = mkIf cfg.enable {
+    modules.home-manager.programs.direnv = {
       enable = true;
       enableZshIntegration = true;
     };
