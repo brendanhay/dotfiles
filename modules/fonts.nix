@@ -26,7 +26,8 @@ in
       fontconfig.defaultFonts = {
         serif = [ "Noto Serif" "Noto Color Emoji" ];
         sansSerif = [ "Noto Sans" "Noto Color Emoji" ];
-        monospace = [ "Essential PragmataPro" "JetBrains Mono ExtraLight" "Noto Color Emoji" ];
+        #        monospace = [ "Essential PragmataPro" "JetBrains Mono ExtraLight" "Noto Color Emoji" ];
+        monospace = [ "JetBrains Mono ExtraLight" "Noto Color Emoji" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };

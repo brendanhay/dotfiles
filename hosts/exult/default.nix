@@ -34,6 +34,7 @@
     firefox.enable = true;
     fonts.enable = true;
     git.enable = true;
+    gpg.enable = true;
     gtk.enable = true;
     readline.enable = true;
     sway.enable = true;

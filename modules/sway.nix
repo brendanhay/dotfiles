@@ -47,23 +47,20 @@ in
 
     modules.home-manager.wayland.windowManager.sway = {
       enable = true;
-      package = null;
-      # package = null; # Use nixos/system sway.
-      # systemd.enable = true;
-      # wrapperFeatures.gtk = true;
-
-      # extraSessionCommands = ''
-      #  export SDL_VIDEODRIVER=wayland
-      #  export QT_QPA_PLATFORM=wayland
-      #  export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      #  export _JAVA_AWT_WM_NONREPARENTING=1
-      #  export MOZ_ENABLE_WAYLAND=1
-      # '';
+      package = null; # Use nixos/system sway.
 
       config = rec {
         modifier = "Mod4";
         terminal = "alacritty";
+
         focus.followMouse = true;
+
+        gaps = {
+          smartBorders = "on";
+          smartGaps = "on";
+          outer = 1;
+          inner = 1;
+        };
 
         window = {
           titlebar = false;

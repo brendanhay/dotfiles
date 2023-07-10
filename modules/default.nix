@@ -8,6 +8,7 @@
     ./firefox.nix
     ./fonts.nix
     ./git.nix
+    ./gpg.nix
     ./gtk.nix
     ./mime.nix
     ./readline.nix
