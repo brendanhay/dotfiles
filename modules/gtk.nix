@@ -27,19 +27,19 @@ in
         enable = true;
 
         theme = {
-          name = "orchis-theme";
-          package = pkgs.orchis-theme;
+          name = "Paper";
+          package = pkgs.paper-gtk-theme;
         };
 
         iconTheme = {
-          name = "Adwaita";
-          package = pkgs.gnome.adwaita-icon-theme;
+          name = "Paper";
+          package = pkgs.paper-icon-theme;
         };
 
-        cursorTheme = {
-          name = "Adwaita";
-          package = pkgs.gnome.adwaita-icon-theme;
-        };
+        #        cursorTheme = {
+        #          name = "Paper";
+        #          package = pkgs.paper-icon-theme;
+        #        };
       };
     };
   };

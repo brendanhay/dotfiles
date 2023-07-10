@@ -31,12 +31,7 @@ in
         vimAlias = true;
         vimdiffAlias = true;
         extraConfig = ''
-              set number
-              set cc=80
-          	  set list
-              set cursorline
-              hi CursorLine cterm=NONE ctermbg=242
-          	  set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
+          set number
         '';
       };
 

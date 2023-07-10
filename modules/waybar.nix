@@ -1,4 +1,5 @@
 { config
+, pkgs
 , lib
 , ...
 }:
@@ -19,20 +20,17 @@ in
       settings = [
         {
           layer = "top";
-          position = "top";
-          height = 24;
+          position = "bottom";
+          height = 28;
 
-          modules-left = [ "sway/workspaces" "sway/mode" ];
-          modules-center = [ "sway/window" ];
-          modules-right = [ "cpu" "memory" "disk" "network" "pulseaudio" "battery" "clock" "tray" ];
+          modules-left = [ "pulseaudio" "cpu" "memory" "disk" ];
+          modules-center = [ "sway/workspaces" ];
+          modules-right = [ "network" "battery" "clock" "tray" ];
 
           "sway/workspaces" = {
-            format = "{icon}";
-            format-icons = {
-              "urgent" = "";
-              "focused" = "";
-              "default" = "";
-            };
+            all-outputs = true;
+            numeric-first = true;
+            format = "{name}";
           };
 
           "network" = {
@@ -52,7 +50,7 @@ in
 
           "memory" = {
             interval = 5;
-            format = " {}%";
+            format = " {}%";
             states = {
               warning = 70;
               critical = 90;
@@ -62,21 +60,17 @@ in
           "disk" = {
             interval = 30;
             format = "💽{percentage_free}%";
-            path = "/";
+            path = "/home";
           };
+
           "pulseaudio" = {
             format = "{icon} {volume}%";
             format-bluetooth = "{icon} {volume}%";
-            format-muted = " 0%";
+            format-muted = " 0%";
             format-icons = {
-              "headphones" = "";
-              "handsfree" = "";
-              "headset" = "";
-              "phone" = "";
-              "portable" = "";
-              "car" = "";
-              "default" = [ "" "" ];
+              "default" = [ "" ];
             };
+            on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
           };
 
           "battery" = {
@@ -95,7 +89,7 @@ in
         }
       ];
 
-      style = builtins.readFile ../config/waybar/style.css;
+      # style = builtins.readFile ../config/waybar/style.css;
     };
   };
 }

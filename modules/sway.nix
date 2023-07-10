@@ -60,7 +60,9 @@ in
 
         focus.followMouse = true;
 
-        bars = [ ];
+        bars = [
+          { command = "waybar"; }
+        ];
 
         gaps = {
           smartBorders = "on";

@@ -13,7 +13,10 @@ in
     };
   };
 
-  config = {
-    modules.home-manager.programs.alacritty.enable = true;
-  };
-}
+  config = mkIf cfg.enable {
+    modules.home-manager = {
+      programs.alacritty.enable = true;
+
+      xdg.configFile."alacritty/alacritty.yml".source = ../config/alacritty.yml;
+    };
+  }
