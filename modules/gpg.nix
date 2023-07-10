@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 with lib;
 
@@ -18,15 +18,17 @@ in
 
     programs.gnupg.agent.enable = true;
 
-    modules.home-manager.packages = with pkgs; [
-      tomb
-    ];
+    modules.home-manager = {
+      home.packages = with pkgs; [
+        tomb
+      ];
 
-    modules.home-manager.xdg.configFile."gnupg/gpg-agent.conf" = {
-      text = ''
-        	    default-cache-ttl 3600
-        	    pinentry-program ${pkgs.pinentry.gtk2}/bin/pinentry
-        	   '';
+      xdg.configFile."gnupg/gpg-agent.conf" = {
+        text = ''
+          default-cache-ttl 3600
+          pinentry-program ${pkgs.pinentry.gtk2}/bin/pinentry
+        '';
+      };
     };
   };
 }
