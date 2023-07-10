@@ -14,7 +14,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.pathsToLink = [ "/libexec" ];
+    environment = {
+      pathsToLink = [ "/libexec" ];
+      systemPackages = with pkgs; [
+        wlr-randr
+      ];
+    };
 
     security.polkit.enable = true;
 
@@ -54,6 +59,8 @@ in
         terminal = "alacritty";
 
         focus.followMouse = true;
+
+        bars = [ ];
 
         gaps = {
           smartBorders = "on";

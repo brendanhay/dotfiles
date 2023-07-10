@@ -38,6 +38,7 @@
     gtk.enable = true;
     readline.enable = true;
     sway.enable = true;
+    waybar.enable = true;
     zsh.enable = true;
   };
 }
