@@ -24,41 +24,48 @@ in
       enableCompletion = true;
       enableBashCompletion = true;
       enableGlobalCompInit = false;
-      promptInit = "";
-      #      shellInit = ''
-      #. "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-      #      '';
     };
 
     modules.home-manager = {
-      xdg.configFile."zsh" = {
-        source = "${../config}/zsh";
-        recursive = true;
-      };
+      xdg.configFile."zsh/config.zsh".source = ../config/zsh/config.zsh;
+      xdg.configFile."zsh/keybinds.zsh".source = ../config/zsh/keybinds.zsh;
+      xdg.configFile."zsh/prompt.zsh".source = ../config/zsh/prompt.zsh;
 
-      home.sessionVariables = {
-        ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
-        ZSH_CACHE = "$XDG_CACHE_HOME/zsh";
-        ZGEN_DIR = "$XDG_DATA_HOME/zgenom";
-      };
+      home.packages = with pkgs;
+        [
+          exa
+          fasd
+          fzf
+        ];
 
       programs.zsh = {
         enable = true;
-        #        enableCompletion = true;
-        #        enableAutosuggestions = true;
-        #        enableVteIntegration = true;
-        completionInit = "";
+        enableCompletion = true;
+        enableAutosuggestions = true;
+        enableVteIntegration = true;
+        # completionInit = "";
         dotDir = ".config/zsh";
 
-        initExtra = ''
-          	  _source "$ZDOTDIR/extra.zshrc"
-          	'';
+        antidote = {
+          enable = true;
+          useFriendlyNames = true;
+          plugins = [
+            "junegunn/fzf path:shell"
+            "jeffreytse/zsh-vi-mode"
+            "zdharma-continuum/fast-syntax-highlighting kind:defer"
+            "zsh-users/zsh-completions"
+            "zsh-users/zsh-autosuggestions"
+            "zsh-users/zsh-history-substring-search"
+            "romkatv/powerlevel10k"
+            "hlissner/zsh-autopair kind:defer"
+          ];
+        };
 
-        envExtra = ''
-          	  _source "$ZDOTDIR/extra.zshenv"
+        initExtraBeforeCompInit = ''
+          source "$HOME/.config/zsh/keybinds.zsh"
+          source "$HOME/.config/zsh/config.zsh"
+          source "$HOME/.config/zsh/prompt.zsh"
         '';
-
-        # source "${config.home.profileDirectory}/etc/profile.d/hm-session-vars.sh"
       };
     };
 
@@ -86,9 +93,5 @@ in
     #      '';
     #    };
 
-    system.userActivationScripts.cleanupZgen = ''
-      rm -rf $ZSH_CACHE
-      rm -fv $ZGEN_DIR/init.zsh{,.zwc}
-    '';
   };
 }
