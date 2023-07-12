@@ -88,4 +88,6 @@ with lib;
     # Block garbage
     #'';
   };
+
+  programs.ssh.startAgent = true;
 }

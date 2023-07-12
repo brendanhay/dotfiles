@@ -42,5 +42,7 @@
     river.enable = true;
     # waybar.enable = true;
     zsh.enable = true;
+    rofi.enable = true;
+    # wofi.enable = true;
   };
 }
