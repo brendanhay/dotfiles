@@ -15,6 +15,7 @@
     ./readline.nix
     ./systemd.nix
     ./sway.nix
+    ./rofi.nix
     ./river.nix
     ./user.nix
     ./vim.nix
