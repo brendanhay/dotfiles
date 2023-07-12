@@ -50,6 +50,10 @@ in
       '';
     };
 
+    # For brightness/backlight keybinds in sway config. 
+    # Only required for light, not brightnessctl.
+    modules.user.extraGroups = [ "video" ];
+
     modules.home-manager.wayland.windowManager.sway = {
       enable = true;
       package = null; # Use nixos/system sway.
@@ -60,15 +64,14 @@ in
 
         focus.followMouse = true;
 
-        bars = [
-          { command = "waybar"; }
-        ];
+        input = {
+          "type:keyboard" = {
+            xkb_options = "caps:swapescape";
+          };
 
-        gaps = {
-          smartBorders = "on";
-          smartGaps = true;
-          outer = 1;
-          inner = 1;
+          "type:pointer" = {
+            left_handed = "enabled";
+          };
         };
 
         window = {
@@ -81,15 +84,35 @@ in
           border = 1;
         };
 
-        input = {
-          "type:keyboard" = {
-            xkb_options = "caps:swapescape";
-          };
-
-          "type:pointer" = {
-            left_handed = "enabled";
-          };
+        gaps = {
+          smartBorders = "on";
+          smartGaps = true;
+          outer = 1;
+          inner = 1;
         };
+#
+#	colors = {
+#           background = "#22232d";
+#	   focused = {
+#  background = "#1d2028";
+#  border = "#181a23";
+#  childBorder = "#285577";
+#  indicator = "#2e9ef4";
+#  text = "#ffffff";
+#};
+#unfocused =
+#{
+#  background = "#1d2028";
+#  border = "#181a23";
+#  childBorder = "#222222";
+#  indicator = "#292d2e";
+#  text = "#888888";
+#};
+#	};
+
+	#bars = [
+        #  { command = "waybar"; }
+        #];
 
         keybindings = lib.mkOptionDefault {
           "${modifier}+h" = "focus left";
@@ -126,10 +149,6 @@ in
         };
       };
     };
-
-    # For brightness/backlight keybinds in sway config. 
-    # Only required for light, not brightnessctl.
-    modules.user.extraGroups = [ "video" ];
   };
 }
 

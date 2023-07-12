@@ -3,6 +3,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./borgmatic.nix
     ./direnv.nix
     ./emacs.nix
     ./firefox.nix
@@ -14,6 +15,7 @@
     ./readline.nix
     ./systemd.nix
     ./sway.nix
+    ./river.nix
     ./user.nix
     ./vim.nix
     ./waybar.nix

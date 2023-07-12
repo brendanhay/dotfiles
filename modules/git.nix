@@ -39,7 +39,7 @@ in
         extraConfig = {
           branch.autoSetupRebase = "always";
           checkout.defaultRemote = "origin";
-
+  	  push.autoSetupRemote = true;
           pull = {
             rebase = true;
             ff = "only";
@@ -58,16 +58,20 @@ in
         "ga" = "git add";
         "gap" = "git add --patch";
         "gc" = "git commit";
-        "gca" = "git commit --amend";
+        # "gca" = "git commit --amend";
         "gcm" = "git commit --message";
         "gcf" = "git commit --fixup";
+	"gb" = " git branch";
         "gbl" = "git blame";
         "gcl" = "git clone";
         "gco" = "git checkout";
+	"gl" = "git log";
         "gs" = "git status";
         "gst" = "git stash";
         "gr" = "git reset HEAD";
         "gv" = "git rev-parse";
+	"gp" = " git push";
+	"gpu" = " git pull";
       };
     };
   };

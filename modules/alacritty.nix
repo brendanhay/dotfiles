@@ -17,6 +17,7 @@ in
     modules.home-manager = {
       programs.alacritty.enable = true;
 
-      xdg.configFile."alacritty/alacritty.yml".source = ../config/alacritty.yml;
+      # xdg.configFile."alacritty/alacritty.yml".source = ../config/alacritty.yml;
     };
+  };
   }

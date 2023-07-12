@@ -18,9 +18,10 @@ in
       fonts = with pkgs; [
         fira-code
         fira-code-symbols
+        font-awesome
         jetbrains-mono
         noto-fonts
-        font-awesome
+	siji
       ];
 
       enableDefaultFonts = false;
