@@ -7,7 +7,7 @@ with lib;
     ../modules
   ];
 
-  system.stateVersion = mkDefault "23.05";
+  system.stateVersion = mkDefault "23.11";
 
   environment = {
     variables = {
@@ -87,6 +87,31 @@ with lib;
     # extraHosts = ''
     # Block garbage
     #'';
+  };
+
+  console = {
+    enable = true;
+    useXkbConfig = true;
+  };
+
+  services.xserver = {
+    enable = true;
+    autorun = false;
+    xkbOptions = "caps:swapescape";
+
+    libinput = {
+      enable = true;
+      mouse = {
+        leftHanded = true;
+        accelProfile = "flat";
+        accelSpeed = "0";
+      };
+      touchpad = {
+        leftHanded = true;
+        accelProfile = "flat";
+        accelSpeed = "0";
+      };
+    };
   };
 
   programs.ssh.startAgent = true;

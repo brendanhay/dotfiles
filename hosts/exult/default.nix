@@ -32,6 +32,7 @@
     alacritty.enable = true;
     borgmatic.enable = true;
     direnv.enable = true;
+    dropbox.enable = true;
     firefox.enable = true;
     fonts.enable = true;
     git.enable = true;
@@ -39,10 +40,8 @@
     gtk.enable = true;
     readline.enable = true;
     sway.enable = true;
-    river.enable = true;
     # waybar.enable = true;
     zsh.enable = true;
     rofi.enable = true;
-    # wofi.enable = true;
   };
 }

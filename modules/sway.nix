@@ -4,6 +4,7 @@ with lib;
 
 let
   cfg = config.modules.sway;
+  rofiHome = "${config.modules.home-manager.xdg.configHome}/rofi";
 in
 {
   options.modules.sway = {
@@ -14,23 +15,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment = {
-      pathsToLink = [ "/libexec" ];
-      systemPackages = with pkgs; [
-        wlr-randr
-      ];
-    };
+    environment.pathsToLink = [ "/libexec" ];
 
     security.polkit.enable = true;
 
     services.dbus.enable = true;
 
     programs.dconf.enable = true;
-
-    #services.xserver.enable = true;
-    #services.xserver.displayManager.lightdm.enable = true;
-    #services.xserver.displayManager.defaultSession = "sway";
-    #services.xserver.displayManager.sessionPackages = with pkgs; [ sway ];
 
     xdg.portal = {
       enable = true;
@@ -54,98 +45,127 @@ in
     # Only required for light, not brightnessctl.
     modules.user.extraGroups = [ "video" ];
 
-    modules.home-manager.wayland.windowManager.sway = {
-      enable = true;
-      package = null; # Use nixos/system sway.
+    modules.home-manager = {
+      home.packages = with pkgs; [
+        brightnessctl
+        cached-nix-shell # rofi/bin/bwmenu
+        fd # rofi/bin/filemenu
+        mpc_cli
+        wev # Get key codes for bindsym on wayland.
+        wlr-randr
+      ];
 
-      config = rec {
-        modifier = "Mod4";
-        terminal = "alacritty";
+      wayland.windowManager.sway = {
+        enable = true;
+        package = null; # Use nixos/system sway.
 
-        focus.followMouse = true;
+        config = rec {
+          modifier = "Mod4";
+          terminal = "alacritty";
 
-        input = {
-          "type:keyboard" = {
-            xkb_options = "caps:swapescape";
+          focus.followMouse = true;
+
+          input = {
+            "type:keyboard" = {
+              xkb_options = "caps:swapescape";
+            };
+
+            "type:pointer" = {
+              left_handed = "enabled";
+              accel_profile = "flat";
+              pointer_accel = "0";
+            };
           };
 
-          "type:pointer" = {
-            left_handed = "enabled";
+          output = {
+            "*" = {
+              background = "#22232d solid_color";
+            };
           };
-        };
 
-        window = {
-          titlebar = false;
-          border = 1;
-        };
+          window = {
+            titlebar = false;
+            border = 1;
+          };
 
-        floating = {
-          titlebar = true;
-          border = 1;
-        };
+          floating = {
+            titlebar = true;
+            border = 1;
+          };
 
-        gaps = {
-          smartBorders = "on";
-          smartGaps = true;
-          outer = 1;
-          inner = 1;
-        };
-#
-#	colors = {
-#           background = "#22232d";
-#	   focused = {
-#  background = "#1d2028";
-#  border = "#181a23";
-#  childBorder = "#285577";
-#  indicator = "#2e9ef4";
-#  text = "#ffffff";
-#};
-#unfocused =
-#{
-#  background = "#1d2028";
-#  border = "#181a23";
-#  childBorder = "#222222";
-#  indicator = "#292d2e";
-#  text = "#888888";
-#};
-#	};
+          gaps = {
+            smartBorders = "on";
+            smartGaps = true;
+            outer = 1;
+            inner = 1;
+          };
 
-	#bars = [
-        #  { command = "waybar"; }
-        #];
+          colors = {
+            focused = {
+              background = "#1d2028";
+              border = "#bd93f9";
+              childBorder = "#285577";
+              indicator = "#2e9ef4";
+              text = "#ffffff";
+            };
 
-        keybindings = lib.mkOptionDefault {
-          "${modifier}+h" = "focus left";
-          "${modifier}+j" = "focus down";
-          "${modifier}+k" = "focus up";
-          "${modifier}+l" = "focus right";
+            unfocused = {
+              background = "#1d2028";
+              border = "#181a23";
+              childBorder = "#222222";
+              indicator = "#292d2e";
+              text = "#888888";
+            };
+          };
 
-          "${modifier}+Shift+h" = "move left";
-          "${modifier}+Shift+j" = "move down";
-          "${modifier}+Shift+k" = "move up";
-          "${modifier}+Shift+l" = "move right";
+          #bars = [
+          #  { command = "waybar"; }
+          #];
 
-          "${modifier}+v" = "split v";
-          "${modifier}+b" = "split h";
+          keybindings = lib.mkOptionDefault {
+            # Application Launchers
+            "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
 
-          "${modifier}+Left" = "move workspace to output left";
-          "${modifier}+Right" = "move workspace to output right";
-          "${modifier}+Up" = "move workspace to output next";
+            "${modifier}+space" = "exec ${rofiHome}/bin/appmenu";
+            "${modifier}+Tab" = "exec ${rofiHome}/rofi/bin/windowmenu";
+            "${modifier}+p" = "exec ${rofiHome}/rofi/bin/bwmenu";
+            "${modifier}+Shift+p" = "exec ${rofiHome}/rofi/bin/bwmenu -r";
+            "${modifier}+slash" = "exec ${rofiHome}/rofi/bin/filemenu -x";
 
-          # Multimedia Keys
-          "XF86AudioMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
-          "XF86AudioMicMute" = "exec ${pkgs.pulseaudio}/bin/pactl set-source-mute @DEFAULT_SOURCE@ toggle";
+            # Window Management
+            "${modifier}+h" = "focus left";
+            "${modifier}+j" = "focus down";
+            "${modifier}+k" = "focus up";
+            "${modifier}+l" = "focus right";
 
-          "--locked XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
-          "--locked XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl set +5%";
+            "${modifier}+Shift+h" = "move left";
+            "${modifier}+Shift+j" = "move down";
+            "${modifier}+Shift+k" = "move up";
+            "${modifier}+Shift+l" = "move right";
 
-          "XF86AudioRaiseVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
-          "XF86AudioLowerVolume" = "exec ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
+            "${modifier}+v" = "split v";
+            "${modifier}+b" = "split h";
 
-          "XF86AudioPrev" = "exec ${pkgs.mpc_cli}/bin/mpc -q next";
-          "XF86AudioNext" = "exec ${pkgs.mpc_cli}/bin/mpc -q prev";
-          "XF86AudioPlay" = "exec ${pkgs.mpc_cli}/bin/mpc -q toggle";
-          "XF86AudioPause" = "exec ${pkgs.mpc_cli}/bin/mpc -q toggle";
+            "${modifier}+Left" = "move workspace to output left";
+            "${modifier}+Right" = "move workspace to output right";
+            "${modifier}+Up" = "move workspace to output next";
+
+            # Brightness
+            "--locked XF86MonBrightnessDown" = "exec brightnessctl set 5%-";
+            "--locked XF86MonBrightnessUp" = "exec brightnessctl set +5%";
+
+            # Volume
+            "XF86AudioRaiseVolume" = "exec wpctl set-volume -l 1.1 @DEFAULT_AUDIO_SINK@ 5%+";
+            "XF86AudioLowerVolume" = "exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+            "--locked XF86AudioMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+            "--locked XF86AudioMicMute" = "exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+
+            # Multimedia
+            "XF86AudioPrev" = "exec mpc -q next";
+            "XF86AudioNext" = "exec mpc -q prev";
+            "XF86AudioPlay" = "exec mpc -q toggle";
+            "--locked XF86AudioPause" = "exec mpc -q toggle";
+          };
         };
       };
     };

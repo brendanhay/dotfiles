@@ -30,6 +30,10 @@ in
 
       home.sessionPath = [ "\${emacsDir}/bin" ];
 
+      home.shellAliases = {
+        "e" = "emacsclient -nc";
+      };
+
       xdg.configFile."doom" = {
         source = ../config/doom;
         recursive = true;
@@ -37,10 +41,10 @@ in
     };
 
     system.userActivationScripts.installDoomEmacs = ''
-            if [ ! -d "${emacsDir}" ]; then
-               ${pkgs.git}/bin/git clone --depth=1 --single-branch ${emacsRepoUrl} ${emacsDir}
-      	 ${emacsDir}/bin/doom install --no-fonts
-            fi
+      if [ ! -d "${emacsDir}" ]; then
+         ${pkgs.git}/bin/git clone --depth=1 --single-branch ${emacsRepoUrl} ${emacsDir}
+         ${emacsDir}/bin/doom install --no-fonts
+      fi
     '';
   };
 }

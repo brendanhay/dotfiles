@@ -28,7 +28,6 @@ configuration {
 
   text-font:      "Fira Sans 15";
   text-mono-font: "Fira Code 13";
-  /* icon-font:      "Hurmit Nerd Font Mono 26"; */
   icon-font:      "FontAwesome 20";
 
   background-color: transparent;
@@ -123,7 +122,7 @@ textbox-icon {
   font: @icon-font;
 }
 entry {
-  font: @text-font-mono;
+  font: @text-mono-font;
   text-color: @fg;
 }
 

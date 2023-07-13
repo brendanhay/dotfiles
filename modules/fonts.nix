@@ -21,7 +21,7 @@ in
         font-awesome
         jetbrains-mono
         noto-fonts
-	siji
+        siji
       ];
 
       enableDefaultFonts = false;

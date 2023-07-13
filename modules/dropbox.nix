@@ -3,10 +3,10 @@
 with lib;
 
 let
-  cfg = config.modules.alacritty;
+  cfg = config.modules.dropbox;
 in
 {
-  options.modules.alacritty = {
+  options.modules.dropbox = {
     enable = mkOption {
       type = types.bool;
       default = false;
@@ -15,9 +15,7 @@ in
 
   config = mkIf cfg.enable {
     modules.home-manager = {
-      programs.alacritty.enable = true;
-
-      xdg.configFile."alacritty/alacritty.yml".source = ../config/alacritty.yml;
+      services.dropbox.enable = true;
     };
   };
 }

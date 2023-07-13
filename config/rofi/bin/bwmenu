@@ -1,10 +1,6 @@
 #!/usr/bin/env cached-nix-shell
 #! nix-shell -p ruby_2_7 -i "ruby -S"
 
-# A rofi client for vaultwarden. Similar to passmenu, but uses rofi. (Badly)
-# written in ruby because data persistence and frontend logic would be a pain to
-# write in bash or zsh. I'll refactor this later perhaps. Maybe.
-
 require 'shellwords'
 require 'json'
 require 'optparse'

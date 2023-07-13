@@ -89,7 +89,7 @@ in
         }
       ];
 
-#      style = builtins.readFile ../config/waybar/style.css;
+      #      style = builtins.readFile ../config/waybar/style.css;
     };
   };
 }

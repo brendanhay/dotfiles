@@ -5,6 +5,7 @@
     ./alacritty.nix
     ./borgmatic.nix
     ./direnv.nix
+    ./dropbox.nix
     ./emacs.nix
     ./firefox.nix
     ./fonts.nix
@@ -16,7 +17,6 @@
     ./systemd.nix
     ./sway.nix
     ./rofi.nix
-    ./river.nix
     ./user.nix
     ./vim.nix
     ./waybar.nix
