@@ -11,4 +11,6 @@ fi
 
 echo >&2 "switching .#${host} ..."
 
-exec nixos-rebuild switch --use-remote-sudo --flake ".#${host}"
+nixos-rebuild switch --use-remote-sudo --flake ".#${host}"
+
+~/.config/emacs/bin/doom sync

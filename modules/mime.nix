@@ -4,6 +4,13 @@ with lib;
 
 let
   cfg = config.modules.mime;
+
+  emacsclient = pkgs.makeDesktopItem {
+    name = "emacsclient";
+    desktopName = "Emacs Client (no wait)";
+    exec = "emacsclient -nc %f";
+    terminal = "false";
+  };
 in
 {
   options.modules.mime = {
@@ -20,7 +27,7 @@ in
 
       text = mkOption {
         type = types.str;
-        default = "emacsclient.desktop";
+        default = emacsclient; # "emacsclient.desktop";
       };
 
       browser = mkOption {

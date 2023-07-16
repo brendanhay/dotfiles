@@ -123,6 +123,9 @@ in
           #];
 
           keybindings = lib.mkOptionDefault {
+            # Unbind Defaults
+            "${modifier}+d" = null;
+
             # Application Launchers
             "${modifier}+Return" = "exec ${pkgs.alacritty}/bin/alacritty";
 

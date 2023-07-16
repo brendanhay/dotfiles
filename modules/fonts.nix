@@ -28,11 +28,8 @@ in
 
       fontconfig.defaultFonts = {
         serif = [ "Noto Serif" ];
-        # serif = [ "Noto Serif" "Noto Color Emoji" ];
         sansSerif = [ "Fira Sans" ];
-        # sansSerif = [ "Noto Sans" "Noto Color Emoji" ];
-        #        monospace = [ "Essential PragmataPro" "JetBrains Mono ExtraLight" "Noto Color Emoji" ];
-        monospace = [ "Fira Code" "JetBrains Mono ExtraLight" ];
+        monospace = [ "JetBrains Mono ExtraLight" "Essential PragmataPro" "Fira Code" ];
         emoji = [ "Noto Color Emoji" ];
       };
     };
