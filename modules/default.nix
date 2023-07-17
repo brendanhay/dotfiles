@@ -13,6 +13,7 @@
     ./gpg.nix
     ./gtk.nix
     ./mime.nix
+    ./network.nix
     ./readline.nix
     ./systemd.nix
     ./sway.nix

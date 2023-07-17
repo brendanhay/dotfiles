@@ -5,7 +5,7 @@
 ## Personal Information
 
 - Name:     Brendan Hay
-- Location: Berlin, Germany or Waikato, New Zealand
+- Berlin, Germany or Waikato, New Zealand
 - Email:    self@brendanhay.nz
 - GitHub:   https://github.com/brendanhay
 - Twitter:  https://twitter.com/haybrendan
@@ -46,9 +46,9 @@ Additionally, see GitHub for more examples of my work:
 
 ## Professional Work Experience
 
-### Principal Engineer at Tlon Corporation (Hosting Platform)
+### Principal Engineer at Tlon Corporation, October 2018 - November 2022
 
-> October 2018 - November 2022, **San Francisco (Remote)**
+> San Francisco (Remote)
 
 - Led the design and implementation of a full VPS-style hosting provider for Urbit using GCP, Stripe, Kubernetes, Nix, Bazel, Ethereum, and Haskell.
 - Developed the React/TypeScript frontend and OpenAPI generated clients.
@@ -57,9 +57,9 @@ Additionally, see GitHub for more examples of my work:
 - Involved in all product, business, and hiring decisions.
 - Overcame various challenges relating to UDP egress via hairpin NAT, growable storage quotas for billing, PKI attestation via Azimuth/Ethereum, multi-tenancy, and more.
 
-### Chief Architect at Formation (Machine Learning, Data Science)
+### Chief Architect at Formation, Machine Learning and Data Science, July 2016 - August 2018
 
-> July 2016 - August 2018, **San Francisco (Remote)**
+> **San Francisco (Remote)**
 
 - Provided architectural designs, mentorship, and guidance for all software and IT projects within the company.
 - Interacted directly with large Fortune 100 companies as an onsite technical representative and for due diligence purposes.
@@ -67,9 +67,10 @@ Additionally, see GitHub for more examples of my work:
 - Built unified (e)DSLs for configuring Terraform and Kubernetes, enabling control of ephemeral environments using high level languages, such as Haskell.
 - Took ownership of a revenue critical system written in Python/SQL/Spark from an external partner and worked onsite with stakeholders to remove technical debt and rewrite parts of the system to be more stable, performant, and easier to adapt for future requirements and feature requests.
 
-### Consultant - Freelance (http://brendanhay.nz)
+### Freelance Consultant, August 2015 - July 2016 
 
-> August 2015 - July 2016, **EU and US (Remote)**
+> August 2015 - July 2016
+> **EU and US (Remote)**
 
 Various short term client projects such as Haskell/PureScript engineering for Franka Emika Robotics and Compiler Engineering at Fugue, including other varying projects within Finance and Infrastructure/PaaS:
 
@@ -79,20 +80,21 @@ Various short term client projects such as Haskell/PureScript engineering for Fr
 - Continuous Integration and Delivery.
 - Containerization and Virtualization.
 
-### Systems Architect, Wire (Audio, Encrypted Messaging)
+### Systems Architect at Wire, Audio and Encrypted Messaging, January 2013 - July 2015
 
-> January 2013 - July 2015, **Berlin - Germany**
+> **Berlin - Germany**
 
 - Architected and implemented an entire suite of cloud based backend services written in Haskell.
 - Planning, guidance, and mentoring for the entire infrastructure vision from architecture and implementation to engineering culture.
-- Utilized many core Amazon Web Service offerings such as S3, Route53, EC2, SNS, SQS, CloudFront, and CloudWatch.
+- Built services utilizing many core Amazon Web Service offerings such as S3, Route53, EC2, SNS, SQS, CloudFront, and CloudWatch.
 - Implemented an immutable Continuous Delivery pipeline featuring containers, file system based snapshots, and machine images.
 - Wrote custom tools to replace the poor ad-hoc Orchestration approach of existing configuration management solutions.
 - Implemented a distributed and consistent service discovery mechanism to support a wide range of ephemeral (state-less) and persistent (state-full) services.
 
 ### Senior Software Engineer at SoundCloud (Audio, Content Recognition, Search)
 
-> December 2010 - December 2012, **Berlin - Germany**
+> December 2010 - December 2012
+> **Berlin - Germany**
 
 - Design and implementation of data flow pipelines for application messaging, logging, ingress of events into Hadoop, MapReduce jobs, and statistics.
 - Solely responsible for RabbitMQ infrastructure, internal AMQP libraries, mentoring/usage, and best practices.
@@ -101,7 +103,8 @@ Various short term client projects such as Haskell/PureScript engineering for Fr
 
 ### Software Architect as Monster Technologies (Search)
 
-> August 2007 - November 2010, **Prague - Czech Republic**
+> August 2007 - November 2010
+> **Prague - Czech Republic**
 
 - Part of the search architecture and development team concerned with search quality, inter-team APIs, indexing, performance, scalability and availability.
 - Worked on Twitter and email agent applications, sending over 30 million dynamically generated emails in a time constrained window (~2-4 hours) every day.
@@ -113,7 +116,8 @@ Various short term client projects such as Haskell/PureScript engineering for Fr
 
 ### Senior Engineer at APN News and Media (Search)
 
-> July 2006 - July 2007, **Auckland - New Zealand**
+> July 2006 - July 2007
+> **Auckland - New Zealand**
 
 - Enhancement of (NZ) high volume web sites such as Wises Maps (www.wises.co.nz) and Universal Business Directories (www.ubd.co.nz) with additions such as user interface Improvements, AJAX/DHTML, improved caching, indexing and performance.
 - Created an internal administration application for managing ~150,000 companies which was then rolled out to external telesales companies improving sales and marketing performance.
@@ -121,7 +125,8 @@ Various short term client projects such as Haskell/PureScript engineering for Fr
 
 ### Software Engineer at Conveyancing Solutions Limited
 
-> July 2003 - June 2006, **Auckland - New Zealand**
+> July 2003 - June 2006
+> **Auckland - New Zealand**
 
 - Led a team composed of 3-5 full-time employees and contractors after 12 months.
 - Designed, implemented and delivered a client/server application for a conveyancing law which was consequently acquired by New Zealand's leading law software provider.
@@ -129,11 +134,12 @@ Various short term client projects such as Haskell/PureScript engineering for Fr
 - Created extensive internal billing software to automate the client and distributor revenue models.
 - Created internal reporting tools, workflow systems and services to provide feedback and statistics for sales staff.
 - Integrated with various third party vendors, such as document management solution providers, which required on-site integrations.
-- Created a Web and SMS notification system to provide workflow updates to clients to reduce amount of contact between purchaser and vendor.
+- Created a Web and SMS notification system to provide workflow updates to clients to reduce the amount of contact between purchaser and vendor.
 
 ### Web Developer at Enlighten Designs Limited
 
-> January 2001 - March 2003, **Hamilton - New Zealand**
+> January 2001 - March 2003
+> **Hamilton - New Zealand**
 
 - Developed a centralized email marketing and content management system which was subsequently extended with strict security upgrades to provide support for a major political party.
 - Developed internal tooling and clent applications for domain sales, email hosting, and VPS hosting.

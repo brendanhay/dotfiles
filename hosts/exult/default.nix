@@ -29,6 +29,11 @@
       vim.enable = true;
     };
 
+    network = {
+      enable = true;
+      forward = true;
+    };
+
     alacritty.enable = true;
     borgmatic.enable = true;
     direnv.enable = true;
@@ -38,6 +43,7 @@
     git.enable = true;
     gpg.enable = true;
     gtk.enable = true;
+    mime.enable = true;
     readline.enable = true;
     sway.enable = true;
     # waybar.enable = true;

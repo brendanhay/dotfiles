@@ -14,6 +14,11 @@ let
 in
 {
   options.modules.mime = {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+    };
+
     viewer = {
       audio = mkOption {
         type = types.str;
@@ -37,7 +42,7 @@ in
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     # XXX: move somewhere sensible.
     modules.home-manager.programs.feh.enable = true;
 
