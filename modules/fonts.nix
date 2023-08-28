@@ -22,6 +22,7 @@ in
         jetbrains-mono
         noto-fonts
         siji
+        sorts-mill-goudy
       ];
 
       enableDefaultFonts = false;

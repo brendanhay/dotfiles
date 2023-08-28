@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 with lib;
 
@@ -6,7 +6,7 @@ let
   cfg = config.modules.mime;
 
   emacsclient = pkgs.makeDesktopItem {
-    name = "emacsclient";
+    name = "emacs";
     desktopName = "Emacs Client (no wait)";
     exec = "emacsclient -nc %f";
     terminal = "false";
@@ -32,7 +32,7 @@ in
 
       text = mkOption {
         type = types.str;
-        default = emacsclient; # "emacsclient.desktop";
+        default = "emacs.desktop"; # emacsclient; # "emacsclient.desktop";
       };
 
       browser = mkOption {

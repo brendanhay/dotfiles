@@ -37,6 +37,7 @@
     alacritty.enable = true;
     borgmatic.enable = true;
     direnv.enable = true;
+    docker.enable = true;
     dropbox.enable = true;
     firefox.enable = true;
     fonts.enable = true;

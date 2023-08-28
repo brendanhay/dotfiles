@@ -5,6 +5,7 @@
     ./alacritty.nix
     ./borgmatic.nix
     ./direnv.nix
+    ./docker.nix
     ./dropbox.nix
     ./emacs.nix
     ./firefox.nix
