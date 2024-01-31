@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+WDEV=wlp3s0
+EDEV=enp5s0
+IP="192.168.1.200"
+NETMASK="255.255.255.0"
+SUBNET="192.168.0.0/16"
+
+sudo -s -- <<EOF
+set -x
+
+ifconfig "$EDEV" down
+
+sleep 3
+
+iptables -t nat -D POSTROUTING -o "$WDEV" -j MASQUERADE || true
+iptables -D FORWARD -o "$WDEV" -s "$SUBNET" -j ACCEPT || true
+iptables -D INPUT -s "$SUBNET" -j ACCEPT || true
+
+# Forward ipv4 packets
+sysctl -w net.ipv4.ip_forward=1
+
+# Create new rules
+iptables -t nat -A POSTROUTING -o "$WDEV" -j MASQUERADE
+iptables -I FORWARD -o "$WDEV" -s "$SUBNET" -j ACCEPT
+iptables -I INPUT -s "$SUBNET" -j ACCEPT
+
+sleep 3
+
+ifconfig "$EDEV" "$IP" netmask "$NETMASK" up
+EOF

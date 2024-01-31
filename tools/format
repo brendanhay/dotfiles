@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# shellcheck disable=SC2046
+exec nixpkgs-fmt $(find . -type f -name '*.nix')

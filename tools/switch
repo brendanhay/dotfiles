@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+host="$(hostname)"
+
+if [ -z "$host" ]; then
+	echo >&2 "error: unable to determine hostname."
+	exit 1
+fi
+
+echo >&2 "switching .#${host} ..."
+
+nixos-rebuild switch --use-remote-sudo --flake ".#${host}" "$@"
+
+~/.config/emacs/bin/doom sync
